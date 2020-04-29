@@ -30,7 +30,7 @@ public class CreateEmployeeDialog extends JDialog {
 	    private JLabel lbjobtype;
 	    private JButton btnEnter;				// Enter Button
 	    private JButton btnCancel;				// Cancel Button
-	    private boolean succeeded;				// If successful
+	    private static boolean succeeded;				// If successful
 	 
 	    public CreateEmployeeDialog(Frame parent) {
 	        super(parent, "New Employee", true);
@@ -167,7 +167,7 @@ public class CreateEmployeeDialog extends JDialog {
 				            "Create new Employee",
 				            JOptionPane.INFORMATION_MESSAGE);
 	                dispose();
-	                ///////TODO add next GUI screen
+	                AdminPage.main(null);
 	            }
 	        });
 	        btnCancel = new JButton("Cancel");
@@ -264,7 +264,7 @@ public class CreateEmployeeDialog extends JDialog {
 	    	return job;
 	    }
 	 
-	    public boolean isSucceeded() {
+	    public static boolean isSucceeded() {
 	        return succeeded;
 	    }
 	}

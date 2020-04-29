@@ -17,6 +17,7 @@ public class MainLogin {
         btnLogin.addActionListener(
                 new ActionListener(){
                     public void actionPerformed(ActionEvent e) {
+                    	frame.dispose();
                         LoginDialog loginDlg = new LoginDialog(frame);
                         loginDlg.setVisible(true);
                         // if login successfully
@@ -39,30 +40,37 @@ public class MainLogin {
 	public static void RoleGUI(String username) {
         final JFrame frame = new JFrame("Welcome " + username + "!");
         final JButton btnEnter = new JButton("Click to enter home screen");
-        while(!quit) {
-			if (username.equals("admin")){
-				new ActionListener(){
-	                public void actionPerformed(ActionEvent e) {
-	                    AdminMainPage mainpage = new AdminMainPage(frame);
-	                    mainpage.setVisible(true);
-	                }
-				};
-			} else if(username.equals("hr")){
-				//TODO go to HR main page
-			} else if(username.equals("sales")){
-				//TODO go to sales main page
-			} else if(username.equals("engineering")) {
-				//TODO go to engineering main page
-			} else {
-				System.out.println("Invalid Job type: "+username+". Please confirm correct Role is assigned.");
-				break;
-			}
+        try {
+			username = UIController.getRole(username);
+		} catch (SQLException e1) {
+			System.out.println("invalid username");
+		}
+		if (username.equals("admin")){
+			AdminPage.main(null);
+			frame.dispose();
+	        /*btnEnter.addActionListener(
+	        		new ActionListener(){
+	        			public void actionPerformed(ActionEvent e) {
+	        				while(!quit) {
+	        				AdminMainPage mainpage = new AdminMainPage(frame);
+	        				mainpage.setVisible(true);
+	        				}
+	        			}
+	        		});
 	        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 	        frame.setSize(300, 100);
 	        frame.setLayout(new FlowLayout());
 	        frame.getContentPane().add(btnEnter);
-	        frame.setVisible(true);
-        }
-	}	
+	        frame.setVisible(true);*/
+		} else if(username.equals("hr")){
+			//TODO go to HR main page
+		} else if(username.equals("sales")){
+			//TODO go to sales main page
+		} else if(username.equals("engineering")) {
+			//TODO go to engineering main page
+		} else {
+			System.out.println("Invalid Job type: "+username+". Please confirm correct Role is assigned.");
+		}
+	}
 }
     

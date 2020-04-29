@@ -19,7 +19,7 @@ public class AdminMainPage extends JDialog {
 	    private boolean succeeded;				// If successful
 	 
 	    public AdminMainPage(Frame parent) {
-	        super(parent, "New Employee", true);
+	        super(parent, "Admin Main Page", true);
 	        //
 	        JPanel panel = new JPanel(new GridBagLayout());
 	        GridBagConstraints cs = new GridBagConstraints();
@@ -36,24 +36,26 @@ public class AdminMainPage extends JDialog {
 	        //Line separating buttons and welcome message
 	        panel.setBorder(new LineBorder(Color.GRAY));
 	        
+	        JPanel panel2 = new JPanel(new GridBagLayout());
+	        GridBagConstraints bp = new GridBagConstraints();
 	        //Create new employee button and label
 	        lbCreateEmp = new JLabel("Create a new Employee");
-	        cs.gridx = 0;
-	        cs.gridy = 0;
-	        cs.gridwidth = 1;
-	        panel.add(lbCreateEmp, cs);
+	        bp.gridx = 0;
+	        bp.gridy = 1;
+	        bp.gridwidth = 2;
+	        panel2.add(lbCreateEmp, cs);
 	        
 	        btnCreateEmp = new JButton("Create");
 	        btnCreateEmp.addActionListener(new ActionListener() {
 	 
 	        	public void actionPerformed(ActionEvent e) {
+	        		dispose();
 	                MainCreateEmployee.main(null);
-	                return;
 	            }
 	        });
-	        cs.gridx = 1;
-	        cs.gridy = 0;
-	        cs.gridwidth = 2;
+	        bp.gridx = 1;
+	        bp.gridy = 1;
+	        bp.gridwidth = 3;
 	        
 	        //TODO
 	        btnCancel = new JButton("Cancel");
@@ -63,12 +65,11 @@ public class AdminMainPage extends JDialog {
 	                dispose();
 	            }
 	        });
-	        JPanel bp = new JPanel();
-	        bp.add(btnCreateEmp);
-	        bp.add(btnCancel);
+	        panel2.add(btnCreateEmp);
+	        panel2.add(btnCancel);
 	 
-	        getContentPane().add(panel, BorderLayout.CENTER);
-	        getContentPane().add(bp, BorderLayout.PAGE_END);
+	        getContentPane().add(panel2, BorderLayout.CENTER);
+	        getContentPane().add(panel2, BorderLayout.PAGE_END);
 	 
 	        pack();
 	        setResizable(false);
