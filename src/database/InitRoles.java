@@ -37,7 +37,8 @@ public class InitRoles {
 
 			// create sales user and granting privileges
 			st.executeUpdate("CREATE ROLE sales NOINHERIT;");
-			st.execute("GRANT SELECT, UPDATE ON Customer to sales;");
+			st.execute("GRANT SELECT, INSERT, DELETE, UPDATE ON Customer to sales;");
+			st.execute("GRANT SELECT, INSERT, DELETE, UPDATE ON Inventory to sales;");
 			st.execute("GRANT INSERT ON OrderInfo TO sales;");
 			// create views
 			st.execute("GRANT SELECT ON totalRevenue TO sales;");
@@ -53,8 +54,8 @@ public class InitRoles {
 
 			// create engineering user and granting privileges
 			st.executeUpdate("CREATE ROLE engineering NOINHERIT;");
-			st.execute("GRANT SELECT, UPDATE ON Model TO engineering;");
-			st.execute("GRANT SELECT, UPDATE ON Inventory TO engineering;");
+			st.execute("GRANT SELECT, INSERT, DELETE, UPDATE ON Model TO engineering;");
+			st.execute("GRANT SELECT, INSERT, DELETE, UPDATE ON Inventory TO engineering;");
 			st.execute("GRANT SELECT (FirstName), SELECT (LastName), SELECT (JobType) ON Employee TO engineering;");
 			// create views
 			st.execute("GRANT SELECT ON totalRevenue TO engineering;");
