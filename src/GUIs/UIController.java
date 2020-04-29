@@ -7,6 +7,8 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.Base64;
 
 import javax.crypto.SecretKey;
@@ -65,9 +67,11 @@ public class UIController {
 
 	/** Called when login submit button is pushed
 	 * Searches for username in employee database, then checks if passwords match
-	 * @throws Exception
+	 * @throws SQLException
+	 * @throws InvalidKeySpecException
+	 * @throws NoSuchAlgorithmException
 	 */
-	public static boolean login(String username, String password) throws Exception {
+	public static boolean login(String username, String password) throws SQLException, NoSuchAlgorithmException, InvalidKeySpecException {
 		Connection erpDB = DriverManager.getConnection("jdbc:postgresql://localhost:5432/final-project-db", "loginManager", "the_manager");
 		String passwordQuery =
 				"SELECT password "
@@ -84,6 +88,48 @@ public class UIController {
 			return true;
 		} else {
 			return false;
+		}
+	}
+
+	/** Adds employee to the database
+	 * @throws SQLException
+	 *
+	 */
+	public static void addEmployee(String E_ID, String password, String firstName, String lastName, String ssn, float Salary, Boolean isHourly, String jobType) throws SQLException {
+		try {
+			Connection erpDB = DriverManager.getConnection("jdbc:postgresql://localhost:5432/final-project-db", "mr_admin", "mr_password");
+			String employeeInfo =
+					"INSERT INTO employee "
+							+ "(E_ID, Password, FirstName, LastName, SSN, Salary, isHourly, jobType) "
+							+ "VALUES(?, ?, ?, ?, ?, ?, ?, ?);";
+			PreparedStatement ps = erpDB.prepareStatement(employeeInfo);
+			int i = 1;
+			ps.setString(i++, E_ID);
+			ps.setString(i++, UIController.getSaltedHash(password));
+			ps.setString(i++, firstName);
+			ps.setString(i++, lastName);
+			ps.setString(i++, ssn);
+			ps.setFloat(i++, Salary);
+			ps.setBoolean(i++, isHourly);
+			ps.setString(i++, jobType);
+
+			ps.executeUpdate();
+			System.out.println("Employee " + E_ID + " added to employee database");
+
+			Statement st = erpDB.createStatement();
+
+			// create user login
+			String assignRole = "CREATE USER " + E_ID + " WITH ENCRYPTED PASSWORD '" + password + "';";
+			st.executeUpdate(assignRole);
+			System.out.println("Employee " + E_ID + "'s login and password have been created");
+
+			// grant privileges
+			assignRole = "GRANT " + jobType + " TO " + E_ID + ";";
+			st.execute(assignRole);
+			System.out.println("Employee " + E_ID + " has been given the " + jobType + " role");
+
+		} catch (NoSuchAlgorithmException | InvalidKeySpecException e) {
+			System.err.println("Invalid password!");
 		}
 	}
 
