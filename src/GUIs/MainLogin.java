@@ -48,26 +48,12 @@ public class MainLogin {
 		if (username.equals("admin")){
 			AdminPage.main(null);
 			frame.dispose();
-	        /*btnEnter.addActionListener(
-	        		new ActionListener(){
-	        			public void actionPerformed(ActionEvent e) {
-	        				while(!quit) {
-	        				AdminMainPage mainpage = new AdminMainPage(frame);
-	        				mainpage.setVisible(true);
-	        				}
-	        			}
-	        		});
-	        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-	        frame.setSize(300, 100);
-	        frame.setLayout(new FlowLayout());
-	        frame.getContentPane().add(btnEnter);
-	        frame.setVisible(true);*/
 		} else if(username.equals("hr")){
-			//TODO go to HR main page
+			HRPage.main(null);
 		} else if(username.equals("sales")){
-			//TODO go to sales main page
+			SalesPage.main(null);
 		} else if(username.equals("engineering")) {
-			//TODO go to engineering main page
+			EngPage.main(null);
 		} else {
 			System.out.println("Invalid Job type: "+username+". Please confirm correct Role is assigned.");
 		}

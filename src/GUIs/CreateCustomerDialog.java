@@ -74,20 +74,22 @@ public class CreateCustomerDialog extends JDialog {
 	 
 	        	public void actionPerformed(ActionEvent e) {
 	                try {
-	                	//System.out.println("Attempting to add "+getFname()+" "+getLname()+" with Cid: "+getCid());
+	                	System.out.println("Attempting to add "+getFname()+" "+getLname()+" with Cid: "+getCid());
 	                	UIController.addCustomer(getFname(), getLname(), getCid());
 	                	JOptionPane.showMessageDialog(CreateCustomerDialog.this,
 					            "Customer created successfully!",
 					            "Create new Customer",
 					            JOptionPane.INFORMATION_MESSAGE);
 					} catch (Exception e1) {
-						System.out.print("error");
-						dispose();
-						MainCreateCustomer.main(null);
+						System.err.println(e1.toString());
+						JOptionPane.showMessageDialog(CreateCustomerDialog.this,
+					            "Error creating customer, please try again",
+					            "Create new employee",
+					            JOptionPane.ERROR_MESSAGE);
 					}
 	                
 	                dispose();
-	                ///////TODO add next GUI screen
+	                SalesPage.main(null);
 	            }
 	        });
 	        btnCancel = new JButton("Cancel");
