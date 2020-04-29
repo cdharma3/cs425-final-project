@@ -25,11 +25,15 @@ public class CreateTestData {
 			// login as bob
 			System.out.println("Logging in as bWatts returns : " + UIController.login("bWatts", "abc123"));
 
+
 			UIController.addCustomer("Jon", "Johnson", "jJohnson");
 			UIController.addModel("Swiffer Duster", (float)120.00);
+			UIController.addModel("Dyson Cyclone", (float)240.00);
 			UIController.addInventory("Swiffer Duster", (float)120.00, 5, "Vacuum", 10);
+			UIController.addInventory("Dyson Cyclone", (float)240.00, 20, "Vacuum", 20);
 			UIController.addOrder("jJohnson", "bWatts", "Swiffer Duster", 5);
 			UIController.addOrder("jJohnson", "bWatts", "Swiffer Duster", 5);
+			UIController.addOrder("jJohnson", "bWatts", "Dyson Cyclone", 15);
 
 		} catch (SQLException e) {
 			e.printStackTrace();

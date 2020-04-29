@@ -23,6 +23,8 @@ public class InitDatabase {
 			// creates statement to run sql statements
 			Statement st = db.createStatement();
 
+			st.execute("DROP EXTENSION \"uuid-ossp\" CASCADE;");
+			st.execute("CREATE EXTENSION \"uuid-ossp\";");
 
 			// dropping employee table if it exists
 			ResultSet tables = pdbmd.getTables(null, null, "employee", null);
@@ -59,10 +61,12 @@ public class InitDatabase {
 			// creating login table
 			String loginTable =
 					"CREATE TABLE Login "
-							+ "(E_ID varChar(50) NOT NULL, "
+							+ "(SessionID UUID DEFAULT UUID_GENERATE_V4(), "
+							+ "E_ID varChar(50) NOT NULL, "
 							+ "Privilege varChar(15) CHECK (Privilege IN ('admin', 'sales', 'hr', 'engineering')), "
 							+ "LoginTime timestamp, "
 							+ "LogoutTime timestamp, "
+							+ "PRIMARY KEY (SessionID), "
 							+ "FOREIGN KEY (E_ID) REFERENCES Employee(E_ID));";
 
 			// execute login table creation statement
