@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import javax.swing.*;
 import javax.swing.border.*;
  
+@SuppressWarnings("serial")
 public class LoginDialog extends JDialog {
  
     private JTextField tfUsername;
