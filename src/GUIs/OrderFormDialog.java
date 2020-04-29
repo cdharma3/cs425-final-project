@@ -23,7 +23,6 @@ public class OrderFormDialog extends JDialog {
 	    private JButton btnCancel;
 	    
 	    public OrderFormDialog() {}
-	    
 	    public OrderFormDialog(Frame parent) {
 	        super(parent, "Order", true);
 	        //
