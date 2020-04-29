@@ -17,11 +17,13 @@ public class MainLogin {
                         // if login successfully
                         if(loginDlg.isSucceeded()){
                             btnLogin.setText("Welcome " + loginDlg.getUsername() + "!");
+                            frame.dispose();
+                           // MainCreateCustomer.main(null);
                         }
                     }
                 });
  
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frame.setSize(300, 100);
         frame.setLayout(new FlowLayout());
         frame.getContentPane().add(btnLogin);

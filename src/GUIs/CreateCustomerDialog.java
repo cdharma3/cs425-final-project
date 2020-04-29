@@ -74,16 +74,18 @@ public class CreateCustomerDialog extends JDialog {
 	 
 	        	public void actionPerformed(ActionEvent e) {
 	                try {
-	                	// TODO create employee function goes here
-	                	System.out.println("Sucess!");
+	                	//System.out.println("Attempting to add "+getFname()+" "+getLname()+" with Cid: "+getCid());
+	                	UIController.addCustomer(getFname(), getLname(), getCid());
+	                	JOptionPane.showMessageDialog(CreateCustomerDialog.this,
+					            "Customer created successfully!",
+					            "Create new Customer",
+					            JOptionPane.INFORMATION_MESSAGE);
 					} catch (Exception e1) {
+						System.out.print("error");
 						dispose();
 						MainCreateCustomer.main(null);
 					}
-	                JOptionPane.showMessageDialog(CreateCustomerDialog.this,
-				            "Customer created successfully!",
-				            "Create new Customer",
-				            JOptionPane.INFORMATION_MESSAGE);
+	                
 	                dispose();
 	                ///////TODO add next GUI screen
 	            }

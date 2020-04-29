@@ -26,8 +26,8 @@ public class CreateTestData {
 			System.out.println("Logging in as bWatts returns : " + UIController.login("bWatts", "abc123"));
 
 			UIController.addCustomer("Jon", "Johnson", "jJohnson");
-			UIController.addModel("Swiffer Duster", (float)120.00);
-			UIController.addOrder("jJohnson", "bWatts", "Swiffer Duster", 5);
+			//UIController.addModel("Swiffer Duster", (float)120.00);
+			//UIController.addOrder("jJohnson", "bWatts", "Swiffer Duster", 5);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
