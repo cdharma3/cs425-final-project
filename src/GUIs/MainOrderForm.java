@@ -12,7 +12,7 @@ public class MainOrderForm {
 	public static void main(String[] args) {
         final JFrame frame = new JFrame("Order Form");
         final JButton btnOrder = new JButton("Click to Begin");
- 
+        
         btnOrder.addActionListener(
                 new ActionListener(){
                     public void actionPerformed(ActionEvent e) {
