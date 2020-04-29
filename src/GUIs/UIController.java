@@ -373,9 +373,8 @@ public class UIController {
 	public static String displayBusinessReport() throws SQLException {
 		Connection erpDB = DriverManager.getConnection("jdbc:postgresql://localhost:5432/final-project-db", databaseUsername, databasePassword);
 
-		String queryEmployeeRevenue = "SELECT * FROM EmployeeRevenue;";
 		Statement st = erpDB.createStatement();
-		ResultSet employeeRevenue = st.executeQuery(queryEmployeeRevenue);
+		ResultSet employeeRevenue = st.executeQuery("SELECT * FROM EmployeeRevenue;");
 		ResultSetMetaData rsmd = employeeRevenue.getMetaData();
 		System.out.println("querying employeeRevenue");
 
@@ -386,6 +385,11 @@ public class UIController {
 				str += "Employee " + employeeRevenue.getString("E_ID") +
 						" has a total revenue of $" + employeeRevenue.getFloat("salesPerEmployee") + "\n";
 			}
+		}
+
+		ResultSet totalRevenue = st.executeQuery("SELECT * FROM totalRevenue;");
+		while (totalRevenue.next()) {
+			str += "Total revenue generated this quarter: $" + totalRevenue.getFloat("totalSales");
 		}
 
 		return str;
