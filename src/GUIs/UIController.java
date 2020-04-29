@@ -160,12 +160,51 @@ public class UIController {
 		}
 
 		System.out.println("All roles dropped");
-		st.execute("DELETE FROM employee");
+		st.execute("DELETE FROM employee;");
 		System.out.println("Employee table cleared");
 
 		st.close();
 		dropRole.close();
 		erpDB.close();
+	}
+
+	/** adds model to the database
+	 * @throws SQLException
+	 *
+	 */
+	public static void addModel(String modelName, float salePrice) throws SQLException {
+		Connection erpDB = DriverManager.getConnection("jdbc:postgresql://localhost:5432/final-project-db", databaseUsername, databasePassword);
+		String insertModel =
+				"INSERT INTO model "
+						+ "(modelName, salePrice) "
+						+ "VALUES (?, ?);";
+
+		PreparedStatement ps = erpDB.prepareStatement(insertModel);
+		ps.setString(1, modelName);
+		ps.setFloat(2, salePrice);
+		ps.executeUpdate();
+
+		System.out.println(modelName + " added to model database with a price of $" + salePrice);
+	}
+
+	/** adds customer to database
+	 *
+	 */
+	public static void addCustomer(String firstName, String lastName, String C_ID) throws SQLException {
+		Connection erpDB = DriverManager.getConnection("jdbc:postgresql://localhost:5432/final-project-db", databaseUsername, databasePassword);
+		String insertCustomer =
+				"INSERT INTO customer "
+						+ "(firstName, lastName, C_ID) "
+						+ "VALUES (?, ?, ?);";
+
+		PreparedStatement ps = erpDB.prepareStatement(insertCustomer);
+		ps.setString(1, firstName);
+		ps.setString(2, lastName);
+		ps.setString(3, C_ID);
+		ps.executeUpdate();
+
+		System.out.println("Customer " + firstName + " " + lastName +
+				" added to customer database with a C_ID of " + C_ID);
 	}
 
 	/** retrieves sales price from model table when given model name
@@ -187,7 +226,6 @@ public class UIController {
 			System.out.println("Model name not found!");
 			return (float)0.00;
 		}
-
 	}
 
 	/** adds order to database

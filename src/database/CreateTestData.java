@@ -25,9 +25,8 @@ public class CreateTestData {
 			// login as bob
 			System.out.println("Logging in as bWatts returns : " + UIController.login("bWatts", "abc123"));
 
-			// retrieve model number for model Swiffer_Duster
-			System.out.println("Sale price for swiffer duster " + UIController.getSalePrice("Swiffer Duster"));
-
+			UIController.addCustomer("Jon", "Johnson", "jJohnson");
+			UIController.addModel("Swiffer Duster", (float)120.00);
 			UIController.addOrder("jJohnson", "bWatts", "Swiffer Duster", 5);
 		} catch (SQLException e) {
 			e.printStackTrace();
