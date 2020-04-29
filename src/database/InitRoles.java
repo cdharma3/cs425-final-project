@@ -29,6 +29,11 @@ public class InitRoles {
 			st.execute("GRANT ALL ON OrderInfo TO admin;");
 			st.execute("GRANT ALL ON Inventory TO admin;");
 			st.execute("GRANT ALL ON Customer TO admin;");
+
+			st.execute("GRANT SELECT ON employeeRevenue TO admin");
+			st.execute("GRANT SELECT ON totalRevenue TO admin;");
+			st.execute("GRANT SELECT ON customerModel TO admin;");
+			st.execute("GRANT SELECT ON orderDetails TO admin;");
 			System.out.println("Privileges granted to role admin!");
 
 			// drops sales role if it exists, run init database first to clear objects
@@ -40,6 +45,7 @@ public class InitRoles {
 			st.execute("GRANT SELECT, INSERT, DELETE, UPDATE ON Customer to sales;");
 			st.execute("GRANT SELECT, INSERT, DELETE, UPDATE ON Inventory to sales;");
 			st.execute("GRANT INSERT ON OrderInfo TO sales;");
+			st.execute("GRANT SELECT ON Model TO sales;");
 			// create views
 			st.execute("GRANT SELECT ON totalRevenue TO sales;");
 			st.execute("GRANT SELECT ON customerModel TO sales;");

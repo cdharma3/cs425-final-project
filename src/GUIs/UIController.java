@@ -7,6 +7,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.Timestamp;
@@ -362,5 +363,31 @@ public class UIController {
 		} else {
 			return 0;
 		}
+	}
+
+	/**
+	 * display business report by querying the employeeRevenue and totalRevenue views
+	 * @return formatted string with results of views queried
+	 * @throws SQLException
+	 */
+	public static String displayBusinessReport() throws SQLException {
+		Connection erpDB = DriverManager.getConnection("jdbc:postgresql://localhost:5432/final-project-db", databaseUsername, databasePassword);
+
+		String queryEmployeeRevenue = "SELECT * FROM EmployeeRevenue;";
+		Statement st = erpDB.createStatement();
+		ResultSet employeeRevenue = st.executeQuery(queryEmployeeRevenue);
+		ResultSetMetaData rsmd = employeeRevenue.getMetaData();
+		System.out.println("querying employeeRevenue");
+
+		String str = "";
+
+		while (employeeRevenue.next()) {
+			if(rsmd.getColumnCount() >= 1) {
+				str += "Employee " + employeeRevenue.getString("E_ID") +
+						" has a total revenue of $" + employeeRevenue.getFloat("salesPerEmployee") + "\n";
+			}
+		}
+
+		return str;
 	}
 }
