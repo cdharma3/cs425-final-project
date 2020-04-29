@@ -18,6 +18,7 @@ public class MainCreateEmployee {
                     	frame.dispose();
                         CreateEmployeeDialog OrderDlg = new CreateEmployeeDialog(frame);
                         OrderDlg.setVisible(true);
+                        return;
                         
                     }
                 });

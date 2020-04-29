@@ -252,6 +252,8 @@ public class CreateEmployeeDialog extends JDialog {
 	    		job = "engineering";
 	    	}else if (job.equals("sales")||job.equals("sale")) {
 	    		job = "sales";
+	    	}else if(job.equals("admin")||job.equals("administrator")) {
+	    		job = "admin";
 	    	}else {
 	    		JOptionPane.showMessageDialog(CreateEmployeeDialog.this,
 			            "Invalid input for Job type, try again",
