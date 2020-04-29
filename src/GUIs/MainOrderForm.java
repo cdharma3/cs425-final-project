@@ -15,13 +15,14 @@ public class MainOrderForm {
         btnOrder.addActionListener(
                 new ActionListener(){
                     public void actionPerformed(ActionEvent e) {
+                    	frame.dispose();
                         OrderFormDialog OrderDlg = new OrderFormDialog(frame);
                         OrderDlg.setVisible(true);
                         
                     }
                 });
  
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frame.setSize(400, 100);
         frame.setLayout(new FlowLayout());
         frame.getContentPane().add(btnOrder);

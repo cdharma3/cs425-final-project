@@ -12,8 +12,9 @@ public class EngMainPage extends JDialog {
 	 * UIController.addEmployee("bWatts", "abc123", "Bob", "Watts", "123456789", (float)25.00, true, "hr");
 	 */
 	private static final long serialVersionUID = 1L;
-	    private JButton btnModel;			// Access and update Model
-	    private JButton btnInventory;				// Access and update Inventory
+		private JButton btnCreate;				//Create new models
+	    private JButton btnModel;				// Access and update Model
+	    private JButton btnInventory;			// Access and update Inventory
 	    private JButton btnEmpl;				// Access (limited) to employee info
 	    private boolean succeeded;				// If successful
 	 
@@ -29,6 +30,15 @@ public class EngMainPage extends JDialog {
 	       
 	        //Line separating buttons and welcome message
 	        //Create new employee button and label
+	        btnCreate = new JButton("Create a new Model entry");
+	        btnCreate.addActionListener(new ActionListener() {
+	 
+	        	public void actionPerformed(ActionEvent e) {
+	        		dispose();
+	                MainCreateEmployee.main(null);
+	            }
+	        });
+	        panel.add(btnCreate);
 	        
 	        btnModel = new JButton("Create a new Employee");
 	        btnModel.addActionListener(new ActionListener() {
