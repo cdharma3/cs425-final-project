@@ -2,6 +2,8 @@ package GUIs;
 
 import java.awt.*;
 import java.awt.event.*;
+import java.sql.SQLException;
+
 import javax.swing.*;
 import javax.swing.border.*;
  
@@ -53,24 +55,29 @@ public class LoginDialog extends JDialog {
         btnLogin.addActionListener(new ActionListener() {
  
             public void actionPerformed(ActionEvent e) {
-                if (Login.authenticate(getUsername(), getPassword())) {
-                    JOptionPane.showMessageDialog(LoginDialog.this,
-                            "Hi " + getUsername() + "! You have successfully logged in.",
-                            "Login",
-                            JOptionPane.INFORMATION_MESSAGE);
-                    succeeded = true;
-                    dispose();
-                } else {
-                    JOptionPane.showMessageDialog(LoginDialog.this,
-                            "Invalid username or password",
-                            "Login",
-                            JOptionPane.ERROR_MESSAGE);
-                    // reset username and password
-                    tfUsername.setText("");
-                    pfPassword.setText("");
-                    succeeded = false;
+                try {
+					if (UIController.login(getUsername(), getPassword())) {
+					    JOptionPane.showMessageDialog(LoginDialog.this,
+					            "Hi " + getUsername() + "! You have successfully logged in.",
+					            "Login",
+					            JOptionPane.INFORMATION_MESSAGE);
+					    succeeded = true;
+					    dispose();
+					} else {
+					    JOptionPane.showMessageDialog(LoginDialog.this,
+					            "Invalid username or password",
+					            "Login",
+					            JOptionPane.ERROR_MESSAGE);
+					    // reset username and password
+					    tfUsername.setText("");
+					    pfPassword.setText("");
+					    succeeded = false;
  
-                }
+					}
+				} catch (HeadlessException | SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
             }
         });
         btnCancel = new JButton("Cancel");
