@@ -1,4 +1,4 @@
-package Damian_work;
+package GUIs;
 
 import java.awt.*;
 import java.awt.event.*;
@@ -14,7 +14,7 @@ public class MainLogin {
                     public void actionPerformed(ActionEvent e) {
                         LoginDialog loginDlg = new LoginDialog(frame);
                         loginDlg.setVisible(true);
-                        // if logon successfully
+                        // if login successfully
                         if(loginDlg.isSucceeded()){
                             btnLogin.setText("Welcome " + loginDlg.getUsername() + "!");
                         }

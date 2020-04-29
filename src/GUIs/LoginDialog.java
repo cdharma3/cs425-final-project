@@ -1,4 +1,4 @@
-package Damian_work;
+package GUIs;
 
 import java.awt.*;
 import java.awt.event.*;
