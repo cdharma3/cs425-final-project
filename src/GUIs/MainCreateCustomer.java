@@ -18,7 +18,7 @@ public class MainCreateCustomer {
                     	frame.dispose();
                     	CreateCustomerDialog OrderDlg = new CreateCustomerDialog(frame);
                         OrderDlg.setVisible(true);
-                        
+                        return;
                     }
                 });
  
