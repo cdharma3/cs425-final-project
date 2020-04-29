@@ -80,9 +80,8 @@ public class UIController {
 		PreparedStatement passwordStatement = erpDB.prepareStatement(passwordQuery);
 		passwordStatement.setString(1, username);
 		ResultSet storedPassword = passwordStatement.executeQuery();
-		storedPassword.next();
 		try {
-			if (check(password, storedPassword.getString("password"))) {
+			if (storedPassword.next() && check(password, storedPassword.getString("password"))) {
 				databaseUsername = username;
 				databasePassword = password;
 				return true;
@@ -133,9 +132,40 @@ public class UIController {
 			st.execute(assignRole);
 			System.out.println("Employee " + E_ID + " has been given the " + jobType + " role");
 
+			st.close();
+			ps.close();
+			erpDB.close();
+
 		} catch (NoSuchAlgorithmException | InvalidKeySpecException e) {
 			System.err.println("Invalid password!");
 		}
+	}
+
+	/** deletes all employees and roles from database
+	 * warning: will not work if employee table is not populated with role!
+	 * make sure employee table is synced with the roles present
+	 * @throws SQLException
+	 */
+	public static void deleteAllEmployees() throws SQLException {
+		Connection erpDB = DriverManager.getConnection("jdbc:postgresql://localhost:5432/final-project-db", "mr_admin", "mr_password");
+		String retrieveEmployees = "SELECT E_ID FROM employee;";
+		Statement st = erpDB.createStatement();
+		Statement dropRole = erpDB.createStatement();
+		ResultSet rs = st.executeQuery(retrieveEmployees);
+
+		while(rs.next()) {
+			String currentRole = rs.getString("E_ID");
+			dropRole.execute("DROP ROLE IF EXISTS \"" + currentRole + "\"");
+			System.out.println("Dropped role " + currentRole);
+		}
+
+		System.out.println("All roles dropped");
+		st.execute("DELETE FROM employee");
+		System.out.println("Employee table cleared");
+
+		st.close();
+		dropRole.close();
+		erpDB.close();
 	}
 
 	/** retrieves sales price from model table when given model name
@@ -158,6 +188,31 @@ public class UIController {
 			return (float)0.00;
 		}
 
+	}
+
+	/** adds order to database
+	 * @throws SQLException
+	 */
+	public static void addOrder(String C_ID, String E_ID, String ModelName, int Quantity) throws SQLException {
+		Connection erpDB = DriverManager.getConnection("jdbc:postgresql://localhost:5432/final-project-db", databaseUsername, databasePassword);
+		String addOrderInfo =
+				"INSERT INTO OrderInfo "
+						+ "(C_ID, E_ID, ModelName, Quantity, SaleValue) "
+						+ "VALUES (?, ?, ?, ?, ?);";
+
+		PreparedStatement ps = erpDB.prepareStatement(addOrderInfo);
+		int i = 1;
+		ps.setString(i++, C_ID);
+		ps.setString(i++, E_ID);
+		ps.setString(i++, ModelName);
+		ps.setInt(i++, Quantity);
+		ps.setFloat(i++, Quantity * UIController.getSalePrice(ModelName));
+
+		ps.executeUpdate();
+		System.out.println("Order placed for " + Quantity + " " + ModelName + "s priced at $" + (Quantity * UIController.getSalePrice(ModelName)));
+
+		ps.close();
+		erpDB.close();
 	}
 
 }

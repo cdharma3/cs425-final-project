@@ -10,6 +10,9 @@ public class CreateTestData {
 
 		try {
 
+			// clear employee roles
+			UIController.deleteAllEmployees();
+
 			// Create bob
 			UIController.addEmployee("bWatts", "abc123", "Bob", "Watts", "123456789", (float)25.00, true, "admin");
 
@@ -24,6 +27,8 @@ public class CreateTestData {
 
 			// retrieve model number for model Swiffer_Duster
 			System.out.println("Sale price for swiffer duster " + UIController.getSalePrice("Swiffer Duster"));
+
+			UIController.addOrder("jJohnson", "bWatts", "Swiffer Duster", 5);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
