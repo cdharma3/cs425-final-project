@@ -9,7 +9,10 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.Timestamp;
 import java.util.Base64;
+import java.util.Date;
+import java.util.UUID;
 
 import javax.crypto.SecretKey;
 import javax.crypto.SecretKeyFactory;
@@ -21,6 +24,7 @@ public class UIController {
 	private static final int desiredKeyLen = 256;
 	private static String databaseUsername = "";
 	private static String databasePassword = "";
+	private static UUID currentSessionID;
 
 	/**
 	 * Hashes password with given plaintext password and given salt
@@ -65,6 +69,33 @@ public class UIController {
 		String hashOfInput = hash(password, Base64.getDecoder().decode((saltAndHash[0])));
 		return hashOfInput.equals(saltAndHash[1]);
 	}
+	/** helper function to insert login timestamp into login database
+	 * @throws SQLException
+	 *
+	 */
+	private static void addLoginTimestamp() throws SQLException {
+		Connection erpDB = DriverManager.getConnection("jdbc:postgresql://localhost:5432/final-project-db", "mr_admin", "mr_password");
+		String insertLoginTimestamp =
+				"INSERT INTO Login "
+						+ "(SessionID, E_ID, Privilege, LoginTime) "
+						+ "VALUES (?, ?, ?, ?);";
+		PreparedStatement ps = erpDB.prepareStatement(insertLoginTimestamp);
+		// generate sessionid
+		currentSessionID = UUID.randomUUID();
+		int i = 1;
+		ps.setObject(i++, currentSessionID);
+		ps.setString(i++, databaseUsername);
+		ps.setString(i++, UIController.getRole(databaseUsername));
+
+		// create anonymous date instance, get current time
+		long currentTime = new Date().getTime();
+
+		ps.setTimestamp(i++, new Timestamp(currentTime));
+
+		ps.executeUpdate();
+		System.out.println("Login attempt " + currentSessionID.toString() +
+				" logged for user " + databaseUsername + " on " + new Date(currentTime).toString());
+	}
 
 	/**
 	 * Called when login submit button is pushed
@@ -86,6 +117,7 @@ public class UIController {
 			if (storedPassword.next() && check(password, storedPassword.getString("password"))) {
 				databaseUsername = username;
 				databasePassword = password;
+				UIController.addLoginTimestamp();
 				return true;
 			} else {
 				return false;
