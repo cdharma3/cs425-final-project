@@ -71,8 +71,8 @@ public class UIController {
 	 * @throws InvalidKeySpecException
 	 * @throws NoSuchAlgorithmException
 	 */
-	public static boolean login(String username, String password) throws SQLException, NoSuchAlgorithmException, InvalidKeySpecException {
-		Connection erpDB = DriverManager.getConnection("jdbc:postgresql://localhost:5432/final-project-db", "loginManager", "the_manager");
+	public static boolean login(String username, String password) throws SQLException {
+		Connection erpDB = DriverManager.getConnection("jdbc:postgresql://localhost:5432/final-project-db", "mr_admin", "mr_password");
 		String passwordQuery =
 				"SELECT password "
 						+ "FROM employee "
@@ -81,14 +81,19 @@ public class UIController {
 		passwordStatement.setString(1, username);
 		ResultSet storedPassword = passwordStatement.executeQuery();
 		storedPassword.next();
-
-		if (check(password, storedPassword.getString("password"))) {
-			databaseUsername = username;
-			databasePassword = password;
-			return true;
-		} else {
+		try {
+			if (check(password, storedPassword.getString("password"))) {
+				databaseUsername = username;
+				databasePassword = password;
+				return true;
+			} else {
+				return false;
+			}
+		} catch(NoSuchAlgorithmException | InvalidKeySpecException e) {
+			System.err.println("Invalid password entered!");
 			return false;
 		}
+
 	}
 
 	/** Adds employee to the database
