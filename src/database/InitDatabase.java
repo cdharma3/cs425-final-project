@@ -15,8 +15,8 @@ public class InitDatabase {
 		 * All data currently in the database will be lost
 		 */
 		try {
-			Connection db = DriverManager.getConnection("jdbc:postgresql://localhost:5432/final-project-db", "postgres",
-					"123456");
+			Connection db = DriverManager.getConnection("jdbc:postgresql://localhost:5432/final-project-db", "mr_admin",
+					"mr_password");
 			// prints if connection is established
 			System.out.println("Connnection established...");
 			DatabaseMetaData pdbmd = db.getMetaData();
@@ -35,7 +35,7 @@ public class InitDatabase {
 			String loginTable =
 					"CREATE TABLE Login "
 							+ "(U_ID varChar(50) NOT NULL, "
-							+ "Privilege varChar(15) CHECK (Privilege IN ('admin', 'sales', 'HR', 'engineering')), "
+							+ "Privilege varChar(15) CHECK (Privilege IN ('admin', 'sales', 'hr', 'engineering')), "
 							+ "LoginTime timestamp, "
 							+ "LogoutTime timestamp, "
 							+ "PRIMARY KEY (U_ID));";
@@ -61,7 +61,7 @@ public class InitDatabase {
 							+ "SSN varChar(9), "
 							+ "Salary numeric(15, 2), "
 							+ "isHourly BOOLEAN, "
-							+ "JobType varChar(15) CHECK (JobType IN ('HR', 'Sale', 'Engineering')), "
+							+ "JobType varChar(15) CHECK (JobType IN ('admin', 'hr', 'sales', 'engineering')), "
 							+ "U_ID varChar(50) NOT NULL, "
 							+ "PRIMARY KEY (E_ID), "
 							+ "FOREIGN KEY (U_ID) REFERENCES Login(U_ID));";
@@ -91,28 +91,6 @@ public class InitDatabase {
 			System.out.println("Customer table created");
 
 
-			// dropping inventory table if it exists
-			tables = pdbmd.getTables(null, null, "inventory", null);
-			if (tables.next()) {
-				st.executeUpdate("DROP TABLE inventory CASCADE;");
-				System.out.println("Inventory table dropped");
-			}
-
-			// creating inventory table
-			String inventoryTable =
-					"CREATE TABLE Inventory "
-							+ "(I_ID SERIAL, "
-							+ "Cost numeric(15,2), "
-							+ "Lead_time int, "
-							+ "Category_type varChar(50), "
-							+ "Number int, "
-							+ "PRIMARY KEY (I_ID));";
-
-			// execute inventory table creation statement
-			st.executeUpdate(inventoryTable);
-			System.out.println("Inventory table created");
-
-
 			// dropping model table if it exists
 			tables = pdbmd.getTables(null, null, "model", null);
 			if (tables.next()) {
@@ -131,6 +109,30 @@ public class InitDatabase {
 			// execute model table creation statement
 			st.executeUpdate(modelTable);
 			System.out.println("Model table created");
+
+
+			// dropping inventory table if it exists
+			tables = pdbmd.getTables(null, null, "inventory", null);
+			if (tables.next()) {
+				st.executeUpdate("DROP TABLE inventory CASCADE;");
+				System.out.println("Inventory table dropped");
+			}
+
+			// creating inventory table
+			String inventoryTable =
+					"CREATE TABLE Inventory "
+							+ "(I_ID SERIAL, "
+							+ "ModelNumber SERIAl, "
+							+ "Cost numeric(15,2), "
+							+ "Lead_time int, "
+							+ "Category_type varChar(50), "
+							+ "Quantity int CHECK (Quantity >= 0), "
+							+ "PRIMARY KEY (I_ID), "
+							+ "FOREIGN KEY (ModelNumber) REFERENCES Model(ModelNumber));";
+
+			// execute inventory table creation statement
+			st.executeUpdate(inventoryTable);
+			System.out.println("Inventory table created");
 
 
 			// dropping order table if it exists
@@ -159,7 +161,7 @@ public class InitDatabase {
 
 		} catch (SQLException sqle) {
 			System.out.println("SQL Error!");
-			System.err.println(sqle.toString());
+			System.err.println(sqle);
 		}
 	}
 
