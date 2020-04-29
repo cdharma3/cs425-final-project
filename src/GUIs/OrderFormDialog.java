@@ -19,7 +19,6 @@ public class OrderFormDialog extends JDialog {
 	    private JLabel lbquantity;
 	    private JButton btnEnter;
 	    private JButton btnCancel;
-	    private boolean succeeded;
 	    
 	    public OrderFormDialog() {}
 	 
@@ -88,7 +87,7 @@ public class OrderFormDialog extends JDialog {
 	 
 	            public void actionPerformed(ActionEvent e) {
 	            	JOptionPane.showMessageDialog(OrderFormDialog.this, "You have successfully entered the information. "
-	            			+ " Employee ID: " + getEid() + "Customer ID: " + getCid() + " Order Number: " + getOrderNumber() + " Model Name: "
+	            			+ " Employee ID: " + getEid() + " Customer ID: " + getCid() + " Order Number: " + getOrderNumber() + " Model Name: "
 	            					+ getMname() + " Quantity: " + getQ() + " Sale Value: " + calcSaleValue(getQ()) );
 	            	
 	            	enterOrder();
