@@ -5,6 +5,7 @@ import java.sql.SQLException;
 
 import javax.swing.*;
 import javax.swing.border.*;
+@SuppressWarnings("unused")
 public class CreateEmployeeDialog extends JDialog {
 	 
 	    /**
@@ -151,12 +152,22 @@ public class CreateEmployeeDialog extends JDialog {
 	 
 	        	public void actionPerformed(ActionEvent e) {
 	                try {
-						UIController.addEmployee(getEid(), getPassword(), getFname(), getLname(), getSSN(), getSalary(), getisHourly(), getJobType());
-						    
-					} catch (HeadlessException | SQLException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
+	                	if(getSSN() != null) {
+	                		UIController.addEmployee(getEid(), getPassword(), getFname(), getLname(), getSSN(), getSalary(), getisHourly(), getJobType());
+	                	}else {
+	                		dispose();
+							MainCreateEmployee.main(null);
+	                	}
+					} catch (Exception e1) {
+						dispose();
+						MainCreateEmployee.main(null);
 					}
+	                JOptionPane.showMessageDialog(CreateEmployeeDialog.this,
+				            "Employee created successfully!",
+				            "Create new Employee",
+				            JOptionPane.INFORMATION_MESSAGE);
+	                dispose();
+	                ///////TODO add next GUI screen
 	            }
 	        });
 	        btnCancel = new JButton("Cancel");
@@ -196,16 +207,25 @@ public class CreateEmployeeDialog extends JDialog {
 	    }
 	    
 	    public String getSSN() {
+	    	//checking to see if its only numbers and has a length of 9
+	    	if(tfssn.getText().trim().length() != 9 || !(tfssn.getText().trim().matches("[0-9]+"))) {
+	    		JOptionPane.showMessageDialog(CreateEmployeeDialog.this,
+			            "Invalid input for Social security number, try again",
+			            "Create new employee",
+			            JOptionPane.ERROR_MESSAGE);
+	    		return null;
+	    	}
 	    	return tfssn.getText().trim();
 	    }
 	    
 	    public Float getSalary() {
+	    	//checking to see if its a float
 			try {
 				return Float.parseFloat(tfsalary.getText().trim());
 			}
 			catch (Exception e){
 				JOptionPane.showMessageDialog(CreateEmployeeDialog.this,
-			            "Invalid input for Float, try again",
+			            "Invalid input for pay, try again",
 			            "Create new employee",
 			            JOptionPane.ERROR_MESSAGE);
 				
@@ -222,7 +242,9 @@ public class CreateEmployeeDialog extends JDialog {
 			}
 	    }
 	    
+	    
 	    public String getJobType() {
+	    	// checking to see if its a valid job type
 	    	String job = tfjobtype.getText().trim();
 	    	if(job.equals("hr")||job.equals("human resources")) {
 	    		job = "hr";
