@@ -44,6 +44,21 @@ public class InitViews {
 						+ "FROM OrderInfo NATURAL JOIN Model;";
 		st.execute(createOrderDetails);
 		System.out.println("OrderDetails view created");
+
+		// drop and create customerModel view
+		st.executeUpdate("DROP VIEW IF EXISTS customerModel;");
+		System.out.println("CustomerModel view dropped");
+
+		String createCustomerModel =
+				"CREATE VIEW customerModel AS "
+						+ "SELECT c.FirstName, c.LastName, t.ModelName, totalQuantity "
+						+ "FROM ("
+						+ "SELECT C_ID, ModelName, SUM(Quantity) AS totalQuantity "
+						+ "FROM OrderInfo "
+						+ "GROUP BY C_ID, ModelName) "
+						+ " t JOIN Customer c ON c.C_ID = t.C_ID;";
+		st.executeUpdate(createCustomerModel);
+		System.out.println("CustomerModel view created");
 	}
 
 }

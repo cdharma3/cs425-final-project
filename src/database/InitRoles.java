@@ -41,7 +41,7 @@ public class InitRoles {
 			st.execute("GRANT INSERT ON OrderInfo TO sales;");
 			// create views
 			st.execute("GRANT SELECT ON totalRevenue TO sales;");
-			//st.execute("GRANT SELECT ON customerModel TO sales;");
+			st.execute("GRANT SELECT ON customerModel TO sales;");
 			st.execute("GRANT SELECT ON orderDetails TO sales;");
 			//st.execute("GRANT SELECT ON expenseReport TO sales;");
 
@@ -58,7 +58,7 @@ public class InitRoles {
 			st.execute("GRANT SELECT (FirstName), SELECT (LastName), SELECT (JobType) ON Employee TO engineering;");
 			// create views
 			st.execute("GRANT SELECT ON totalRevenue TO engineering;");
-			//st.execute("GRANT SELECT ON customerModel TO engineering;");
+			st.execute("GRANT SELECT ON customerModel TO engineering;");
 			st.execute("GRANT SELECT ON orderDetails TO engineering;");
 			//st.execute("GRANT SELECT ON expenseReport TO engineering;");
 
