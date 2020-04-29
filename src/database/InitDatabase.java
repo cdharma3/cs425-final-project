@@ -24,29 +24,8 @@ public class InitDatabase {
 			Statement st = db.createStatement();
 
 
-			// dropping login table if it exists
-			ResultSet tables = pdbmd.getTables(null, null, "login", null);
-			if (tables.next()) {
-				st.executeUpdate("DROP TABLE login CASCADE;");
-				System.out.println("login table dropped");
-			}
-
-			// creating login table
-			String loginTable =
-					"CREATE TABLE Login "
-							+ "(U_ID varChar(50) NOT NULL, "
-							+ "Privilege varChar(15) CHECK (Privilege IN ('admin', 'sales', 'hr', 'engineering')), "
-							+ "LoginTime timestamp, "
-							+ "LogoutTime timestamp, "
-							+ "PRIMARY KEY (U_ID));";
-
-			// execute login table creation statement
-			st.executeUpdate(loginTable);
-			System.out.println("Login table created");
-
-
 			// dropping employee table if it exists
-			tables = pdbmd.getTables(null, null, "employee", null);
+			ResultSet tables = pdbmd.getTables(null, null, "employee", null);
 			if (tables.next()) {
 				st.executeUpdate("DROP TABLE employee CASCADE;");
 				System.out.println("Employee table dropped");
@@ -55,26 +34,46 @@ public class InitDatabase {
 			// creating employee table
 			String employeeTable =
 					"CREATE TABLE Employee "
-							+ "(E_ID varChar(50) NOT NULL, "
+							+ "(E_ID varChar(50) NOT NULL,"
+							+ "Password varChar(256), "
 							+ "FirstName varChar(50) NOT NULL, "
 							+ "LastName varChar(50), "
 							+ "SSN varChar(9), "
 							+ "Salary numeric(15, 2), "
 							+ "isHourly BOOLEAN, "
 							+ "JobType varChar(15) CHECK (JobType IN ('admin', 'hr', 'sales', 'engineering')), "
-							+ "U_ID varChar(50) NOT NULL, "
-							+ "PRIMARY KEY (E_ID), "
-							+ "FOREIGN KEY (U_ID) REFERENCES Login(U_ID));";
+							+ "PRIMARY KEY (E_ID));";
 
 			// execute employee table creation statement
 			st.executeUpdate(employeeTable);
 			System.out.println("Employee table created");
 
 
+			// dropping login table if it exists
+			tables = pdbmd.getTables(null, null, "login", null);
+			if (tables.next()) {
+				st.executeUpdate("DROP TABLE login CASCADE;");
+				System.out.println("login table dropped");
+			}
+
+			// creating login table
+			String loginTable =
+					"CREATE TABLE Login "
+							+ "(E_ID varChar(50) NOT NULL, "
+							+ "Privilege varChar(15) CHECK (Privilege IN ('admin', 'sales', 'hr', 'engineering')), "
+							+ "LoginTime timestamp, "
+							+ "LogoutTime timestamp, "
+							+ "FOREIGN KEY (E_ID) REFERENCES Employee(E_ID));";
+
+			// execute login table creation statement
+			st.executeUpdate(loginTable);
+			System.out.println("Login table created");
+
+
 			// dropping customer table if it exists
 			tables = pdbmd.getTables(null, null, "customer", null);
 			if (tables.next()) {
-				st.executeUpdate("DROP TABLE CUSTOMER CASCADE;");
+				st.executeUpdate("DROP TABLE customer CASCADE;");
 				System.out.println("Customer table dropped");
 			}
 
@@ -104,7 +103,7 @@ public class InitDatabase {
 							+ "(ModelName varChar(50), "
 							+ "ModelNumber SERIAL, "
 							+ "SalePrice numeric(15, 2), "
-							+ "PRIMARY KEY (ModelNumber));";
+							+ "PRIMARY KEY (ModelName));";
 
 			// execute model table creation statement
 			st.executeUpdate(modelTable);
@@ -122,13 +121,13 @@ public class InitDatabase {
 			String inventoryTable =
 					"CREATE TABLE Inventory "
 							+ "(I_ID SERIAL, "
-							+ "ModelNumber SERIAl, "
+							+ "ModelName varChar(50), "
 							+ "Cost numeric(15,2), "
 							+ "Lead_time int, "
 							+ "Category_type varChar(50), "
 							+ "Quantity int CHECK (Quantity >= 0), "
 							+ "PRIMARY KEY (I_ID), "
-							+ "FOREIGN KEY (ModelNumber) REFERENCES Model(ModelNumber));";
+							+ "FOREIGN KEY (ModelName) REFERENCES Model(ModelName));";
 
 			// execute inventory table creation statement
 			st.executeUpdate(inventoryTable);
@@ -148,12 +147,13 @@ public class InitDatabase {
 							+ "(OrderNumber SERIAL, "
 							+ "C_ID varChar(50) NOT NULL, "
 							+ "E_ID varChar(50) NOT NULL, "
-							+ "ModelNumber SERIAL, "
+							+ "ModelName varChar(50), "
+							+ "Quantity INTEGER CHECK (Quantity >= 0), "
 							+ "SaleValue numeric(15,2), "
 							+ "PRIMARY KEY (OrderNumber), "
 							+ "FOREIGN KEY (E_ID) REFERENCES employee(E_ID), "
 							+ "FOREIGN KEY (C_ID) REFERENCES customer(C_ID), "
-							+ "FOREIGN KEY (ModelNumber) REFERENCES model(ModelNumber));";
+							+ "FOREIGN KEY (ModelName) REFERENCES model(ModelName));";
 
 			// execute order table creation statement
 			st.executeUpdate(orderInfoTable);
