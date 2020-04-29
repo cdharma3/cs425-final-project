@@ -95,13 +95,36 @@ public class UIController {
 
 	}
 
+
+	/** call to retrieve role of user based on e_id
+	 * @throws SQLException
+	 *
+	 */
+	public static String getRole(String E_ID) throws SQLException {
+		Connection erpDB = DriverManager.getConnection("jdbc:postgresql://localhost:5432/final-project-db", "mr_admin", "mr_password");
+		String selectRole =
+				"SELECT JobType from employee "
+						+ "WHERE E_ID = ?;";
+
+		PreparedStatement ps = erpDB.prepareStatement(selectRole);
+		ps.setString(1, E_ID);
+		ResultSet rs = ps.executeQuery();
+
+		if(rs.next()) {
+			return rs.getString("JobType");
+		} else {
+			System.err.println("E_ID not found!");
+			return null;
+		}
+	}
+
 	/** Adds employee to the database
 	 * @throws SQLException
 	 *
 	 */
 	public static void addEmployee(String E_ID, String password, String firstName, String lastName, String ssn, float Salary, Boolean isHourly, String jobType) throws SQLException {
 		try {
-			Connection erpDB = DriverManager.getConnection("jdbc:postgresql://localhost:5432/final-project-db", "mr_admin", "mr_password");
+			Connection erpDB = DriverManager.getConnection("jdbc:postgresql://localhost:5432/final-project-db", databaseUsername, databasePassword);
 			String employeeInfo =
 					"INSERT INTO employee "
 							+ "(E_ID, Password, FirstName, LastName, SSN, Salary, isHourly, jobType) "
@@ -205,6 +228,9 @@ public class UIController {
 
 		System.out.println("Customer " + firstName + " " + lastName +
 				" added to customer database with a C_ID of " + C_ID);
+
+		ps.close();
+		erpDB.close();
 	}
 
 	/** retrieves sales price from model table when given model name
