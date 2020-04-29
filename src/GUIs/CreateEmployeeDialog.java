@@ -200,17 +200,44 @@ public class CreateEmployeeDialog extends JDialog {
 	    }
 	    
 	    public Float getSalary() {
-			return (float) 5.00;
-	    	//TODO
+			try {
+				return Float.parseFloat(tfsalary.getText().trim());
+			}
+			catch (Exception e){
+				JOptionPane.showMessageDialog(CreateEmployeeDialog.this,
+			            "Invalid input for Float, try again",
+			            "Create new employee",
+			            JOptionPane.ERROR_MESSAGE);
+				
+			}
+			return null;
 	    }
 	    
 	    public Boolean getisHourly() {
-			return true;
-	    	//TODO
+			if(cbhourly.isSelected()) {
+				return true;
+			}
+			else {
+				return false;
+			}
 	    }
 	    
 	    public String getJobType() {
-	    	return tfjobtype.getText().trim();
+	    	String job = tfjobtype.getText().trim();
+	    	if(job.equals("hr")||job.equals("human resources")) {
+	    		job = "hr";
+	    	}else if (job.equals("engineering")||job.equals("engineer") ) {
+	    		job = "engineering";
+	    	}else if (job.equals("sales")||job.equals("sale")) {
+	    		job = "sales";
+	    	}else {
+	    		JOptionPane.showMessageDialog(CreateEmployeeDialog.this,
+			            "Invalid input for Job type, try again",
+			            "Create new employee",
+			            JOptionPane.ERROR_MESSAGE);
+	    		return null;
+	    	}
+	    	return job;
 	    }
 	 
 	    public boolean isSucceeded() {
