@@ -50,7 +50,8 @@ public class UIController {
 		return Base64.getEncoder().encodeToString(salt) + "$" + hash(password, salt);
 	}
 
-	/** Checks whether given plaintext password corresponds to a stored salted hash of the password.
+	/**
+	 * Checks whether given plaintext password corresponds to a stored salted hash of the password.
 	 * @param password plaintext password to be checked against stored hash
 	 * @param stored salted hash to be checked again in this format 'salt$hash'
 	 * @returns returns true if plaintext password equals the stored password
@@ -65,7 +66,8 @@ public class UIController {
 		return hashOfInput.equals(saltAndHash[1]);
 	}
 
-	/** Called when login submit button is pushed
+	/**
+	 * Called when login submit button is pushed
 	 * Searches for username in employee database, then checks if passwords match
 	 * @throws SQLException
 	 * @throws InvalidKeySpecException
@@ -96,7 +98,8 @@ public class UIController {
 	}
 
 
-	/** call to retrieve role of user based on e_id
+	/**
+	 * call to retrieve role of user based on e_id
 	 * @throws SQLException
 	 *
 	 */
@@ -118,13 +121,14 @@ public class UIController {
 		}
 	}
 
-	/** Adds employee to the database
+	/**
+	 * Adds employee to the database
 	 * @throws SQLException
 	 *
 	 */
 	public static void addEmployee(String E_ID, String password, String firstName, String lastName, String ssn, float Salary, Boolean isHourly, String jobType) throws SQLException {
 		try {
-			Connection erpDB = DriverManager.getConnection("jdbc:postgresql://localhost:5432/final-project-db", databaseUsername, databasePassword);
+			Connection erpDB = DriverManager.getConnection("jdbc:postgresql://localhost:5432/final-project-db", "mr_admin", "mr_password");
 			String employeeInfo =
 					"INSERT INTO employee "
 							+ "(E_ID, Password, FirstName, LastName, SSN, Salary, isHourly, jobType) "
@@ -164,7 +168,8 @@ public class UIController {
 		}
 	}
 
-	/** deletes all employees and roles from database
+	/**
+	 * deletes all employees and roles from database
 	 * warning: will not work if employee table is not populated with role!
 	 * make sure employee table is synced with the roles present
 	 * @throws SQLException
@@ -191,7 +196,8 @@ public class UIController {
 		erpDB.close();
 	}
 
-	/** adds model to the database
+	/**
+	 * adds model to the database
 	 * @throws SQLException
 	 *
 	 */
@@ -210,7 +216,8 @@ public class UIController {
 		System.out.println(modelName + " added to model database with a price of $" + salePrice);
 	}
 
-	/** adds customer to database
+	/**
+	 * adds customer to database
 	 *
 	 */
 	public static void addCustomer(String firstName, String lastName, String C_ID) throws SQLException {
@@ -233,7 +240,8 @@ public class UIController {
 		erpDB.close();
 	}
 
-	/** retrieves sales price from model table when given model name
+	/**
+	 * retrieves sales price from model table when given model name
 	 * @throws SQLException
 	 */
 	public static float getSalePrice(String modelName) throws SQLException {
@@ -254,7 +262,8 @@ public class UIController {
 		}
 	}
 
-	/** adds order to database
+	/**
+	 * adds order to database
 	 * @throws SQLException
 	 */
 	public static void addOrder(String C_ID, String E_ID, String ModelName, int Quantity) throws SQLException {
@@ -279,4 +288,47 @@ public class UIController {
 		erpDB.close();
 	}
 
+	/**
+	 * add inventory to database
+	 * @throws SQLException
+	 */
+	public static void addInventory(String modelName, float cost, int leadTime, String categoryType, int quantity) throws SQLException {
+		Connection erpDB = DriverManager.getConnection("jdbc:postgresql://localhost:5432/final-project-db", databaseUsername, databasePassword);
+		String addInventoryInfo =
+				"INSERT INTO Inventory "
+						+ "(ModelName, Cost, Lead_time, Category_type, Quantity)"
+						+ "VALUES (?, ?, ?, ?, ?);";
+
+		PreparedStatement ps = erpDB.prepareStatement(addInventoryInfo);
+		int i = 1;
+		ps.setString(i++, modelName);
+		ps.setFloat(i++, cost);
+		ps.setInt(i++, leadTime);
+		ps.setString(i++, categoryType);
+		ps.setInt(i++, quantity);
+
+		ps.executeUpdate();
+		System.out.println("Inventory of " + modelName + " added with " + quantity + " item(s)");
+	}
+
+	/**
+	 * retrieve quantity from inventory given the modelname
+	 * @throws SQLException
+	 */
+	public static int getInventoryQuantity(String modelName) throws SQLException {
+		Connection erpDB = DriverManager.getConnection("jdbc:postgresql://localhost:5432/final-project-db", databaseUsername, databasePassword);
+		String selectInventoryQuantity =
+				"SELECT Quantity FROM Inventory "
+						+ "WHERE ModelName = ?;";
+		PreparedStatement ps = erpDB.prepareStatement(selectInventoryQuantity);
+		ps.setString(1, modelName);
+
+		ResultSet rs = ps.executeQuery();
+
+		if(rs.next()) {
+			return rs.getInt("Quantity");
+		} else {
+			return 0;
+		}
+	}
 }

@@ -27,7 +27,10 @@ public class CreateTestData {
 
 			UIController.addCustomer("Jon", "Johnson", "jJohnson");
 			UIController.addModel("Swiffer Duster", (float)120.00);
+			UIController.addInventory("Swiffer Duster", (float)120.00, 5, "Vacuum", 10);
 			UIController.addOrder("jJohnson", "bWatts", "Swiffer Duster", 5);
+			UIController.addOrder("jJohnson", "bWatts", "Swiffer Duster", 5);
+
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

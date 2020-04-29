@@ -40,12 +40,11 @@ public class InitRoles {
 			st.execute("GRANT SELECT, UPDATE ON Customer to sales;");
 			st.execute("GRANT INSERT ON OrderInfo TO sales;");
 			// create views
-			/*
 			st.execute("GRANT SELECT ON totalRevenue TO sales;");
-			st.execute("GRANT SELECT ON customerModel TO sales;");
+			//st.execute("GRANT SELECT ON customerModel TO sales;");
 			st.execute("GRANT SELECT ON orderDetails TO sales;");
-			st.execute("GRANT SELECT ON expenseReport TO sales;");
-			 */
+			//st.execute("GRANT SELECT ON expenseReport TO sales;");
+
 			System.out.println("Privileges granted to role salesperson");
 
 			// drops engineering role if it exists, run init database first to clear objects
@@ -58,12 +57,11 @@ public class InitRoles {
 			st.execute("GRANT SELECT, UPDATE ON Inventory TO engineering;");
 			st.execute("GRANT SELECT (FirstName), SELECT (LastName), SELECT (JobType) ON Employee TO engineering;");
 			// create views
-			/*
 			st.execute("GRANT SELECT ON totalRevenue TO engineering;");
-			st.execute("GRANT SELECT ON customerModel TO engineering;");
+			//st.execute("GRANT SELECT ON customerModel TO engineering;");
 			st.execute("GRANT SELECT ON orderDetails TO engineering;");
-			st.execute("GRANT SELECT ON expenseReport TO engineering;");
-			 */
+			//st.execute("GRANT SELECT ON expenseReport TO engineering;");
+
 			System.out.println("Privileges granted to role engineering");
 
 			// drops hr role if it exists, run init database first to clear objects
@@ -73,6 +71,7 @@ public class InitRoles {
 			// create hr user and grant privileges
 			st.executeUpdate("CREATE ROLE hr NOINHERIT;");
 			st.execute("GRANT SELECT, UPDATE, INSERT, DELETE ON Employee TO hr;");
+			st.execute("GRANT SELECT ON employeeRevenue TO hr"); // grant view of employee and associated sales number
 			System.out.println("Privileges granted to role hr");
 
 
