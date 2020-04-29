@@ -1,6 +1,8 @@
 package GUIs;
 import java.awt.*;
 import java.awt.event.*;
+import java.sql.SQLException;
+
 import javax.swing.*;
 import javax.swing.border.*;
 public class OrderFormDialog extends JDialog {
@@ -21,7 +23,6 @@ public class OrderFormDialog extends JDialog {
 	    private JButton btnCancel;
 	    
 	    public OrderFormDialog() {}
-	 
 	    public OrderFormDialog(Frame parent) {
 	        super(parent, "Order", true);
 	        //
@@ -86,12 +87,31 @@ public class OrderFormDialog extends JDialog {
 	        btnEnter.addActionListener(new ActionListener() {
 	 
 	            public void actionPerformed(ActionEvent e) {
-	            	JOptionPane.showMessageDialog(OrderFormDialog.this, "You have successfully entered the information. "
-	            			+ " Employee ID: " + getEid() + " Customer ID: " + getCid() + " Order Number: " + getOrderNumber() + " Model Name: "
-	            					+ getMname() + " Quantity: " + getQ() + " Sale Value: " + calcSaleValue(getQ()) );
-	            	
-	            	enterOrder();
-	            	
+	            	try {
+						JOptionPane.showMessageDialog(OrderFormDialog.this, "You have successfully entered the information. "
+								+ " Employee ID: " + getEid() + " Customer ID: " + getCid() + " Model Name: "
+										+ getMname() + " Quantity: " + getQ() + " Sale Value: " + calcSaleValue(getQ()));
+					} catch (HeadlessException e1) {
+						e1.printStackTrace();
+					} catch (SQLException e1) {
+						e1.printStackTrace();
+					}
+	            	try {
+						if(UIController.getInventoryQuantity(getMname())>getQ()) {
+							try {
+								enterOrder();
+							} catch (SQLException e1) {
+								// TODO Auto-generated catch block
+								e1.printStackTrace();
+							}
+						}else {
+							JOptionPane.showMessageDialog(OrderFormDialog.this, "The quantity you have ordered is not available, "
+									+ "please note that the quantity available is: " + UIController.getInventoryQuantity(getMname()));
+						}
+					} catch (SQLException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
 	            	
 	            }
 	        });
@@ -133,19 +153,13 @@ public class OrderFormDialog extends JDialog {
 	    	return t;
 	    }
 	    //salevalue
-	    public double calcSaleValue(int quantity) {
-	    	return 33.75;
-	    	
+	    public double calcSaleValue(int quantity) throws SQLException {
+	    	double saleValue = quantity*UIController.getSalePrice(getMname());
+	    	return saleValue;
 	    }
 	    
-	    public String getOrderNumber() {
-	    	String s = "1234";
-	    	
-	    	return s;
-	    }
-	    
-	    public void enterOrder() {
-	    	System.out.println("hi");
+	    public void enterOrder() throws SQLException {
+	    	UIController.addOrder(getCid(), getEid(), getMname(), getQ());
 	    }
 	    
 }
