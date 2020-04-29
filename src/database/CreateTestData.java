@@ -11,7 +11,7 @@ public class CreateTestData {
 		try {
 
 			// Create bob
-			UIController.addEmployee("bWatts", "abc123", "Bob", "Watts", "123456789", (float)25.00, true, "hr");
+			UIController.addEmployee("bWatts", "abc123", "Bob", "Watts", "123456789", (float)25.00, true, "admin");
 
 			// create jen
 			UIController.addEmployee("jMcmurphy", "jen123", "Jen", "McMurphy", "987654321", (float)150000.00, false, "engineering");
@@ -21,6 +21,9 @@ public class CreateTestData {
 
 			// login as bob
 			System.out.println("Logging in as bWatts returns : " + UIController.login("bWatts", "abc123"));
+
+			// retrieve model number for model Swiffer_Duster
+			System.out.println("Sale price for swiffer duster " + UIController.getSalePrice("Swiffer Duster"));
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

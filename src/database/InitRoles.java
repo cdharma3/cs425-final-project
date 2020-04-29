@@ -18,7 +18,7 @@ public class InitRoles {
 			Statement st = db.createStatement();
 
 			// create admin role
-			st.executeUpdate("CREATE ROLE admin;");
+			st.executeUpdate("CREATE ROLE admin NOINHERIT;");
 			st.execute("GRANT SELECT ON Login TO admin;");
 			st.execute("GRANT SELECT, INSERT, UPDATE, DELETE ON Employee TO admin;");
 			st.execute("GRANT ALL ON Model TO admin;");
@@ -28,7 +28,7 @@ public class InitRoles {
 			System.out.println("Privileges granted to role admin!");
 
 			// create sales user and granting privileges
-			st.executeUpdate("CREATE ROLE sales;");
+			st.executeUpdate("CREATE ROLE sales NOINHERIT;");
 			st.execute("GRANT SELECT, UPDATE ON Customer to sales;");
 			st.execute("GRANT INSERT ON OrderInfo TO sales;");
 			// create views
@@ -41,7 +41,7 @@ public class InitRoles {
 			System.out.println("Privileges granted to role salesperson");
 
 			// create engineering user and granting privileges
-			st.executeUpdate("CREATE ROLE engineering;");
+			st.executeUpdate("CREATE ROLE engineering NOINHERIT;");
 			st.execute("GRANT SELECT, UPDATE ON Model TO engineering;");
 			st.execute("GRANT SELECT, UPDATE ON Inventory TO engineering;");
 			st.execute("GRANT SELECT (FirstName), SELECT (LastName), SELECT (JobType) ON Employee TO engineering;");
@@ -55,7 +55,7 @@ public class InitRoles {
 			System.out.println("Privileges granted to role engineering");
 
 			// create hr user and grant privileges
-			st.executeUpdate("CREATE ROLE hr;");
+			st.executeUpdate("CREATE ROLE hr NOINHERIT;");
 			st.execute("GRANT SELECT, UPDATE, INSERT, DELETE ON Employee TO hr;");
 			System.out.println("Privileges granted to role hr");
 

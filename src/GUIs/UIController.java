@@ -124,18 +124,40 @@ public class UIController {
 			Statement st = erpDB.createStatement();
 
 			// create user login
-			String assignRole = "CREATE USER " + E_ID + " WITH ENCRYPTED PASSWORD '" + password + "';";
+			String assignRole = "CREATE USER \"" + E_ID + "\" WITH INHERIT PASSWORD '" + password + "';";
 			st.executeUpdate(assignRole);
 			System.out.println("Employee " + E_ID + "'s login and password have been created");
 
 			// grant privileges
-			assignRole = "GRANT " + jobType + " TO " + E_ID + ";";
+			assignRole = "GRANT " + jobType + " TO \"" + E_ID + "\";";
 			st.execute(assignRole);
 			System.out.println("Employee " + E_ID + " has been given the " + jobType + " role");
 
 		} catch (NoSuchAlgorithmException | InvalidKeySpecException e) {
 			System.err.println("Invalid password!");
 		}
+	}
+
+	/** retrieves sales price from model table when given model name
+	 * @throws SQLException
+	 */
+	public static float getSalePrice(String modelName) throws SQLException {
+		Connection erpDB = DriverManager.getConnection("jdbc:postgresql://localhost:5432/final-project-db", databaseUsername, databasePassword);
+		String retrieveSalePrice =
+				"SELECT SalePrice FROM model "
+						+ "WHERE ModelName = ?;";
+
+		PreparedStatement ps = erpDB.prepareStatement(retrieveSalePrice);
+		ps.setString(1, modelName);
+		ResultSet rs = ps.executeQuery();
+
+		if (rs.next()) {
+			return rs.getFloat("SalePrice");
+		} else {
+			System.out.println("Model name not found!");
+			return (float)0.00;
+		}
+
 	}
 
 }
