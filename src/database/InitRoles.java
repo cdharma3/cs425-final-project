@@ -23,12 +23,13 @@ public class InitRoles {
 
 			// create admin role
 			st.executeUpdate("CREATE ROLE admin NOINHERIT;");
-			st.execute("GRANT SELECT ON Login TO admin;");
-			st.execute("GRANT SELECT, INSERT, UPDATE, DELETE ON Employee TO admin;");
-			st.execute("GRANT ALL ON Model TO admin;");
-			st.execute("GRANT ALL ON OrderInfo TO admin;");
-			st.execute("GRANT ALL ON Inventory TO admin;");
-			st.execute("GRANT ALL ON Customer TO admin;");
+			st.execute("GRANT CREATE ON DATABASE \"final-project-db\" TO admin WITH GRANT OPTION;");
+			st.execute("GRANT SELECT ON Login TO admin WITH GRANT OPTION;");
+			st.execute("GRANT SELECT, INSERT, UPDATE, DELETE ON Employee TO admin WITH GRANT OPTION;");
+			st.execute("GRANT ALL ON Model TO admin WITH GRANT OPTION;");
+			st.execute("GRANT ALL ON OrderInfo TO admin WITH GRANT OPTION;");
+			st.execute("GRANT ALL ON Inventory TO admin WITH GRANT OPTION;");
+			st.execute("GRANT ALL ON Customer TO admin WITH GRANT OPTION;");
 
 			st.execute("GRANT SELECT ON employeeRevenue TO admin");
 			st.execute("GRANT SELECT ON totalRevenue TO admin;");
