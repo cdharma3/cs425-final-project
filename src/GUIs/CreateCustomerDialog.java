@@ -15,6 +15,7 @@ public class CreateCustomerDialog extends JDialog {
 	    private JLabel lbfname;
 	    private JTextField tflname;				// Last Name
 	    private JLabel lblname;
+	    private JButton btnLogout;				//Logout
 	    private JButton btnEnter;				// Enter Button
 	    private JButton btnCancel;				// Cancel Button
 	    private boolean succeeded;				// If successful
@@ -97,11 +98,27 @@ public class CreateCustomerDialog extends JDialog {
 	 
 	            public void actionPerformed(ActionEvent e) {
 	                dispose();
+	                SalesPage.main(null);
 	            }
 	        });
 	        JPanel bp = new JPanel();
 	        bp.add(btnEnter);
 	        bp.add(btnCancel);
+	        
+	        btnLogout = new JButton("Logout");
+	        btnLogout.addActionListener(new ActionListener() {
+	        
+	            public void actionPerformed(ActionEvent e) {
+	            	try {
+						UIController.logout();
+					} catch (SQLException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+	            	dispose();
+	            }
+	        });
+	        bp.add(btnLogout);
 	 
 	        getContentPane().add(panel, BorderLayout.CENTER);
 	        getContentPane().add(bp, BorderLayout.PAGE_END);
@@ -109,6 +126,7 @@ public class CreateCustomerDialog extends JDialog {
 	        pack();
 	        setResizable(false);
 	        setLocationRelativeTo(parent);
+	        setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 	    }
 		// * UIController.addEmployee("bWatts", "abc123", "Bob", "Watts", "123456789", (float)25.00, true, "hr");
 

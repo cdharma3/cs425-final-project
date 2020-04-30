@@ -28,6 +28,7 @@ public class CreateEmployeeDialog extends JDialog {
 	    //private JLabel lbhourly;
 	    private JTextField tfjobtype;			// Job Type
 	    private JLabel lbjobtype;
+	    private JButton btnLogout;				//Logout
 	    private JButton btnEnter;				// Enter Button
 	    private JButton btnCancel;				// Cancel Button
 	    private static boolean succeeded;				// If successful
@@ -175,18 +176,35 @@ public class CreateEmployeeDialog extends JDialog {
 	 
 	            public void actionPerformed(ActionEvent e) {
 	                dispose();
+	                AdminPage.main(null);
 	            }
 	        });
 	        JPanel bp = new JPanel();
 	        bp.add(btnEnter);
 	        bp.add(btnCancel);
 	 
+	        btnLogout = new JButton("Logout");
+	        btnLogout.addActionListener(new ActionListener() {
+	        
+	            public void actionPerformed(ActionEvent e) {
+	            	try {
+						UIController.logout();
+					} catch (SQLException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+	            	dispose();
+	            }
+	        });
+	        bp.add(btnLogout);
+	        
 	        getContentPane().add(panel, BorderLayout.CENTER);
 	        getContentPane().add(bp, BorderLayout.PAGE_END);
 	 
 	        pack();
 	        setResizable(false);
 	        setLocationRelativeTo(parent);
+	        setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 	    }
 		// * UIController.addEmployee("bWatts", "abc123", "Bob", "Watts", "123456789", (float)25.00, true, "hr");
 

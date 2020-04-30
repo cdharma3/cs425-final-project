@@ -15,17 +15,12 @@ public class CreateModelDialog extends JDialog {
 	    private JLabel lbsaleprice;
 	    private JButton btnEnter;				// Enter Button
 	    private JButton btnCancel;				// Cancel Button
+	    private JButton btnLogout;				//Logout
 	    private boolean succeeded;				// If successful
 	 
 	    public CreateModelDialog(Frame parent) {
 	        super(parent, "New Model", true);
 	        //
-	    	try {
-				UIController.login("d", "d");
-			} catch (SQLException e2) {
-				// TODO Auto-generated catch block
-				e2.printStackTrace();
-			}
 	        JPanel panel = new JPanel(new GridBagLayout());
 	        GridBagConstraints cs = new GridBagConstraints();
 	 
@@ -94,9 +89,25 @@ public class CreateModelDialog extends JDialog {
 	 
 	            public void actionPerformed(ActionEvent e) {
 	                dispose();
+	                EngPage.main(null);
 	            }
 	        });
+	        btnLogout = new JButton("Logout");
+	        btnLogout.addActionListener(new ActionListener() {
+	        
+	            public void actionPerformed(ActionEvent e) {
+	            	try {
+						UIController.logout();
+					} catch (SQLException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+	            	dispose();
+	            }
+	        });
+	        
 	        JPanel bp = new JPanel();
+	        bp.add(btnLogout);
 	        bp.add(btnEnter);
 	        bp.add(btnCancel);
 	 
@@ -106,6 +117,7 @@ public class CreateModelDialog extends JDialog {
 	        pack();
 	        setResizable(false);
 	        setLocationRelativeTo(parent);
+	        setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 	    }
 		// * UIController.addEmployee("bWatts", "abc123", "Bob", "Watts", "123456789", (float)25.00, true, "hr");
 

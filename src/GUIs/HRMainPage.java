@@ -14,6 +14,7 @@ public class HRMainPage extends JDialog {
 	private static final long serialVersionUID = 1L;
 	    private JButton btnEmplyeeInfo;			// Access and update employee info
 	    private JButton btnSales;				// View employees and their sales numbers
+	    private JButton btnLogout;				//Logout
 	    private boolean succeeded;				// If successful
 	 
 	    public HRMainPage(Frame parent) {
@@ -49,12 +50,28 @@ public class HRMainPage extends JDialog {
 	        });
 	        panel.add(btnSales);
 	        
+	        btnLogout = new JButton("Logout");
+	        btnLogout.addActionListener(new ActionListener() {
+	        
+	            public void actionPerformed(ActionEvent e) {
+	            	try {
+						UIController.logout();
+					} catch (SQLException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+	            	dispose();
+	            }
+	        });
+	        panel.add(btnLogout);
+	        
 	        getContentPane().add(panel, BorderLayout.CENTER);
 	        getContentPane().add(panel, BorderLayout.PAGE_END);
 	 
 	        pack();
 	        setResizable(false);
 	        setLocationRelativeTo(parent);
+	        setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 	    }
 		// * UIController.addEmployee("bWatts", "abc123", "Bob", "Watts", "123456789", (float)25.00, true, "hr");
 

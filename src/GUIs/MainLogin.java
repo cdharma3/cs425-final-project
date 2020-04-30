@@ -30,7 +30,7 @@ public class MainLogin {
                     }
                 });
  
-        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
         frame.setSize(300, 100);
         frame.setLayout(new FlowLayout());
         frame.getContentPane().add(btnLogin);

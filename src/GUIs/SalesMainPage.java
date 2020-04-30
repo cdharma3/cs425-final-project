@@ -16,6 +16,7 @@ public class SalesMainPage extends JDialog {
 	    private JButton btnEdit;				// Edit data Button
 	    private JButton btnOrder;				// Create Order
 	    private JButton btnreports;         	// access and reports
+	    private JButton btnLogout;				//Logout
 	    private boolean succeeded;				// If successful
 	 
 	    public SalesMainPage(Frame parent) {
@@ -71,6 +72,20 @@ public class SalesMainPage extends JDialog {
 	        });
 	        panel.add(btnreports);
 	 
+	        btnLogout = new JButton("Logout");
+	        btnLogout.addActionListener(new ActionListener() {
+	        
+	            public void actionPerformed(ActionEvent e) {
+	            	try {
+						UIController.logout();
+					} catch (SQLException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+	            	dispose();
+	            }
+	        });
+	        panel.add(btnLogout);
 	 
 	        getContentPane().add(panel, BorderLayout.CENTER);
 	        getContentPane().add(panel, BorderLayout.PAGE_END);
@@ -78,6 +93,7 @@ public class SalesMainPage extends JDialog {
 	        pack();
 	        setResizable(false);
 	        setLocationRelativeTo(parent);
+	        setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 	    }
 		// * UIController.addEmployee("bWatts", "abc123", "Bob", "Watts", "123456789", (float)25.00, true, "hr");
 

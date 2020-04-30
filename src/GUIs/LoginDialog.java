@@ -98,6 +98,7 @@ public class LoginDialog extends JDialog {
         pack();
         setResizable(false);
         setLocationRelativeTo(parent);
+        setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
     }
  
     public String getUsername() {

@@ -16,10 +16,11 @@ public class EngMainPage extends JDialog {
 	    private JButton btnModel;				// Access and update Model
 	    private JButton btnInventory;			// Access and update Inventory
 	    private JButton btnEmpl;				// Access (limited) to employee info
+	    private JButton btnLogout;				//Logout
 	    private boolean succeeded;				// If successful
 	 
 	    public EngMainPage(Frame parent) {
-	        super(parent, "Admin Main Page", true);
+	        super(parent, "Engineer Main Page", true);
 	        //
 	        JPanel panel = new JPanel(new GridBagLayout());
 	        GridBagConstraints cs = new GridBagConstraints();
@@ -40,7 +41,7 @@ public class EngMainPage extends JDialog {
 	        });
 	        panel.add(btnCreate);
 	        
-	        btnModel = new JButton("Create a new Employee");
+	        btnModel = new JButton("Access and update Model");
 	        btnModel.addActionListener(new ActionListener() {
 	 
 	        	public void actionPerformed(ActionEvent e) {
@@ -50,7 +51,7 @@ public class EngMainPage extends JDialog {
 	        });
 	        panel.add(btnModel);
 	        
-	        btnInventory = new JButton("Edit data within tables");
+	        btnInventory = new JButton("Access and update Inventory");
 	        btnInventory.addActionListener(new ActionListener() {
 	        
 	            public void actionPerformed(ActionEvent e) {
@@ -60,7 +61,7 @@ public class EngMainPage extends JDialog {
 	        });
 	        panel.add(btnInventory);
 	        
-	        btnEmpl = new JButton("Grant Access");
+	        btnEmpl = new JButton("Access Employee Info.");
 	        btnEmpl.addActionListener(new ActionListener() {
 	        
 	            public void actionPerformed(ActionEvent e) {
@@ -70,6 +71,21 @@ public class EngMainPage extends JDialog {
 	        });
 	        panel.add(btnEmpl);
 	        
+	        btnLogout = new JButton("Logout");
+	        btnLogout.addActionListener(new ActionListener() {
+	        
+	            public void actionPerformed(ActionEvent e) {
+	            	try {
+						UIController.logout();
+					} catch (SQLException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+	            	dispose();
+	            }
+	        });
+	        panel.add(btnLogout);
+	        
 	 
 	        getContentPane().add(panel, BorderLayout.CENTER);
 	        getContentPane().add(panel, BorderLayout.PAGE_END);
@@ -77,6 +93,7 @@ public class EngMainPage extends JDialog {
 	        pack();
 	        setResizable(false);
 	        setLocationRelativeTo(parent);
+	        setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 	    }
 		// * UIController.addEmployee("bWatts", "abc123", "Bob", "Watts", "123456789", (float)25.00, true, "hr");
 

@@ -22,7 +22,7 @@ public class MainCreateModel {
                     }
                 });
  
-        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
         frame.setSize(400, 100);
         frame.setLayout(new FlowLayout());
         frame.getContentPane().add(btnOrder);
