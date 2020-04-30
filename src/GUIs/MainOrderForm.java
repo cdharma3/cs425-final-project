@@ -8,6 +8,7 @@ import java.sql.SQLException;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 
+@SuppressWarnings("unused")
 public class MainOrderForm {
 	public static void main(String[] args) {
         final JFrame frame = new JFrame("Order Form");
