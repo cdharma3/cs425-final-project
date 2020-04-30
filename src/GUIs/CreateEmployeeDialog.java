@@ -161,7 +161,9 @@ public class CreateEmployeeDialog extends JDialog {
 	                	}
 					} catch (Exception e1) {
 						dispose();
-						MainCreateEmployee.main(null);
+						if(getSSN() != null) {
+							MainCreateEmployee.main(null);
+						}
 					}
 	                JOptionPane.showMessageDialog(CreateEmployeeDialog.this,
 				            "Employee created successfully!",
