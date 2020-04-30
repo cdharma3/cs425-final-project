@@ -18,7 +18,8 @@ public class InitRoles {
 			Statement st = db.createStatement();
 
 			// drops admin role if it exists, run init database first to clear objects
-			st.execute("REVOKE CREATE ON DATABASE \"final-project-db\" TO admin WITH GRANT OPTION;");
+			st.execute("REVOKE CREATE ON DATABASE \"final-project-db\" FROM admin;");
+			System.out.println("Database CREATE permission revoked from admin");
 			st.executeUpdate("DROP ROLE IF EXISTS admin;");
 			System.out.println("admin role dropped");
 
