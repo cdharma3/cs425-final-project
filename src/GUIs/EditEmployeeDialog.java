@@ -169,8 +169,8 @@ public class EditEmployeeDialog extends JDialog {
             	update[0] = getFN();
             	update[1] = getLN();
             	update[2] = getS();
-            	update[3] = getSal();
-            	update[4] = getH();
+            	update[3] = getH();
+            	update[4] = getSal();
             	update[5] = getJType();
             	
             	try {
