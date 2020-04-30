@@ -15,13 +15,12 @@ public class BusinessReports {
                 new ActionListener(){
                     public void actionPerformed(ActionEvent e) {
                     	frame.dispose();
-                        BusinessReportsDialog bRep = new BusinessReportsDialog(frame);
-                        bRep.setVisible(true);
+                        BusinessReportsDialog.main(null);
                         
                     }
                 });
  
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frame.setSize(400, 100);
         frame.setLayout(new FlowLayout());
         frame.getContentPane().add(btnRev);

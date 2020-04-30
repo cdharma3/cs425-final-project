@@ -31,9 +31,7 @@ public class BusinessReportsDialog extends JDialog {
     private JButton btnEnter;
     private JButton btnCancel;
     
-    public BusinessReportsDialog() {}
-    public BusinessReportsDialog(Frame parent) {
-        super(parent, "Business Report", true);
+    BusinessReportsDialog() {
         
         //business reports code
         /*textArea = new JTextArea("Hello, my name is Adam");        
@@ -41,13 +39,13 @@ public class BusinessReportsDialog extends JDialog {
         textArea.setEditable(true);
         textArea.append("Hello, my name is Adam");*/
         
-         
+        JFrame f = new JFrame();
         JTextArea area=new JTextArea("Welcome to javatpoint");  
         area.setBounds(10,30, 200,200);  
-        parent.add(area);  
-        parent.setSize(300,300);  
-        parent.setLayout(null);  
-        parent.setVisible(true);
+        f.add(area);  
+        f.setSize(300,300);  
+        f.setLayout(null);  
+        f.setVisible(true);
         
         
         //old
@@ -158,4 +156,8 @@ public class BusinessReportsDialog extends JDialog {
         setResizable(false);
         setLocationRelativeTo(parent);*/
     }
+    public static void main(String args[])  
+    {  
+   new BusinessReportsDialog();  
+    }  
 }
