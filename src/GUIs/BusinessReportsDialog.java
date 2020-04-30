@@ -13,6 +13,7 @@ import java.sql.SQLException;
 
 import javax.swing.*;
 import javax.swing.border.EtchedBorder;
+import javax.swing.border.LineBorder;
 import javax.swing.border.TitledBorder;
 
 public class BusinessReportsDialog extends JDialog {
@@ -20,6 +21,8 @@ public class BusinessReportsDialog extends JDialog {
 	private static JTextArea area;
 	private static JFrame f;
 	private static JScrollPane sPane;
+    private JButton btnCancel;				// Cancel Button
+    private JButton btnLogout;				// Logout Button
     
     BusinessReportsDialog() throws SQLException {
     	
@@ -37,14 +40,40 @@ public class BusinessReportsDialog extends JDialog {
 		area.setLineWrap(true);
 		area.setWrapStyleWord(true);
         area.setBounds(10,30, 200,200);  
-        f.add(area);  
+        f.add(area);
+        
+        btnCancel = new JButton("Cancel");
+        btnCancel.addActionListener(new ActionListener() {
+ 
+            public void actionPerformed(ActionEvent e) {
+                dispose();
+                AdminPage.main(null);
+            }
+        });
+        btnLogout = new JButton("Logout");
+        btnLogout.addActionListener(new ActionListener() {
+        
+            public void actionPerformed(ActionEvent e) {
+            	try {
+					UIController.logout();
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+            	dispose();
+            }
+        });
+        JPanel bp = new JPanel();
+        bp.add(btnCancel);
+        bp.add(btnCancel);
+        
         f.setSize(300,300);  
         f.setLayout(null);  
         f.setVisible(true);
+        f.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
     }
     public static void main(String args[]) throws SQLException  
     {  
-    	UIController.login("bWatts", "abc123");
     	new BusinessReportsDialog();  
     }  
 }

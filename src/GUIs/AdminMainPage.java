@@ -66,6 +66,7 @@ public class AdminMainPage extends JDialog {
 	        btnreports.addActionListener(new ActionListener() {
 	        
 	            public void actionPerformed(ActionEvent e) {
+	            	BusinessReports.main(null);
 	                dispose();
 	            }
 	        });
