@@ -95,42 +95,42 @@ public class EditEmployeeDialog extends JDialog {
         cs.gridy = 3;
         cs.gridwidth = 2;
         panel.add(tfssn, cs);
-        //salary
-        lbsalary = new JLabel("Salary: ");
-        cs.gridx = 0;
-        cs.gridy = 4;
-        cs.gridwidth = 1;
-        panel.add(lbsalary, cs);
-        
-        lbsalary2 = new JLabel(employee[3]);
-        cs.gridx = 1;
-        cs.gridy = 4;
-        cs.gridwidth = 1;
-        panel.add(lbsalary2, cs);
-        
-        tfsalary = new JTextField(20);
-        cs.gridx = 2;
-        cs.gridy = 4;
-        cs.gridwidth = 2;
-        panel.add(tfsalary, cs);
-        //hourly
+      //hourly
         lbhourly = new JLabel("Hourly: ");
         cs.gridx = 0;
-        cs.gridy = 5;
+        cs.gridy = 4;
         cs.gridwidth = 1;
         panel.add(lbhourly, cs);
         
-        lbhourly2 = new JLabel(employee[4]);
+        lbhourly2 = new JLabel(employee[3]);
         cs.gridx = 1;
-        cs.gridy = 5;
+        cs.gridy = 4;
         cs.gridwidth = 1;
         panel.add(lbhourly2, cs);
         
         tfhourly = new JTextField(20);
         cs.gridx = 2;
-        cs.gridy = 5;
+        cs.gridy = 4;
         cs.gridwidth = 2;
         panel.add(tfhourly, cs);
+        //salary
+        lbsalary = new JLabel("Salary: ");
+        cs.gridx = 0;
+        cs.gridy = 5;
+        cs.gridwidth = 1;
+        panel.add(lbsalary, cs);
+        
+        lbsalary2 = new JLabel(employee[4]);
+        cs.gridx = 1;
+        cs.gridy = 5;
+        cs.gridwidth = 1;
+        panel.add(lbsalary2, cs);
+        
+        tfsalary = new JTextField(20);
+        cs.gridx = 2;
+        cs.gridy = 5;
+        cs.gridwidth = 2;
+        panel.add(tfsalary, cs);
         //job
         lbjob = new JLabel("Job Type: ");
         cs.gridx = 0;
@@ -161,7 +161,7 @@ public class EditEmployeeDialog extends JDialog {
             	try {
 					JOptionPane.showMessageDialog(EditEmployeeDialog.this, "You have successfully entered the information. "
 							+ " First Name: " + getFN() + " Last Name: " + getLN() + " SSN: "
-									+ getS() + " Salary: " + getSal() + " Hourly: " + getH() + " Job Type: " + getJType());
+									+ getS() + " Salary: " + getH() + " Hourly: " + getSal() + " Job Type: " + getJType());
 				} catch (HeadlessException e1) {
 					e1.printStackTrace();
 				} 
