@@ -52,6 +52,7 @@ public class CreateTestData {
 			UIController.deleteEmployeeInformation("jMcmurphy");
 
 			System.out.println(UIController.displayEmployeeInformation("jWillis"));
+			UIController.login("bWatts", "abc123");
 			UIController.logout();
 
 		} catch (SQLException e) {
