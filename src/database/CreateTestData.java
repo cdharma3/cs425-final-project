@@ -31,12 +31,12 @@ public class CreateTestData {
 			//UIController.addModel("Dyson Cyclone", (float)240.00);
 			//UIController.addInventory("Swiffer Duster", (float)120.00, 5, "Vacuum", 10);
 			//UIController.addInventory("Dyson Cyclone", (float)240.00, 20, "Vacuum", 20);
-			UIController.addOrder("jJohnson", "bWatts", "Swiffer Duster", 5);
-			UIController.addOrder("jJohnson", "bWatts", "Swiffer Duster", 5);
-			UIController.addOrder("jJohnson", "bWatts", "Dyson Cyclone", 15);
-			UIController.addOrder("jJohnson", "jWillis", "Swiffer Duster", 5);
-			UIController.addOrder("jJohnson", "jMcmurphy", "Swiffer Duster", 5);
-			UIController.addOrder("jJohnson", "jMcmurphy", "Dyson Cyclone", 15);
+			//UIController.addOrder("jJohnson", "bWatts", "Swiffer Duster", 5);
+			//UIController.addOrder("jJohnson", "bWatts", "Swiffer Duster", 5);
+			//UIController.addOrder("jJohnson", "bWatts", "Dyson Cyclone", 15);
+			//UIController.addOrder("jJohnson", "jWillis", "Swiffer Duster", 5);
+			//UIController.addOrder("jJohnson", "jMcmurphy", "Swiffer Duster", 5);
+			//UIController.addOrder("jJohnson", "jMcmurphy", "Dyson Cyclone", 15);
 
 			System.out.println(UIController.displayBusinessReport());
 

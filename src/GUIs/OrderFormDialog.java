@@ -100,6 +100,8 @@ public class OrderFormDialog extends JDialog {
 						if(UIController.getInventoryQuantity(getMname())>getQ()) {
 							try {
 								enterOrder();
+								dispose();
+								SalesPage.main(null);
 							} catch (SQLException e1) {
 								// TODO Auto-generated catch block
 								e1.printStackTrace();
