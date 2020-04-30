@@ -473,7 +473,7 @@ public class UIController {
 	 * displays certain employee information
 	 * @throws SQLException
 	 */
-	public static String displayEmployeeInformation(String E_ID) throws SQLException {
+	public static String[] displayEmployeeInformation(String E_ID) throws SQLException {
 		Connection erpDB = DriverManager.getConnection("jdbc:postgresql://localhost:5432/final-project-db", databaseUsername, databasePassword);
 		String selectEmployeeInformation =
 				"SELECT firstName, lastName, SSN, Salary, isHourly, jobType "
@@ -484,21 +484,17 @@ public class UIController {
 		ps.setString(1, E_ID);
 		ResultSet rs = ps.executeQuery();
 
+		String[] employeeInfo = new String[6];
 		if(rs.next()) {
-			String str = "";
-			str += "Employee " + rs.getString("firstName") + " " + rs.getString("lastName") +
-					" has a SSN of " + rs.getString("SSN") + ", ";
-
-			if (rs.getBoolean("isHourly")) {
-				str += "an hourly";
-			} else {
-				str += "a yearly ";
-			}
-
-			str += " salary of $" + rs.getString("Salary") + " and works for the " + rs.getString("jobType") + " department.";
-			return str;
+			employeeInfo[0] = rs.getString("firstName");
+			employeeInfo[1] = rs.getString("lastName");
+			employeeInfo[2] = rs.getString("SSN");
+			employeeInfo[3] = Boolean.toString(rs.getBoolean("isHourly"));
+			employeeInfo[4] = Float.toString(rs.getFloat("Salary"));
+			employeeInfo[5] = rs.getString("jobType");
+			return employeeInfo;
 		} else {
-			return "Employee with that E_ID not found!";
+			return null;
 		}
 
 	}
