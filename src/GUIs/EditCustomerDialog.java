@@ -24,9 +24,9 @@ public class EditCustomerDialog extends JDialog {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	JLabel lbeid, lbfname, lblname, lbssn, lbsalary, lbhourly, lbjob;
-	JLabel lbeid2, lbfname2, lblname2, lbssn2, lbsalary2, lbhourly2, lbjob2;
-	JTextField tffname, tflname, tfssn, tfsalary, tfhourly, tfjob;
+	JLabel lbeid, lbfname, lblname;
+	JLabel lbeid2, lbfname2, lblname2;
+	JTextField tffname, tflname;
 	JButton btnEnter, btnCancel;
 	
 	public EditCustomerDialog(Frame parent,String cid) throws SQLException {

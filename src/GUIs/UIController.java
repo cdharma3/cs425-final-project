@@ -527,6 +527,54 @@ public class UIController {
 		ps.executeUpdate();
 		System.out.println("Updated!");
 	}
+	
+	/**
+	 * displays certain customer information
+	 * @throws SQLException
+	 */
+	public static String[] displayCustomerInformation(String C_ID) throws SQLException {
+		Connection erpDB = DriverManager.getConnection("jdbc:postgresql://localhost:5432/final-project-db", databaseUsername, databasePassword);
+		String selectCustomerInformation =
+				"SELECT firstName, lastName"
+						+ "FROM Customer "
+						+ "WHERE C_ID = ?;";
+
+		PreparedStatement ps = erpDB.prepareStatement(selectCustomerInformation);
+		ps.setString(1, C_ID);
+		ResultSet rs = ps.executeQuery();
+
+		String[] customerInfo = new String[2];
+		if(rs.next()) {
+			customerInfo[0] = rs.getString("firstName");
+			customerInfo[1] = rs.getString("lastName");
+			return customerInfo;
+		} else {
+			return null;
+		}
+
+	}
+	
+	/**
+	 * displays certain customer information
+	 * @throws SQLException
+	 */
+	public static void updateCustomerInformation(String C_ID, String[] customerInfo) throws SQLException {
+		Connection erpDB = DriverManager.getConnection("jdbc:postgresql://localhost:5432/final-project-db", databaseUsername, databasePassword);
+		String selectEmployeeInformation =
+				"UPDATE Customer "
+						+ "SET firstName = ?, lastName = ?"
+						+ "WHERE C_ID = ?;";
+
+		PreparedStatement ps = erpDB.prepareStatement(selectEmployeeInformation);
+		System.out.println(Arrays.toString(customerInfo));
+		int i = 1;
+		ps.setString(i++, customerInfo[0]);
+		ps.setString(i++, customerInfo[1]);
+		ps.setString(i++, C_ID);
+
+		ps.executeUpdate();
+		System.out.println("Updated!");
+	}
 
 	/**
 	 * display business report by querying the employeeRevenue and totalRevenue views
