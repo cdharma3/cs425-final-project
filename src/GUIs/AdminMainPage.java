@@ -16,6 +16,7 @@ public class AdminMainPage extends JDialog {
 	    private JButton btnEdit;				// Edit data Button
 	    private JButton btnAccess;				// Grant Access button
 	    private JButton btnreports;         	// access and create reports
+	    private JButton btnDelete;				//Delete employee info
 	    private JButton btnLogout;				//Logout
 	    private boolean succeeded;				// If successful
 	 
@@ -41,6 +42,16 @@ public class AdminMainPage extends JDialog {
 	            }
 	        });
 	        panel.add(btnCreateEmp);
+	        
+	        btnDelete = new JButton("Delete employee information");
+	        btnDelete.addActionListener(new ActionListener() {
+	        
+	            public void actionPerformed(ActionEvent e) {
+	            	//TODO
+	                dispose();
+	            }
+	        });
+	        panel.add(btnDelete);
 	        
 	        btnEdit = new JButton("Edit data within tables");
 	        btnEdit.addActionListener(new ActionListener() {
