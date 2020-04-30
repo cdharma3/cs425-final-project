@@ -424,6 +424,64 @@ public class UIController {
 	}
 
 	/**
+	 * deletes employee information based on e_id
+	 * @throws SQLException
+	 */
+	public static void deleteEmployeeInformation(String E_ID) throws SQLException {
+		Connection erpDB = DriverManager.getConnection("jdbc:postgresql://localhost:5432/final-project-db", "mr_admin", "mr_password");
+		PreparedStatement ps = erpDB.prepareStatement("DELETE FROM orderInfo WHERE E_ID = ?;");
+		ps.setString(1, E_ID);
+		ps.executeUpdate();
+		System.out.println("Deleted orders associated with " + E_ID);
+
+		ps = erpDB.prepareStatement("DELETE FROM employee WHERE E_ID = ?;");
+		ps.setString(1, E_ID);
+		ps.executeUpdate();
+		System.out.println("Employee " + E_ID + " deleted from employee table");
+
+		ps = erpDB.prepareStatement("DROP ROLE IF EXISTS \"" + E_ID + "\";");
+		ps.execute();
+		System.out.println("Dropped role " + E_ID);
+
+		ps.close();
+		erpDB.close();
+
+	}
+
+	/**
+	 * displays certain employee information
+	 * @throws SQLException
+	 */
+	public static String displayEmployeeInformation(String E_ID) throws SQLException {
+		Connection erpDB = DriverManager.getConnection("jdbc:postgresql://localhost:5432/final-project-db", databaseUsername, databasePassword);
+		String selectEmployeeInformation =
+				"SELECT firstName, lastName, SSN, Salary, isHourly, jobType "
+						+ "FROM Employee "
+						+ "WHERE E_ID = ?;";
+
+		PreparedStatement ps = erpDB.prepareStatement(selectEmployeeInformation);
+		ps.setString(1, E_ID);
+		ResultSet rs = ps.executeQuery();
+
+		if(rs.next()) {
+			String str = "";
+			str += "Employee " + rs.getString("firstName") + " " + rs.getString("lastName") +
+					" has a SSN of " + rs.getString("SSN") + ", ";
+
+			if (rs.getBoolean("isHourly")) {
+				str += "an hourly";
+			} else {
+				str += "a yearly ";
+			}
+
+			str += " salary of $" + rs.getString("Salary") + " and works for the " + rs.getString("jobType") + " department.";
+			return str;
+		} else {
+			return "Employee with that E_ID not found!";
+		}
+
+	}
+	/**
 	 * display business report by querying the employeeRevenue and totalRevenue views
 	 * @return formatted string with results of views queried
 	 * @throws SQLException

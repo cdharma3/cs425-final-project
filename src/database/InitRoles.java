@@ -78,7 +78,7 @@ public class InitRoles {
 
 			// create hr user and grant privileges
 			st.executeUpdate("CREATE ROLE hr NOINHERIT;");
-			st.execute("GRANT SELECT, UPDATE, INSERT, DELETE ON Employee TO hr;");
+			st.execute("GRANT SELECT, UPDATE ON Employee TO hr;");
 			st.execute("GRANT SELECT ON employeeRevenue TO hr"); // grant view of employee and associated sales number
 			System.out.println("Privileges granted to role hr");
 
