@@ -53,6 +53,7 @@ public class InitRoles {
 			st.execute("GRANT SELECT ON totalRevenue TO sales;");
 			st.execute("GRANT SELECT ON customerModel TO sales;");
 			st.execute("GRANT SELECT ON orderDetails TO sales;");
+			st.execute("GRANT SELECT ON employeeRevenue TO sales;");
 			//st.execute("GRANT SELECT ON expenseReport TO sales;");
 
 			System.out.println("Privileges granted to role salesperson");
