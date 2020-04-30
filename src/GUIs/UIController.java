@@ -350,7 +350,7 @@ public class UIController {
 	 * adds order to database
 	 * @throws SQLException
 	 */
-	public static void addOrder(String C_ID, String E_ID, String ModelName, int Quantity) throws SQLException {
+	public static void addOrder(String C_ID, String E_ID, String modelName, int Quantity) throws SQLException {
 		Connection erpDB = DriverManager.getConnection("jdbc:postgresql://localhost:5432/final-project-db", databaseUsername, databasePassword);
 		String addOrderInfo =
 				"INSERT INTO OrderInfo "
@@ -361,13 +361,14 @@ public class UIController {
 		int i = 1;
 		ps.setString(i++, C_ID);
 		ps.setString(i++, E_ID);
-		ps.setString(i++, ModelName);
+		ps.setString(i++, modelName);
 		ps.setInt(i++, Quantity);
-		ps.setFloat(i++, Quantity * UIController.getSalePrice(ModelName));
+		ps.setFloat(i++, Quantity * UIController.getSalePrice(modelName));
 
 		ps.executeUpdate();
-		System.out.println("Order placed for " + Quantity + " " + ModelName + "s priced at $" + (Quantity * UIController.getSalePrice(ModelName)));
+		System.out.println("Order placed for " + Quantity + " " + modelName + "s priced at $" + (Quantity * UIController.getSalePrice(modelName)));
 
+		UIController.updateInventoryQuantity(modelName, -Quantity);
 		ps.close();
 		erpDB.close();
 	}
@@ -421,6 +422,26 @@ public class UIController {
 		} else {
 			return 0;
 		}
+	}
+
+	/*
+	 * update inventory quantity, amount is subtracted from current inventory
+	 * @throws SQLException
+	 */
+	public static void updateInventoryQuantity(String modelName, int amount) throws SQLException {
+		Connection erpDB = DriverManager.getConnection("jdbc:postgresql://localhost:5432/final-project-db", databaseUsername, databasePassword);
+		String updateInventory =
+				"UPDATE Inventory "
+						+ "SET Quantity = ? "
+						+ "WHERE ModelName = ?;";
+		PreparedStatement ps = erpDB.prepareStatement(updateInventory);
+		ps.setString(2, modelName);
+		ps.setInt(1, UIController.getInventoryQuantity(modelName) + amount);
+		ps.executeUpdate();
+
+		ps.close();
+		erpDB.close();
+		System.out.println("Inventory for " + modelName + " modified by " + amount);
 	}
 
 	/**
@@ -481,6 +502,7 @@ public class UIController {
 		}
 
 	}
+
 	/**
 	 * display business report by querying the employeeRevenue and totalRevenue views
 	 * @return formatted string with results of views queried
