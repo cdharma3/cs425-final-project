@@ -11,6 +11,7 @@ import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.Timestamp;
+import java.util.Arrays;
 import java.util.Base64;
 import java.util.Date;
 import java.util.UUID;
@@ -157,9 +158,12 @@ public class UIController {
 
 		ps.close();
 		erpDB.close();
-		System.out.println("Session " + currentSessionID.toString() +
-				" logged out for user " + databaseUsername + " on " + new Date(currentTime).toString());
-
+		if (currentSessionID == null ) {
+			System.out.println("Null session ID! This shouldn't happen!");
+		} else {
+			System.out.println("Session " + currentSessionID.toString() +
+					" logged out for user " + databaseUsername + " on " + new Date(currentTime).toString());
+		}
 		// resetting session variables
 		currentSessionID = null;
 		databaseUsername = null;
@@ -510,13 +514,15 @@ public class UIController {
 						+ "WHERE E_ID = ?;";
 
 		PreparedStatement ps = erpDB.prepareStatement(selectEmployeeInformation);
+		System.out.println(Arrays.toString(employeeInfo));
 		int i = 1;
-		ps.setString(i++, employeeInfo[i - 1]);
-		ps.setString(i++, employeeInfo[i - 1]);
-		ps.setString(i++, employeeInfo[i - 1]);
-		ps.setBoolean(i++, Boolean.parseBoolean(employeeInfo[i - 1]));
-		ps.setFloat(i++, Float.parseFloat(employeeInfo[i - 1]));
-		ps.setString(i++, employeeInfo[i - 1]);
+		ps.setString(i++, employeeInfo[0]);
+		ps.setString(i++, employeeInfo[1]);
+		ps.setString(i++, employeeInfo[2]);
+		ps.setBoolean(i++, Boolean.parseBoolean(employeeInfo[3]));
+		ps.setFloat(i++, Float.parseFloat(employeeInfo[4]));
+		ps.setString(i++, employeeInfo[5]);
+		ps.setString(i++, E_ID);
 
 		ps.executeUpdate();
 		System.out.println("Updated!");
