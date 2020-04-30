@@ -501,8 +501,27 @@ public class UIController {
 	}
 
 	/**
-	 *
+	 * updates employee information based on string array parameter
 	 */
+	public static void updateEmployeeInformation(String E_ID, String[] employeeInfo) throws SQLException {
+		Connection erpDB = DriverManager.getConnection("jdbc:postgresql://localhost:5432/final-project-db", databaseUsername, databasePassword);
+		String selectEmployeeInformation =
+				"UPDATE Employee "
+						+ "SET firstName = ?, lastName = ?, SSN = ?, isHourly = ?, Salary = ?, jobType = ?"
+						+ "WHERE E_ID = ?;";
+
+		PreparedStatement ps = erpDB.prepareStatement(selectEmployeeInformation);
+		int i = 1;
+		ps.setString(i++, employeeInfo[i - 1]);
+		ps.setString(i++, employeeInfo[i - 1]);
+		ps.setString(i++, employeeInfo[i - 1]);
+		ps.setBoolean(i++, Boolean.parseBoolean(employeeInfo[i - 1]));
+		ps.setFloat(i++, Float.parseFloat(employeeInfo[i - 1]));
+		ps.setString(i++, employeeInfo[i - 1]);
+
+		ps.executeUpdate();
+		System.out.println("Updated!");
+	}
 
 	/**
 	 * display business report by querying the employeeRevenue and totalRevenue views

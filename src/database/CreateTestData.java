@@ -45,7 +45,7 @@ public class CreateTestData {
 			UIController.addOrder("jJohnson", "bWatts", "Swiffer Duster", 5);
 			UIController.addOrder("jJohnson", "bWatts", "Swiffer Duster", 5);
 			UIController.addOrder("jJohnson", "bWatts", "Dyson Cyclone", 15);
-			UIController.addOrder("jJohnson", "jWillis", "Swiffer Duster", 5);
+
 
 			System.out.println(UIController.displayBusinessReport());
 
