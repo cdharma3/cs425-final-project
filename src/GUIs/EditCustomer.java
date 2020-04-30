@@ -14,13 +14,18 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.WindowConstants;
 
-public class EditEmployee {
+public class EditCustomer {
 	public static void main(String[] args) {
-		
-        JFrame frame = new JFrame("Edit Employee");
+		try {
+			UIController.login("bWatts","abc123");
+		} catch (SQLException e2) {
+			// TODO Auto-generated catch block
+			e2.printStackTrace();
+		}
+        JFrame frame = new JFrame("Edit Customer");
         JPanel panel = new JPanel();
         frame.getContentPane();
-        JLabel label = new JLabel("Employee ID: ");
+        JLabel label = new JLabel("Customer ID: ");
         JTextField enter = new JTextField(20);
         Dimension size = label.getPreferredSize();
         label.setBounds(150, 100, size.width, size.height);
@@ -40,9 +45,9 @@ public class EditEmployee {
                 new ActionListener(){
                     public void actionPerformed(ActionEvent e) {
                     	frame.dispose();
-                        EditEmployeeDialog OrderDlg;
+                        EditCustomerDialog OrderDlg;
 						try {
-							OrderDlg = new EditEmployeeDialog(frame,enter.getText().trim());
+							OrderDlg = new EditCustomerDialog(frame,enter.getText().trim());
 							OrderDlg.setVisible(true);
 						} catch (SQLException e1) {
 							// TODO Auto-generated catch block
