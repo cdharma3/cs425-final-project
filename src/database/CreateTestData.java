@@ -1,6 +1,7 @@
 package database;
 
 import java.sql.SQLException;
+import java.util.Arrays;
 
 import GUIs.UIController;
 
@@ -14,7 +15,7 @@ public class CreateTestData {
 			UIController.deleteAllEmployees();
 
 			// Create bob
-			//UIController.addEmployee("bWatts", "abc123", "Bob", "Watts", "123456789", (float)25.00, true, "admin");
+			UIController.addEmployee("bWatts", "abc123", "Bob", "Watts", "123456789", (float)25.00, true, "admin");
 
 			// create jen
 			UIController.addEmployee("jMcmurphy", "jen123", "Jen", "McMurphy", "987654321", (float)150000.00, false, "engineering");
@@ -51,7 +52,7 @@ public class CreateTestData {
 
 			UIController.deleteEmployeeInformation("jMcmurphy");
 
-			System.out.println(UIController.displayEmployeeInformation("jWillis"));
+			System.out.println(Arrays.deepToString(UIController.displayEmployeeInformation("jWillis")));
 			UIController.login("bWatts", "abc123");
 			UIController.logout();
 
