@@ -190,8 +190,8 @@ public class EditEmployeeDialog extends JDialog {
             }
         });
         JPanel bp = new JPanel();
-        //bp.add(btnEnter);
-        //bp.add(btnCancel);
+        bp.add(btnEnter);
+        bp.add(btnCancel);
         
         JButton btnLogout = new JButton("Logout");
         btnLogout.addActionListener(new ActionListener() {

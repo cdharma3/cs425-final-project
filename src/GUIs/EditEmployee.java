@@ -16,6 +16,12 @@ import javax.swing.WindowConstants;
 
 public class EditEmployee {
 	public static void main(String[] args) {
+		try {
+			UIController.login("bWatts","abc123");
+		} catch (SQLException e2) {
+			// TODO Auto-generated catch block
+			e2.printStackTrace();
+		}
         JFrame frame = new JFrame("Edit Employee");
         JPanel panel = new JPanel();
         frame.getContentPane();
