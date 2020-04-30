@@ -94,6 +94,9 @@ public class UIController {
 		ps.setTimestamp(i++, new Timestamp(currentTime));
 
 		ps.executeUpdate();
+
+		ps.close();
+		erpDB.close();
 		System.out.println("Login attempt " + currentSessionID.toString() +
 				" logged for user " + databaseUsername + " on " + new Date(currentTime).toString());
 	}
@@ -119,6 +122,9 @@ public class UIController {
 				databaseUsername = username;
 				databasePassword = password;
 				UIController.addLoginTimestamp();
+				storedPassword.close();
+				passwordStatement.close();
+				erpDB.close();
 				return true;
 			} else {
 				return false;
@@ -147,8 +153,15 @@ public class UIController {
 		ResultSet rs = ps.executeQuery();
 
 		if(rs.next()) {
-			return rs.getString("JobType");
+			String str = rs.getString("JobType");
+			rs.close();
+			ps.close();
+			erpDB.close();
+			return str;
 		} else {
+			rs.close();
+			ps.close();
+			erpDB.close();
 			System.err.println("E_ID not found!");
 			return null;
 		}
@@ -246,6 +259,8 @@ public class UIController {
 		ps.setFloat(2, salePrice);
 		ps.executeUpdate();
 
+		ps.close();
+		erpDB.close();
 		System.out.println(modelName + " added to model database with a price of $" + salePrice);
 	}
 
@@ -288,8 +303,15 @@ public class UIController {
 		ResultSet rs = ps.executeQuery();
 
 		if (rs.next()) {
-			return rs.getFloat("SalePrice");
+			float salePrice = rs.getFloat("SalePrice");
+			rs.close();
+			ps.close();
+			erpDB.close();
+			return salePrice;
 		} else {
+			rs.close();
+			ps.close();
+			erpDB.close();
 			System.out.println("Model name not found!");
 			return (float)0.00;
 		}
@@ -341,6 +363,9 @@ public class UIController {
 		ps.setInt(i++, quantity);
 
 		ps.executeUpdate();
+
+		ps.close();
+		erpDB.close();
 		System.out.println("Inventory of " + modelName + " added with " + quantity + " item(s)");
 	}
 
@@ -359,7 +384,11 @@ public class UIController {
 		ResultSet rs = ps.executeQuery();
 
 		if(rs.next()) {
-			return rs.getInt("Quantity");
+			int quantity = rs.getInt("Quantity");
+			rs.close();
+			ps.close();
+			erpDB.close();
+			return quantity;
 		} else {
 			return 0;
 		}
@@ -392,6 +421,9 @@ public class UIController {
 			str += "Total revenue generated this quarter: $" + totalRevenue.getFloat("totalSales");
 		}
 
+		employeeRevenue.close();
+		st.close();
+		erpDB.close();
 		return str;
 	}
 }
