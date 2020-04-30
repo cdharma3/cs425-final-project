@@ -14,6 +14,7 @@ public class BusinessReports {
         btnRev.addActionListener(
                 new ActionListener(){
                     public void actionPerformed(ActionEvent e) {
+                    	frame.dispose();
                         BusinessReportsDialog bRep = new BusinessReportsDialog(frame);
                         bRep.setVisible(true);
                         

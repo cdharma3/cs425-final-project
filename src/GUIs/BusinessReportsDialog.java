@@ -2,6 +2,7 @@ package GUIs;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Frame;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -33,31 +34,20 @@ public class BusinessReportsDialog extends JDialog {
     public BusinessReportsDialog() {}
     public BusinessReportsDialog(Frame parent) {
         super(parent, "Business Report", true);
-        JPanel middlePanel = new JPanel ();
-        middlePanel.setBorder ( new TitledBorder ( new EtchedBorder (), "Display Area" ) );
-
-        // create the middle panel components
-
-        JTextArea display = new JTextArea ( 16, 58 );
-        display.setEditable ( false ); // set textArea non-editable
-        JScrollPane scroll = new JScrollPane ( display );
-        scroll.setVerticalScrollBarPolicy ( ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS );
-
-        //Add Textarea in to middle panel
-        middlePanel.add ( scroll );
-
-        // My code
-        parent.add ( middlePanel );
-        parent.pack ();
-        parent.setLocationRelativeTo ( null );
-        parent.setVisible ( true );
-        
         
         //business reports code
         /*textArea = new JTextArea("Hello, my name is Adam");        
         JScrollPane scrollPane = new JScrollPane(textArea); 
         textArea.setEditable(true);
         textArea.append("Hello, my name is Adam");*/
+        
+         
+        JTextArea area=new JTextArea("Welcome to javatpoint");  
+        area.setBounds(10,30, 200,200);  
+        parent.add(area);  
+        parent.setSize(300,300);  
+        parent.setLayout(null);  
+        parent.setVisible(true);
         
         
         //old
