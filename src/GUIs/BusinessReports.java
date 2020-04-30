@@ -3,6 +3,7 @@ package GUIs;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -15,7 +16,12 @@ public class BusinessReports {
                 new ActionListener(){
                     public void actionPerformed(ActionEvent e) {
                     	frame.dispose();
-                        BusinessReportsDialog.main(null);
+                        try {
+							BusinessReportsDialog.main(null);
+						} catch (SQLException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						}
                         
                     }
                 });
