@@ -47,8 +47,8 @@ public class AdminMainPage extends JDialog {
 	        btnDelete.addActionListener(new ActionListener() {
 	        
 	            public void actionPerformed(ActionEvent e) {
-	            	//TODO
 	                dispose();
+	                MainDeleteEmployee.main(null);
 	            }
 	        });
 	        panel.add(btnDelete);
