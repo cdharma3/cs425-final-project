@@ -21,8 +21,7 @@ public class OrderFormDialog extends JDialog {
 	    private JLabel lbquantity;
 	    private JButton btnEnter;
 	    private JButton btnCancel;
-	    
-	    public OrderFormDialog() {}
+
 	    public OrderFormDialog(Frame parent) {
 	        super(parent, "Order", true);
 	        //
