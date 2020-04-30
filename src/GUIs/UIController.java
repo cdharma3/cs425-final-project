@@ -136,6 +136,35 @@ public class UIController {
 
 	}
 
+	/**
+	 * adds logout timestamp to current session in login table
+	 * WARNING: Only run after login function has been run! Depopulates the databaseUsername, databasePassword
+	 * and currentSessionID fields, so very few commands can be run in a logged out state
+	 * @throws SQLException
+	 */
+	public static void logout() throws SQLException {
+		Connection erpDB = DriverManager.getConnection("jdbc:postgresql://localhost:5432/final-project-db", "mr_admin", "mr_password");
+		String insertLogoutTimestamp =
+				"UPDATE login "
+						+ "SET logoutTime = ? "
+						+ "WHERE SessionID = ?;";
+
+		PreparedStatement ps = erpDB.prepareStatement(insertLogoutTimestamp);
+		long currentTime = new Date().getTime();
+		ps.setTimestamp(1, new Timestamp(currentTime));
+		ps.setObject(2, currentSessionID);
+		ps.executeUpdate();
+
+		ps.close();
+		erpDB.close();
+		System.out.println("Session " + currentSessionID.toString() +
+				" logged out for user " + databaseUsername + " on " + new Date(currentTime).toString());
+
+		// resetting session variables
+		currentSessionID = null;
+		databaseUsername = null;
+		databasePassword = null;
+	}
 
 	/**
 	 * call to retrieve role of user based on e_id

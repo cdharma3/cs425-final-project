@@ -24,7 +24,9 @@ public class CreateTestData {
 
 			// login as bob
 			System.out.println("Logging in returns: " + UIController.login("bWatts", "abc123"));
+			UIController.logout();
 
+			System.out.println("Logging in returns: " + UIController.login("bWatts", "abc123"));
 
 			//UIController.addCustomer("Jon", "Johnson", "jJohnson");
 
@@ -48,6 +50,8 @@ public class CreateTestData {
 			UIController.addOrder("jJohnson", "jMcmurphy", "Dyson Cyclone", 15);
 
 			System.out.println(UIController.displayBusinessReport());
+
+			UIController.logout();
 
 		} catch (SQLException e) {
 			e.printStackTrace();
