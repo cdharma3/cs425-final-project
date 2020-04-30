@@ -19,77 +19,95 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.LineBorder;
 
-public class EditCustomerDialog extends JDialog {
+public class EditModelDialog extends JDialog {
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	JLabel lbeid, lbfname, lblname;
-	JLabel lbeid2, lbfname2, lblname2;
-	JTextField tffname, tflname;
+	JLabel lbname, lbnum, lbpc, lbsp;
+	JLabel lbname2, lbnum2, lbpc2, lbsp2;
+	JTextField tfnum, tfpc, tfsp;
 	JButton btnEnter, btnCancel;
 	
-	public EditCustomerDialog(Frame parent,String cid) throws SQLException {
-		super(parent,"Edit Customer",true);
-		String [] customer;
-		String [] update = new String[2];
-		customer = UIController.displayCustomerInformation(cid);
+	public EditModelDialog(Frame parent,String modelName) throws SQLException {
+		super(parent,"Edit Model",true);
+		String [] customer = new String[3];
+		String [] update = new String[3];
+		customer = UIController.displayModelInformation(modelName);
 		
 		
 		JPanel panel = new JPanel(new GridBagLayout());
         GridBagConstraints cs = new GridBagConstraints();
  
         cs.fill = GridBagConstraints.HORIZONTAL;
-        //customer id
-        lbeid = new JLabel("Customer ID: ");
+        //model name
+        lbname = new JLabel("Model Name: ");
         cs.gridx = 0;
         cs.gridy = 0;
         cs.gridwidth = 1;
-        panel.add(lbeid, cs);
+        panel.add(lbname, cs);
         
-        lbeid2 = new JLabel(cid);
+        lbname2 = new JLabel(modelName);
         cs.gridx = 2;
         cs.gridy = 0;
         cs.gridwidth = 1;
-        panel.add(lbeid2, cs);
+        panel.add(lbname2, cs);
         
         
-        //first name
-        lbfname = new JLabel("First Name: ");
+        //model number
+        lbnum = new JLabel("Model Number: ");
         cs.gridx = 0;
         cs.gridy = 1;
         cs.gridwidth = 1;
-        panel.add(lbfname, cs);
+        panel.add(lbnum, cs);
         
-        lbfname2 = new JLabel(customer[0]);
+        lbnum2 = new JLabel(customer[0]);
         cs.gridx = 1;
         cs.gridy = 1;
         cs.gridwidth = 1;
-        panel.add(lbfname2, cs);
+        panel.add(lbnum2, cs);
         
-        tffname = new JTextField(20);
+        tfnum = new JTextField(20);
         cs.gridx = 2;
         cs.gridy = 1;
         cs.gridwidth = 2;
-        panel.add(tffname, cs);
-        //last name
-        lblname = new JLabel("Last Name: ");
+        panel.add(tfnum, cs);
+        //production cost
+        lbpc = new JLabel("Production Cost: ");
         cs.gridx = 0;
         cs.gridy = 2;
         cs.gridwidth = 1;
-        panel.add(lblname, cs);
+        panel.add(lbpc, cs);
         
-        lblname2 = new JLabel(customer[1]);
+        lbpc2 = new JLabel(customer[1]);
         cs.gridx = 1;
         cs.gridy = 2;
         cs.gridwidth = 1;
-        panel.add(lblname2, cs);
+        panel.add(lbpc2, cs);
         
-        tflname = new JTextField(20);
+        tfpc = new JTextField(20);
         cs.gridx = 2;
         cs.gridy = 2;
         cs.gridwidth = 2;
-        panel.add(tflname, cs);
+        panel.add(tfpc, cs);
+        //sale price
+        lbsp = new JLabel("Sale Price: ");
+        cs.gridx = 0;
+        cs.gridy = 3;
+        cs.gridwidth = 1;
+        panel.add(lbsp, cs);
+        
+        lbsp2 = new JLabel(customer[2]);
+        cs.gridx = 1;
+        cs.gridy = 3;
+        cs.gridwidth = 1;
+        panel.add(lbsp2, cs);
+        
+        tfsp = new JTextField(20);
+        cs.gridx = 2;
+        cs.gridy = 3;
+        cs.gridwidth = 2;
+        panel.add(tfsp, cs);
         
  
         
@@ -101,17 +119,18 @@ public class EditCustomerDialog extends JDialog {
  
             public void actionPerformed(ActionEvent e) {
             	try {
-					JOptionPane.showMessageDialog(EditCustomerDialog.this, "You have successfully entered the information. "
-							+ " First Name: " + getFN() + " Last Name: " + getLN());
+					JOptionPane.showMessageDialog(EditModelDialog.this, "You have successfully entered the information. "
+							+ " Model Number: " + getNUM() + " Production Cost: " + getPC() + " Sale Price: " + getSP());
 				} catch (HeadlessException e1) {
 					e1.printStackTrace();
 				} 
             	
-            	update[0] = getFN();
-            	update[1] = getLN();
+            	update[0] = getNUM();
+            	update[1] = getPC();
+            	update[3] = getSP();
             	
             	try {
-					UIController.updateEmployeeInformation(cid, update);
+					UIController.updateModelInformation(modelName, update);
 				} catch (SQLException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
@@ -156,11 +175,15 @@ public class EditCustomerDialog extends JDialog {
 		
 	}
 	
-	public String getFN() {
-		return tffname.getText().trim();
+	public String getNUM() {
+		return tfnum.getText().trim();
 	}
 	
-	public String getLN() {
-		return tflname.getText().trim();
+	public String getPC() {
+		return tfpc.getText().trim();
+	}
+	
+	public String getSP() {
+		return tfsp.getText().trim();
 	}
 }

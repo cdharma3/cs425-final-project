@@ -39,6 +39,12 @@ public class EditEmployeeDialog extends JDialog {
         cs.gridy = 0;
         cs.gridwidth = 1;
         panel.add(lbeid, cs);
+      
+        lbeid2 = new JLabel(eid);
+        cs.gridx = 2;
+        cs.gridy = 0;
+        cs.gridwidth = 1;
+        panel.add(lbeid2, cs);
         
         
         //first name
