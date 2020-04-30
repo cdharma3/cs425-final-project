@@ -20,13 +20,13 @@ public class EditEmployeeDialog extends JDialog {
 	JLabel lbeid, lbfname, lblname, lbssn, lbsalary, lbhourly, lbjob;
 	JLabel lbeid2, lbfname2, lblname2, lbssn2, lbsalary2, lbhourly2, lbjob2;
 	JTextField tffname, tflname, tfssn, tfsalary, tfhourly, tfjob;
-	
+	JButton btnEnter, btnCancel;
 	
 	public EditEmployeeDialog(Frame parent,String eid) throws SQLException {
 		super(parent,"Edit Employee",true);
 		String [] employee;
-		
-			employee = UIController.displayEmployeeInformation(eid);
+		String [] update = new String[6];
+		employee = UIController.displayEmployeeInformation(eid);
 		
 		
 		JPanel panel = new JPanel(new GridBagLayout());
@@ -153,41 +153,32 @@ public class EditEmployeeDialog extends JDialog {
         
         panel.setBorder(new LineBorder(Color.GRAY));
  
-        /*btnEnter = new JButton("Enter");
- 
- 		UPDATEEMPLOYYEINFORMATION method needed
+        btnEnter = new JButton("Enter");
  
         btnEnter.addActionListener(new ActionListener() {
  
             public void actionPerformed(ActionEvent e) {
             	try {
-					JOptionPane.showMessageDialog(OrderFormDialog.this, "You have successfully entered the information. "
-							+ " Employee ID: " + getEid() + " Customer ID: " + getCid() + " Model Name: "
-									+ getMname() + " Quantity: " + getQ() + " Sale Value: " + calcSaleValue(getQ()));
+					JOptionPane.showMessageDialog(EditEmployeeDialog.this, "You have successfully entered the information. "
+							+ " First Name: " + getFN() + " Last Name: " + getLN() + " SSN: "
+									+ getS() + " Salary: " + getSal() + " Hourly: " + getH() + " Job Type: " + getJType());
 				} catch (HeadlessException e1) {
 					e1.printStackTrace();
-				} catch (SQLException e1) {
-					e1.printStackTrace();
-				}
+				} 
+            	
+            	update[0] = getFN();
+            	update[1] = getLN();
+            	update[2] = getS();
+            	update[3] = getSal();
+            	update[4] = getH();
+            	update[5] = getJType();
+            	
             	try {
-					if(UIController.getInventoryQuantity(getMname())>getQ()) {
-						try {
-							enterOrder();
-							dispose();
-							SalesPage.main(null);
-						} catch (SQLException e1) {
-							// TODO Auto-generated catch block
-							e1.printStackTrace();
-						}
-					}else {
-						JOptionPane.showMessageDialog(OrderFormDialog.this, "The quantity you have ordered is not available, "
-								+ "please note that the quantity available is: " + UIController.getInventoryQuantity(getMname()));
-					}
+					UIController.updateEmployeeInformation(eid, update);
 				} catch (SQLException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
-            	
             }
         });
         btnCancel = new JButton("Cancel");
@@ -197,8 +188,8 @@ public class EditEmployeeDialog extends JDialog {
                 dispose();
                 SalesPage.main(null);
             }
-        });*/
-       /* JPanel bp = new JPanel();
+        });
+        JPanel bp = new JPanel();
         //bp.add(btnEnter);
         //bp.add(btnCancel);
         
@@ -218,13 +209,37 @@ public class EditEmployeeDialog extends JDialog {
 		bp.add(btnLogout);
  
         getContentPane().add(panel, BorderLayout.CENTER);
-        getContentPane().add(bp, BorderLayout.PAGE_END);*/
+        getContentPane().add(bp, BorderLayout.PAGE_END);
  
         pack();
         setResizable(false);
         setLocationRelativeTo(parent);
-        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		
 		
+	}
+	
+	public String getFN() {
+		return tffname.getText().trim();
+	}
+	
+	public String getLN() {
+		return tflname.getText().trim();
+	}
+	
+	public String getS() {
+		return tfssn.getText().trim();
+	}
+	
+	public String getSal() {
+		return tfsalary.getText().trim();
+	}
+	
+	public String getH() {
+		return tfhourly.getText().trim();
+	}
+	
+	public String getJType() {
+		return tfjob.getText().trim();
 	}
 }

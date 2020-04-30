@@ -4,6 +4,7 @@ import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
@@ -38,8 +39,15 @@ public class EditEmployee {
                 new ActionListener(){
                     public void actionPerformed(ActionEvent e) {
                     	frame.dispose();
-                        EditEmployeeDialog OrderDlg = new EditEmployeeDialog(frame,enter.getText().trim());
-                        OrderDlg.setVisible(true);
+                        EditEmployeeDialog OrderDlg;
+						try {
+							OrderDlg = new EditEmployeeDialog(frame,enter.getText().trim());
+							OrderDlg.setVisible(true);
+						} catch (SQLException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						}
+                        
                         
                     }
                 });
