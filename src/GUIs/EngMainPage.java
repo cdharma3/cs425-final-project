@@ -34,8 +34,8 @@ public class EngMainPage extends JDialog {
 	        btnCreate.addActionListener(new ActionListener() {
 	 
 	        	public void actionPerformed(ActionEvent e) {
-	        		dispose();
-	                MainCreateEmployee.main(null);
+	                dispose();
+	                MainCreateModel.main(null);
 	            }
 	        });
 	        panel.add(btnCreate);
