@@ -535,20 +535,4 @@ public class UIController {
 		erpDB.close();
 		return str;
 	}
-	public static String [] employeeInfo(String eid) throws SQLException {
-		Connection erpDB = DriverManager.getConnection("jdbc:postgresql://localhost:5432/final-project-db", databaseUsername, databasePassword);
-
-		Statement st = erpDB.createStatement();
-		ResultSet employeeInfo = st.executeQuery("SELECT " + eid + " FROM Employee;");
-		ResultSetMetaData rsmd = employeeInfo.getMetaData();
-		System.out.println("querying employeeInfo");
-
-		String [] str; 
-
-
-		employeeInfo.close();
-		st.close();
-		erpDB.close();
-		return str;
-	}
 }
