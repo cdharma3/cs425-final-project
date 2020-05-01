@@ -272,12 +272,6 @@ public class UIController {
 		System.out.println("Role password updated!");
 	}
 
-	/**
-	 * deletes all employees and roles from database
-	 * warning: will not work if employee table is not populated with role!
-	 * make sure employee table is synced with the roles present
-	 * @throws SQLException
-	 */
 	public static void deleteAllEmployees() throws SQLException {
 		Connection erpDB = DriverManager.getConnection("jdbc:postgresql://localhost:5432/final-project-db", "mr_admin", "mr_password");
 		String retrieveEmployees = "SELECT E_ID FROM employee;";
@@ -769,8 +763,8 @@ public class UIController {
 	public static String [] hrAccess(String eid) throws SQLException {
 		Connection erpDB = DriverManager.getConnection("jdbc:postgresql://localhost:5432/final-project-db", databaseUsername, databasePassword);
 		String selectEmployeeInformation =
-				"SELECT firstName, lastName "
-						+ "FROM Employee "
+				"SELECT firstName, lastName, salesPerEmployee "
+						+ "FROM Employee NATURAL JOIN EmployeeRevenue"
 						+ "WHERE E_ID = ?;";
 
 		PreparedStatement ps = erpDB.prepareStatement(selectEmployeeInformation);
@@ -781,6 +775,7 @@ public class UIController {
 		if(rs.next()) {
 			employeeInfo[0] = rs.getString("firstName");
 			employeeInfo[1] = rs.getString("lastName");
+			employeeInfo[2] = Float.toString(rs.getFloat("salesPerEmployee"));
 		} else {
 			return null;
 		}
