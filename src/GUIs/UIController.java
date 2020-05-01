@@ -712,4 +712,29 @@ public class UIController {
 		ps.executeUpdate();
 		System.out.println("Updated!");
 	}
+	/**
+	 * displays specific engineer accessed information
+	 * @throws SQLException
+	 */
+	public static String [] engineerAccess(String eid) throws SQLException {
+		Connection erpDB = DriverManager.getConnection("jdbc:postgresql://localhost:5432/final-project-db", databaseUsername, databasePassword);
+		String selectEmployeeInformation =
+				"SELECT firstName, lastName, jobType "
+						+ "FROM Employee "
+						+ "WHERE E_ID = ?;";
+
+		PreparedStatement ps = erpDB.prepareStatement(selectEmployeeInformation);
+		ps.setString(1, eid);
+		ResultSet rs = ps.executeQuery();
+
+		String[] employeeInfo = new String[3];
+		if(rs.next()) {
+			employeeInfo[0] = rs.getString("firstName");
+			employeeInfo[1] = rs.getString("lastName");
+			employeeInfo[2] = rs.getString("jobType");
+			return employeeInfo;
+		} else {
+			return null;
+		}
+	}
 }
