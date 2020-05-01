@@ -19,7 +19,7 @@ public class HRMainPage extends JDialog {
 	    private boolean succeeded;				// If successful
 	 
 	    public HRMainPage(Frame parent) {
-	        super(parent, "Admin Main Page", true);
+	        super(parent, "HR Main Page", true);
 	        //
 	        JPanel panel = new JPanel(new GridBagLayout());
 	        GridBagConstraints cs = new GridBagConstraints();

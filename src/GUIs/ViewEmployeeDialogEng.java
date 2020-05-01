@@ -41,6 +41,7 @@ public class ViewEmployeeDialogEng extends JDialog{
 		            "Edit Employee",
 		            JOptionPane.ERROR_MESSAGE);
 			dispose();
+			
 			EditEmployee.main(null);
 		}
 		

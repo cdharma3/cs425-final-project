@@ -13,11 +13,13 @@ public class AdminMainPage extends JDialog {
 	 */
 	private static final long serialVersionUID = 1L;
 
-	    private JButton btnEdit;				// Edit data Button
 	    private JButton btnAccess;				// Grant Access button
 	    private JButton btnreports;         	// access and create reports
 	    private JButton btnpassword;			//Change passwords for employees
 	    private JButton btnDelete;				//Delete employee info
+	    private JButton btnHR;
+	    private JButton btnSales;
+	    private JButton btnEng;
 	    private JButton btnLogout;				//Logout
 	    private boolean succeeded;				// If successful
 	 
@@ -44,15 +46,6 @@ public class AdminMainPage extends JDialog {
 	        });
 	        panel.add(btnDelete);
 	        
-	        btnEdit = new JButton("Edit data within tables");
-	        btnEdit.addActionListener(new ActionListener() {
-	        
-	            public void actionPerformed(ActionEvent e) {
-	            	//TODO
-	                dispose();
-	            }
-	        });
-	        panel.add(btnEdit);
 	        
 	        btnAccess = new JButton("Grant Access");
 	        btnAccess.addActionListener(new ActionListener() {
@@ -83,6 +76,41 @@ public class AdminMainPage extends JDialog {
 	            }
 	        });
 	        panel.add(btnpassword);
+	        
+
+	        
+	        btnHR = new JButton("Access HR main page");
+	        btnHR.addActionListener(new ActionListener() {
+	        
+	            public void actionPerformed(ActionEvent e) {
+	                dispose();
+	                HRPage.main(null);
+	            }
+	        });
+	        
+	        panel.add(btnHR);
+	        
+	        btnSales = new JButton("Access Sales main page");
+	        btnSales.addActionListener(new ActionListener() {
+	        
+	            public void actionPerformed(ActionEvent e) {
+	                dispose();
+	                SalesPage.main(null);
+	            }
+	        });
+	        
+	        panel.add(btnSales);
+	        
+	        btnEng = new JButton("Access Engineer main page");
+	        btnEng.addActionListener(new ActionListener() {
+	        
+	            public void actionPerformed(ActionEvent e) {
+	                dispose();
+	                EngPage.main(null);
+	            }
+	        });
+	        
+	        panel.add(btnEng);
 	        
 	        btnLogout = new JButton("Logout");
 	        btnLogout.addActionListener(new ActionListener() {
