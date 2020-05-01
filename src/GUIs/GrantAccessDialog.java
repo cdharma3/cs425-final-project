@@ -45,23 +45,41 @@ public class GrantAccessDialog extends JDialog {
 	        cs.gridwidth = 2;
 	        panel.add(tfeid, cs);
 	        
-	        lbeid = new JLabel("Employee ID: ");
+	        lbtable = new JLabel("Table you want them to have access to: ");
 	        cs.gridx = 0;
 	        cs.gridy = 0;
 	        cs.gridwidth = 1;
-	        panel.add(lbeid, cs);
+	        panel.add(lbtable, cs);
 	        
-	        tfeid = new JTextField(50);
+	        tftable = new JTextField(50);
 	        cs.gridx = 1;
 	        cs.gridy = 0;
 	        cs.gridwidth = 2;
-	        panel.add(tfeid, cs);
+	        panel.add(tftable, cs);
 	        
-	        cbhourly = new JCheckBox("Are they paid Hourly?");
+	        cbSelect = new JCheckBox("Select");
 	        cs.gridx = 0;
 	        cs.gridy = 5;
 	        cs.gridwidth = 2;
-	        panel.add(cbhourly, cs);
+	        panel.add(cbSelect, cs);
+	        
+	        cbInsert = new JCheckBox("Insert");
+	        cs.gridx = 0;
+	        cs.gridy = 5;
+	        cs.gridwidth = 2;
+	        panel.add(cbInsert, cs);
+	        
+	        cbUpdate = new JCheckBox("Update");
+	        cs.gridx = 0;
+	        cs.gridy = 5;
+	        cs.gridwidth = 2;
+	        panel.add(cbUpdate, cs);
+	        
+	        cbDelete = new JCheckBox("Delete");
+	        cs.gridx = 0;
+	        cs.gridy = 5;
+	        cs.gridwidth = 2;
+	        panel.add(cbDelete, cs);
 	        
 	        panel.setBorder(new LineBorder(Color.GRAY));
 	 
@@ -125,10 +143,41 @@ public class GrantAccessDialog extends JDialog {
 	    public String getEid() {
 	        return tfeid.getText().trim();
 	    }
+	    
+	    public String getTable() {
+	        return tftable.getText().trim();
+	    }
 	 
 
-	    public Boolean getisHourly() {
-			if(cbhourly.isSelected()) {
+	    public Boolean getSelect() {
+			if(cbSelect.isSelected()) {
+				return true;
+			}
+			else {
+				return false;
+			}
+	    }
+	    
+	    public Boolean getInsert() {
+			if(cbInsert.isSelected()) {
+				return true;
+			}
+			else {
+				return false;
+			}
+	    }
+	    
+	    public Boolean getUpdate() {
+			if(cbUpdate.isSelected()) {
+				return true;
+			}
+			else {
+				return false;
+			}
+	    }
+	    
+	    public Boolean getDelete() {
+			if(cbDelete.isSelected()) {
 				return true;
 			}
 			else {
