@@ -14,6 +14,7 @@ public class GrantAccessDialog extends JDialog {
 		private JLabel lbeid;
 		private JTextField tftable;				// Employee ID/ Login Id
 		private JLabel lbtable;
+		private JLabel lbtables;
 	    private JCheckBox cbSelect;				// Is Hourly
 	    private JCheckBox cbInsert;				// Is Hourly
 	    private JCheckBox cbUpdate;				// Is Hourly
@@ -45,39 +46,45 @@ public class GrantAccessDialog extends JDialog {
 	        cs.gridwidth = 2;
 	        panel.add(tfeid, cs);
 	        
+	        lbtables = new JLabel("	Tables available are:  employee,  inventory,  customer,  login,  model,  orderinfo");
+	        cs.gridx = 1;
+	        cs.gridy = 1;
+	        cs.gridwidth = 1;
+	        panel.add(lbtables, cs);
+	        
 	        lbtable = new JLabel("Table you want them to have access to: ");
 	        cs.gridx = 0;
-	        cs.gridy = 1;
+	        cs.gridy = 2;
 	        cs.gridwidth = 1;
 	        panel.add(lbtable, cs);
 	        
 	        tftable = new JTextField(50);
 	        cs.gridx = 1;
-	        cs.gridy = 1;
+	        cs.gridy = 2;
 	        cs.gridwidth = 2;
 	        panel.add(tftable, cs);
 	        
 	        cbSelect = new JCheckBox("Select");
 	        cs.gridx = 0;
-	        cs.gridy = 2;
+	        cs.gridy = 3;
 	        cs.gridwidth = 2;
 	        panel.add(cbSelect, cs);
 	        
 	        cbInsert = new JCheckBox("Insert");
 	        cs.gridx = 0;
-	        cs.gridy = 3;
+	        cs.gridy = 4;
 	        cs.gridwidth = 2;
 	        panel.add(cbInsert, cs);
 	        
 	        cbUpdate = new JCheckBox("Update");
 	        cs.gridx = 0;
-	        cs.gridy = 4;
+	        cs.gridy = 5;
 	        cs.gridwidth = 2;
 	        panel.add(cbUpdate, cs);
 	        
 	        cbDelete = new JCheckBox("Delete");
 	        cs.gridx = 0;
-	        cs.gridy = 5;
+	        cs.gridy = 6;
 	        cs.gridwidth = 2;
 	        panel.add(cbDelete, cs);
 	        
@@ -89,7 +96,8 @@ public class GrantAccessDialog extends JDialog {
 	 
 	        	public void actionPerformed(ActionEvent e) {
 	                try {
-	                	UIController.grantAccess(getTable(), Hashtable<String, Boolean> access, getEid());
+	                	
+	                	//UIController.grantAccess(getTable(), Hashtable<String, Boolean> access, getEid());
 	                	
 					} catch (Exception e1) {
 						dispose();
