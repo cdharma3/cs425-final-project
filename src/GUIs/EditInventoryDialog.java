@@ -24,8 +24,8 @@ public class EditInventoryDialog extends JDialog {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	JLabel lbname, lbnum, lbpc, lbsp;
-	JLabel lbname2, lbnum2, lbpc2, lbsp2;
+	JLabel lbiid, lbnum, lbpc, lbsp;
+	JLabel lbiid2, lbnum2, lbpc2, lbsp2;
 	JTextField tfnum, tfpc, tfsp;
 	JButton btnEnter, btnCancel;
 	
@@ -33,7 +33,7 @@ public class EditInventoryDialog extends JDialog {
 		super(parent,"Edit Inventory",true);
 		String [] customer;
 		String [] update = new String[3];
-		customer = UIController.displayModelInformation(modelName);
+		customer = UIController.displayInventoryInformation(iid);
 		
 		
 		JPanel panel = new JPanel(new GridBagLayout());
@@ -41,17 +41,17 @@ public class EditInventoryDialog extends JDialog {
  
         cs.fill = GridBagConstraints.HORIZONTAL;
         //model name
-        lbname = new JLabel("Model Name: ");
+        lbiid = new JLabel("I_ID: ");
         cs.gridx = 0;
         cs.gridy = 0;
         cs.gridwidth = 1;
-        panel.add(lbname, cs);
+        panel.add(lbiid, cs);
         
-        lbname2 = new JLabel(modelName);
+        lbiid2 = new JLabel(iid);
         cs.gridx = 2;
         cs.gridy = 0;
         cs.gridwidth = 1;
-        panel.add(lbname2, cs);
+        panel.add(lbiid2, cs);
         
         
         //model number
