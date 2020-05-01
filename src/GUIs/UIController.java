@@ -566,7 +566,7 @@ public class UIController {
 		Connection erpDB = DriverManager.getConnection("jdbc:postgresql://localhost:5432/final-project-db", databaseUsername, databasePassword);
 		String selectEmployeeInformation =
 				"UPDATE Employee "
-						+ "SET firstName = ?, lastName = ?, SSN = ?, isHourly = ?, Salary = ?, jobType = ?"
+						+ "SET firstName = ?, lastName = ?, SSN = ?, isHourly = ?, Salary = ?, jobType = ? "
 						+ "WHERE E_ID = ?;";
 
 		PreparedStatement ps = erpDB.prepareStatement(selectEmployeeInformation);
@@ -618,7 +618,7 @@ public class UIController {
 		Connection erpDB = DriverManager.getConnection("jdbc:postgresql://localhost:5432/final-project-db", databaseUsername, databasePassword);
 		String selectEmployeeInformation =
 				"UPDATE Customer "
-						+ "SET firstname = ?, lastname = ?"
+						+ "SET firstname = ?, lastname = ? "
 						+ "WHERE C_ID = ?;";
 
 		PreparedStatement ps = erpDB.prepareStatement(selectEmployeeInformation);
