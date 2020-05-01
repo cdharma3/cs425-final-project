@@ -27,7 +27,9 @@ public class EditEmployeeDialog extends JDialog {
 		String [] employee;
 		String [] update = new String[6];
 		employee = UIController.displayEmployeeInformation(eid);
-		
+		if(employee[0] == null) {
+			
+		}
 		
 		JPanel panel = new JPanel(new GridBagLayout());
         GridBagConstraints cs = new GridBagConstraints();
