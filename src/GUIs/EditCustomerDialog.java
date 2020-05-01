@@ -122,7 +122,7 @@ public class EditCustomerDialog extends JDialog {
             	update[1] = getLN();
             	
             	try {
-					UIController.updateEmployeeInformation(cid, update);
+					UIController.updateCustomerInformation(cid, update);
 					dispose();
 					SalesPage.main(null);
 				} catch (SQLException e1) {
