@@ -168,7 +168,7 @@ public class CreateEmployeeDialog extends JDialog {
 				            "Create new Employee",
 				            JOptionPane.INFORMATION_MESSAGE);
 	                dispose();
-	                AdminPage.main(null);
+	                HRPage.main(null);
 	                }
 	            }
 	        });
@@ -177,7 +177,7 @@ public class CreateEmployeeDialog extends JDialog {
 	 
 	            public void actionPerformed(ActionEvent e) {
 	                dispose();
-	                AdminPage.main(null);
+	                HRPage.main(null);
 	            }
 	        });
 	        JPanel bp = new JPanel();

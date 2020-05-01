@@ -12,7 +12,7 @@ public class AdminMainPage extends JDialog {
 	 * UIController.addEmployee("bWatts", "abc123", "Bob", "Watts", "123456789", (float)25.00, true, "hr");
 	 */
 	private static final long serialVersionUID = 1L;
-	    private JButton btnCreateEmp;			// Create Employee Button
+
 	    private JButton btnEdit;				// Edit data Button
 	    private JButton btnAccess;				// Grant Access button
 	    private JButton btnreports;         	// access and create reports
@@ -33,16 +33,6 @@ public class AdminMainPage extends JDialog {
 	       
 	        //Line separating buttons and welcome message
 	        //Create new employee button and label
-	        
-	        btnCreateEmp = new JButton("Create a new Employee");
-	        btnCreateEmp.addActionListener(new ActionListener() {
-	 
-	        	public void actionPerformed(ActionEvent e) {
-	        		dispose();
-	                MainCreateEmployee.main(null);
-	            }
-	        });
-	        panel.add(btnCreateEmp);
 	        
 	        btnDelete = new JButton("Delete employee information");
 	        btnDelete.addActionListener(new ActionListener() {

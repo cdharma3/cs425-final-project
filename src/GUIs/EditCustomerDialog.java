@@ -44,7 +44,7 @@ public class EditCustomerDialog extends JDialog {
 		            "Edit Employee",
 		            JOptionPane.ERROR_MESSAGE);
 			dispose();
-			EditEmployee.main(null);
+			EditCustomer.main(null);
 		}
 		
 		JPanel panel = new JPanel(new GridBagLayout());

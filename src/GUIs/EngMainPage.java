@@ -55,8 +55,8 @@ public class EngMainPage extends JDialog {
 	        btnInventory.addActionListener(new ActionListener() {
 	        
 	            public void actionPerformed(ActionEvent e) {
-	            	//TODO
 	                dispose();
+	                EditInventory.main(null);
 	            }
 	        });
 	        panel.add(btnInventory);

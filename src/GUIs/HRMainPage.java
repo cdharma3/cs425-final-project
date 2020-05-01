@@ -14,6 +14,7 @@ public class HRMainPage extends JDialog {
 	private static final long serialVersionUID = 1L;
 	    private JButton btnEmplyeeInfo;			// Access and update employee info
 	    private JButton btnSales;				// View employees and their sales numbers
+	    private JButton btnCreateEmp;			// Create Employee Button
 	    private JButton btnLogout;				//Logout
 	    private boolean succeeded;				// If successful
 	 
@@ -29,6 +30,15 @@ public class HRMainPage extends JDialog {
 	       
 	        //Line separating buttons and welcome message
 	        //Create new employee button and label
+	        btnCreateEmp = new JButton("Create a new Employee");
+	        btnCreateEmp.addActionListener(new ActionListener() {
+	 
+	        	public void actionPerformed(ActionEvent e) {
+	        		dispose();
+	                MainCreateEmployee.main(null);
+	            }
+	        });
+	        panel.add(btnCreateEmp);
 	        
 	        btnEmplyeeInfo = new JButton("Access and Edit Employee Info");
 	        btnEmplyeeInfo.addActionListener(new ActionListener() {
