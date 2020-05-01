@@ -72,7 +72,7 @@ public class AdminMainPage extends JDialog {
 	        
 	            public void actionPerformed(ActionEvent e) {
 	                dispose();
-	                //TODO
+	                changePassword.main(null);
 	            }
 	        });
 	        panel.add(btnpassword);
