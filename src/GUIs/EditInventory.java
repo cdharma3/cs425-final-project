@@ -16,12 +16,6 @@ import javax.swing.WindowConstants;
 
 public class EditInventory {
 	public static void main(String[] args) {
-		try {
-			UIController.login("bWatts","abc123");
-		} catch (SQLException e2) {
-			// TODO Auto-generated catch block
-			e2.printStackTrace();
-		}
         JFrame frame = new JFrame("Edit Inventory");
         JPanel panel = new JPanel();
         frame.getContentPane();
@@ -40,6 +34,7 @@ public class EditInventory {
         
         
         JButton btnOrder = new JButton("Click to Edit");
+        JButton btnCancel = new JButton("Cancel");
         
         btnOrder.addActionListener(
                 new ActionListener(){
@@ -56,11 +51,20 @@ public class EditInventory {
                         
                     }
                 });
+        btnCancel.addActionListener(new ActionListener() {
+          	 
+            public void actionPerformed(ActionEvent e) {
+                frame.dispose();
+                EngPage.main(null);
+            }
+        });
+        
         frame.setLocation(200, 200);
         frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
         frame.setSize(400, 150);
         frame.setLayout(new FlowLayout());
         frame.add(btnOrder);
+        frame.add(btnCancel);
         frame.setVisible(true);
 	}
 }
