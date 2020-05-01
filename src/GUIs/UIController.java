@@ -608,4 +608,54 @@ public class UIController {
 		erpDB.close();
 		return str;
 	}
+	/**
+	 * displays certain model information
+	 * @throws SQLException
+	 */
+	public static String[] displayModelInformation(String mName) throws SQLException {
+		Connection erpDB = DriverManager.getConnection("jdbc:postgresql://localhost:5432/final-project-db", databaseUsername, databasePassword);
+		String selectCustomerInformation =
+				"SELECT modelname, productioncost, saleprice"
+						+ "FROM Model "
+						+ "WHERE modelname = ?;";
+
+		PreparedStatement ps = erpDB.prepareStatement(selectCustomerInformation);
+		ps.setString(1, mName);
+		ResultSet rs = ps.executeQuery();
+
+		String[] modelInfo = new String[3];
+		if(rs.next()) {
+			modelInfo[0] = rs.getString("modelname");
+			modelInfo[1] = rs.getString("productioncost");
+			modelInfo[2] = rs.getString("saleprice");
+			
+			return modelInfo;
+		} else {
+			return null;
+		}
+
+	}
+	
+	/**
+	 * displays certain model information
+	 * @throws SQLException
+	 */
+	public static void updateModelInformation(String mName, String[] modelInfo) throws SQLException {
+		Connection erpDB = DriverManager.getConnection("jdbc:postgresql://localhost:5432/final-project-db", databaseUsername, databasePassword);
+		String selectModelInformation =
+				"UPDATE Model "
+						+ "SET modelnumber = ?, productioncost = ?, saleprice = ?"
+						+ "WHERE modelname = ?;";
+
+		PreparedStatement ps = erpDB.prepareStatement(selectModelInformation);
+		System.out.println(Arrays.toString(modelInfo));
+		int i = 1;
+		ps.setString(i++, modelInfo[0]);
+		ps.setString(i++, modelInfo[1]);
+		ps.setString(i++, modelInfo[2]);
+		ps.setString(i++, mName);
+
+		ps.executeUpdate();
+		System.out.println("Updated!");
+	}
 }
