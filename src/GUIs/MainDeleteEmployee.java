@@ -8,13 +8,13 @@ import java.sql.SQLException;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 
+@SuppressWarnings("unused")
 public class MainDeleteEmployee {
 	public static void main(String[] args) {
 		//testing
 		/*try {
 			UIController.login("bWatts","abc123");
 		} catch (SQLException e1) {
-			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}*/
 		//testing

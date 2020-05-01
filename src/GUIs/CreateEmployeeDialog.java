@@ -153,7 +153,7 @@ public class CreateEmployeeDialog extends JDialog {
 	 
 	        	public void actionPerformed(ActionEvent e) {
 	                try {
-	                	if(getSSN() != null) {
+	                	if(getSSN() != null && getJobType() != null && getSalary() != null) {
 	                		UIController.addEmployee(getEid(), getPassword(), getFname(), getLname(), getSSN(), getSalary(), getisHourly(), getJobType());
 	                	}else {
 	                		dispose();
@@ -161,16 +161,18 @@ public class CreateEmployeeDialog extends JDialog {
 	                	}
 					} catch (Exception e1) {
 						dispose();
-						if(getSSN() != null) {
+						if(getSSN() != null && getJobType() != null && getSalary() != null) {
 							MainCreateEmployee.main(null);
 						}
 					}
+	                if(getSSN() != null && getJobType() != null && getSalary() != null) {
 	                JOptionPane.showMessageDialog(CreateEmployeeDialog.this,
 				            "Employee created successfully!",
 				            "Create new Employee",
 				            JOptionPane.INFORMATION_MESSAGE);
 	                dispose();
 	                AdminPage.main(null);
+	                }
 	            }
 	        });
 	        btnCancel = new JButton("Cancel");
@@ -228,26 +230,34 @@ public class CreateEmployeeDialog extends JDialog {
 	    
 	    public String getSSN() {
 	    	//checking to see if its only numbers and has a length of 9
+	    	boolean error = true;
 	    	if(tfssn.getText().trim().length() != 9 || !(tfssn.getText().trim().matches("[0-9]+"))) {
-	    		JOptionPane.showMessageDialog(CreateEmployeeDialog.this,
-			            "Invalid input for Social security number, try again",
-			            "Create new employee",
-			            JOptionPane.ERROR_MESSAGE);
-	    		return null;
+	    		if(error) {
+	    			error = false;
+		    		JOptionPane.showMessageDialog(CreateEmployeeDialog.this,
+				            "Invalid input for Social security number, try again",
+				            "Create new employee",
+				            JOptionPane.ERROR_MESSAGE);
+		    		return null;
+	    		}
 	    	}
 	    	return tfssn.getText().trim();
 	    }
 	    
 	    public Float getSalary() {
 	    	//checking to see if its a float
+	    	boolean error = true;
 			try {
 				return Float.parseFloat(tfsalary.getText().trim());
 			}
 			catch (Exception e){
-				JOptionPane.showMessageDialog(CreateEmployeeDialog.this,
-			            "Invalid input for pay, try again",
-			            "Create new employee",
-			            JOptionPane.ERROR_MESSAGE);
+				if (error) {
+					JOptionPane.showMessageDialog(CreateEmployeeDialog.this,
+							"Invalid input for pay, try again",
+							"Create new employee",
+			            	JOptionPane.ERROR_MESSAGE);
+					error = false;
+				}
 				
 			}
 			return null;
@@ -265,6 +275,7 @@ public class CreateEmployeeDialog extends JDialog {
 	    
 	    public String getJobType() {
 	    	// checking to see if its a valid job type
+	    	boolean error = true;
 	    	String job = tfjobtype.getText().trim();
 	    	if(job.equals("hr")||job.equals("human resources")) {
 	    		job = "hr";
@@ -275,11 +286,14 @@ public class CreateEmployeeDialog extends JDialog {
 	    	}else if(job.equals("admin")||job.equals("administrator")) {
 	    		job = "admin";
 	    	}else {
-	    		JOptionPane.showMessageDialog(CreateEmployeeDialog.this,
-			            "Invalid input for Job type, try again",
-			            "Create new employee",
-			            JOptionPane.ERROR_MESSAGE);
-	    		return null;
+	    		if(error) {
+	    			JOptionPane.showMessageDialog(CreateEmployeeDialog.this,
+	    					"Invalid input for Job type, try again",
+	    					"Create new employee",
+	    					JOptionPane.ERROR_MESSAGE);
+	    			error = false;
+	    			return null;
+	    		}
 	    	}
 	    	return job;
 	    }
