@@ -12,11 +12,11 @@ import javax.swing.JFrame;
 public class MainGrantAccess {
 	public static void main(String[] args) {
 		//testing
-		try {
+		/*try {
 			UIController.login("bWatts","abc123");
 		} catch (SQLException e1) {
 			e1.printStackTrace();
-		}
+		}*/
 		//testing
         final JFrame frame = new JFrame("Grant Access to an Employee");
         final JButton btnOrder = new JButton("Click to Begin");
