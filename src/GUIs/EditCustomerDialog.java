@@ -40,8 +40,8 @@ public class EditCustomerDialog extends JDialog {
 			}
 		}catch(Exception e2){
 			JOptionPane.showMessageDialog(EditCustomerDialog.this,
-		            "Invalid input for Employee ID, try again",
-		            "Edit Employee",
+		            "Invalid input for Customer ID, try again",
+		            "Edit Customer",
 		            JOptionPane.ERROR_MESSAGE);
 			dispose();
 			EditCustomer.main(null);

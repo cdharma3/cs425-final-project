@@ -40,11 +40,11 @@ public class EditModelDialog extends JDialog {
 			}
 		}catch(Exception e2){
 			JOptionPane.showMessageDialog(EditModelDialog.this,
-		            "Invalid input for Employee ID, try again",
-		            "Edit Employee",
+		            "Invalid input for Model name, try again",
+		            "Edit Model",
 		            JOptionPane.ERROR_MESSAGE);
 			dispose();
-			EditEmployee.main(null);
+			EditModel.main(null);
 		}
 		
 		JPanel panel = new JPanel(new GridBagLayout());

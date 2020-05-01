@@ -40,11 +40,11 @@ public class EditInventoryDialog extends JDialog {
 			}
 		}catch(Exception e2){
 			JOptionPane.showMessageDialog(EditInventoryDialog.this,
-		            "Invalid input for Employee ID, try again",
-		            "Edit Employee",
+		            "Invalid input for Inventory ID, try again",
+		            "Edit Inventory",
 		            JOptionPane.ERROR_MESSAGE);
 			dispose();
-			EditEmployee.main(null);
+			EditInventory.main(null);
 		}
 		
 		JPanel panel = new JPanel(new GridBagLayout());
