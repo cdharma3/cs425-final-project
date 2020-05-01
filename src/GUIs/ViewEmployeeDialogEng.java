@@ -95,7 +95,7 @@ public class ViewEmployeeDialogEng extends JDialog{
  
             public void actionPerformed(ActionEvent e) {
                 dispose();
-                SalesPage.main(null);
+                EngPage.main(null);
             }
         });
         JPanel bp = new JPanel();

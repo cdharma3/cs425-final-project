@@ -89,12 +89,12 @@ public class HRViewEmployeeDialog extends JDialog{
         
         panel.setBorder(new LineBorder(Color.GRAY));
  
-        btnCancel = new JButton("Cancel");
+        btnCancel = new JButton("Back");
         btnCancel.addActionListener(new ActionListener() {
  
             public void actionPerformed(ActionEvent e) {
                 dispose();
-                SalesPage.main(null);
+                HRPage.main(null);
             }
         });
         JPanel bp = new JPanel();

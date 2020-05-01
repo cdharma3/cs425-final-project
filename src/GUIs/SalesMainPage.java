@@ -46,8 +46,8 @@ public class SalesMainPage extends JDialog {
 	        btnEdit.addActionListener(new ActionListener() {
 	        
 	            public void actionPerformed(ActionEvent e) {
-	            	//TODO
 	                dispose();
+	                EditCustomer.main(null);
 	            }
 	        });
 	        panel.add(btnEdit);

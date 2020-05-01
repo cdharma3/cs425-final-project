@@ -65,8 +65,8 @@ public class EngMainPage extends JDialog {
 	        btnEmpl.addActionListener(new ActionListener() {
 	        
 	            public void actionPerformed(ActionEvent e) {
-	            	//TODO
 	                dispose();
+	                ViewEmployeeEng.main(null);
 	            }
 	        });
 	        panel.add(btnEmpl);

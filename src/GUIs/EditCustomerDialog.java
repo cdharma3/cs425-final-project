@@ -112,8 +112,11 @@ public class EditCustomerDialog extends JDialog {
             	
             	try {
 					UIController.updateEmployeeInformation(cid, update);
+					dispose();
+					SalesPage.main(null);
 				} catch (SQLException e1) {
 					e1.printStackTrace();
+					EditCustomer.main(null);
 				}
             }
         });

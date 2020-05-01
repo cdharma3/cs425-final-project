@@ -44,8 +44,8 @@ public class HRMainPage extends JDialog {
 	        btnSales.addActionListener(new ActionListener() {
 	        
 	            public void actionPerformed(ActionEvent e) {
-	            	//TODO
 	                dispose();
+	                HRViewEmployee.main(null);
 	            }
 	        });
 	        panel.add(btnSales);

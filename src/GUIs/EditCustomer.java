@@ -16,11 +16,6 @@ import javax.swing.WindowConstants;
 
 public class EditCustomer {
 	public static void main(String[] args) {
-		try {
-			UIController.login("bWatts","abc123");
-		} catch (SQLException e2) {
-			e2.printStackTrace();
-		}
         JFrame frame = new JFrame("Edit Customer");
         JPanel panel = new JPanel();
         frame.getContentPane();
