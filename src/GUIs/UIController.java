@@ -671,7 +671,7 @@ public class UIController {
 	public static String[] displayModelInformation(String mName) throws SQLException {
 		Connection erpDB = DriverManager.getConnection("jdbc:postgresql://localhost:5432/final-project-db", databaseUsername, databasePassword);
 		String selectModelInformation =
-				"SELECT modelnumber, productioncost, saleprice"
+				"SELECT modelnumber, productioncost, saleprice "
 						+ "FROM Model "
 						+ "WHERE modelname = ?;";
 
@@ -721,7 +721,7 @@ public class UIController {
 	public static String[] displayInventoryInformation(String iid) throws SQLException {
 		Connection erpDB = DriverManager.getConnection("jdbc:postgresql://localhost:5432/final-project-db", databaseUsername, databasePassword);
 		String selectInventoryInformation =
-				"SELECT modelname, cost, lead_time, category_type, quantity"
+				"SELECT modelname, cost, lead_time, category_type, quantity "
 						+ "FROM Inventory "
 						+ "WHERE i_id = ?;";
 
@@ -752,7 +752,7 @@ public class UIController {
 		Connection erpDB = DriverManager.getConnection("jdbc:postgresql://localhost:5432/final-project-db", databaseUsername, databasePassword);
 		String selectInventoryInformation =
 				"UPDATE Inventory "
-						+ "SET modelname = ?, cost = ?, lead_time = ?, category_type = ?, quantity = ?"
+						+ "SET modelname = ?, cost = ?, lead_time = ?, category_type = ?, quantity = ? "
 						+ "WHERE iid = ?;";
 
 		PreparedStatement ps = erpDB.prepareStatement(selectInventoryInformation);
