@@ -708,8 +708,8 @@ public class UIController {
 		System.out.println(Arrays.toString(modelInfo));
 		int i = 1;
 		ps.setString(i++, modelInfo[0]);
-		ps.setString(i++, modelInfo[1]);
-		ps.setString(i++, modelInfo[2]);
+		ps.setFloat(i++, Float.parseFloat(modelInfo[1]));
+		ps.setFloat(i++, Float.parseFloat(modelInfo[2]));
 		ps.setString(i++, mName);
 
 		ps.executeUpdate();
@@ -733,10 +733,10 @@ public class UIController {
 		String[] invenInfo = new String[5];
 		if(rs.next()) {
 			invenInfo[0] = rs.getString("modelname");
-			invenInfo[1] = rs.getString("cost");
-			invenInfo[2] = rs.getString("lead_time");
+			invenInfo[1] = Float.toString(rs.getFloat("cost"));
+			invenInfo[2] = Integer.toString(rs.getInt("lead_time"));
 			invenInfo[3] = rs.getString("category_type");
-			invenInfo[4] = rs.getString("quantity");
+			invenInfo[4] = Integer.toString(rs.getInt("quantity"));
 
 			return invenInfo;
 		} else {
@@ -760,10 +760,10 @@ public class UIController {
 		System.out.println(Arrays.toString(invenInfo));
 		int i = 1;
 		ps.setString(i++, invenInfo[0]);
-		ps.setString(i++, invenInfo[1]);
-		ps.setString(i++, invenInfo[2]);
+		ps.setFloat(i++, Float.parseFloat(invenInfo[1]));
+		ps.setInt(i++, Integer.parseInt(invenInfo[2]));
 		ps.setString(i++, invenInfo[3]);
-		ps.setString(i++, invenInfo[4]);
+		ps.setInt(i++, Integer.parseInt(invenInfo[4]));
 		ps.setString(i++, iid);
 
 		ps.executeUpdate();
