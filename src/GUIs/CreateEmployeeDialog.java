@@ -161,9 +161,6 @@ public class CreateEmployeeDialog extends JDialog {
 	                	}
 					} catch (Exception e1) {
 						dispose();
-						if(getSSN() != null && getJobType() != null && getSalary() != null) {
-							MainCreateEmployee.main(null);
-						}
 					}
 	                if(getSSN() != null && getJobType() != null && getSalary() != null) {
 	                JOptionPane.showMessageDialog(CreateEmployeeDialog.this,
@@ -194,7 +191,6 @@ public class CreateEmployeeDialog extends JDialog {
 	            	try {
 						UIController.logout();
 					} catch (SQLException e1) {
-						// TODO Auto-generated catch block
 						e1.printStackTrace();
 					}
 	            	dispose();
