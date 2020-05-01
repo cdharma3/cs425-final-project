@@ -2,16 +2,22 @@ package GUIs;
 import java.awt.*;
 import java.awt.event.*;
 import java.sql.SQLException;
+import java.util.Hashtable;
 
 import javax.swing.*;
 import javax.swing.border.*;
 @SuppressWarnings("unused")
 public class GrantAccessDialog extends JDialog {
-	
+	//grantAccess(String table, Hashtable<String, Boolean> access, String E_ID)
 	private static final long serialVersionUID = 1L;
 		private JTextField tfeid;				// Employee ID/ Login Id
 		private JLabel lbeid;
-	    private JCheckBox cbhourly;				// Is Hourly
+		private JTextField tftable;				// Employee ID/ Login Id
+		private JLabel lbtable;
+	    private JCheckBox cbSelect;				// Is Hourly
+	    private JCheckBox cbInsert;				// Is Hourly
+	    private JCheckBox cbUpdate;				// Is Hourly
+	    private JCheckBox cbDelete;				// Is Hourly
 	    //private JLabel lbhourly;
 	    private JButton btnLogout;				//Logout
 	    private JButton btnEnter;				// Enter Button
@@ -27,6 +33,18 @@ public class GrantAccessDialog extends JDialog {
 	        cs.fill = GridBagConstraints.HORIZONTAL;
 	        
 	        //employee id
+	        lbeid = new JLabel("Employee ID: ");
+	        cs.gridx = 0;
+	        cs.gridy = 0;
+	        cs.gridwidth = 1;
+	        panel.add(lbeid, cs);
+	        
+	        tfeid = new JTextField(50);
+	        cs.gridx = 1;
+	        cs.gridy = 0;
+	        cs.gridwidth = 2;
+	        panel.add(tfeid, cs);
+	        
 	        lbeid = new JLabel("Employee ID: ");
 	        cs.gridx = 0;
 	        cs.gridy = 0;
