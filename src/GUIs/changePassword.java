@@ -33,6 +33,7 @@ public static void main(String[] args) {
         frame.setSize(300, 300);
         frame.setVisible(true);
         
+        
         JButton btnOrder = new JButton("Click to Change Password");
 	    JButton btnCancel = new JButton("Cancel");
         btnOrder.addActionListener(
