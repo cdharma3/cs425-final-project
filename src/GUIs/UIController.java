@@ -336,21 +336,22 @@ public class UIController {
 	 * @throws SQLException
 	 *
 	 */
-	public static void addModel(String modelName, float salePrice) throws SQLException {
+	public static void addModel(String modelName, float productionCost, float salePrice) throws SQLException {
 		Connection erpDB = DriverManager.getConnection("jdbc:postgresql://localhost:5432/final-project-db", databaseUsername, databasePassword);
 		String insertModel =
 				"INSERT INTO model "
-						+ "(modelName, salePrice) "
-						+ "VALUES (?, ?);";
+						+ "(modelName, productioncost, salePrice) "
+						+ "VALUES (?, ?, ?);";
 
 		PreparedStatement ps = erpDB.prepareStatement(insertModel);
 		ps.setString(1, modelName);
-		ps.setFloat(2, salePrice);
+		ps.setFloat(2, productionCost);
+		ps.setFloat(3, salePrice);
 		ps.executeUpdate();
 
 		ps.close();
 		erpDB.close();
-		System.out.println(modelName + " added to model database with a price of $" + salePrice);
+		System.out.println(modelName + " added to model database with a price of $" + salePrice + " and cost of " + productionCost);
 	}
 
 	/**
@@ -671,7 +672,7 @@ public class UIController {
 	public static String[] displayModelInformation(String mName) throws SQLException {
 		Connection erpDB = DriverManager.getConnection("jdbc:postgresql://localhost:5432/final-project-db", databaseUsername, databasePassword);
 		String selectModelInformation =
-				"SELECT modelnumber, saleprice "
+				"SELECT modelnumber, productioncost, saleprice "
 						+ "FROM Model "
 						+ "WHERE modelname = ?;";
 
