@@ -727,7 +727,7 @@ public class UIController {
 						+ "WHERE i_id = ?;";
 
 		PreparedStatement ps = erpDB.prepareStatement(selectInventoryInformation);
-		ps.setString(1, iid);
+		ps.setInt(1, Integer.parseInt(iid));
 		ResultSet rs = ps.executeQuery();
 
 		String[] invenInfo = new String[5];
@@ -754,7 +754,7 @@ public class UIController {
 		String selectInventoryInformation =
 				"UPDATE Inventory "
 						+ "SET modelname = ?, cost = ?, lead_time = ?, category_type = ?, quantity = ? "
-						+ "WHERE iid = ?;";
+						+ "WHERE i_id = ?;";
 
 		PreparedStatement ps = erpDB.prepareStatement(selectInventoryInformation);
 		System.out.println(Arrays.toString(invenInfo));
@@ -764,7 +764,7 @@ public class UIController {
 		ps.setInt(i++, Integer.parseInt(invenInfo[2]));
 		ps.setString(i++, invenInfo[3]);
 		ps.setInt(i++, Integer.parseInt(invenInfo[4]));
-		ps.setString(i++, iid);
+		ps.setInt(i++, Integer.parseInt(iid));
 
 		ps.executeUpdate();
 		System.out.println("Updated!");

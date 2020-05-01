@@ -51,7 +51,7 @@ public class EditModel {
                     }
                 });
         frame.setLocation(200, 200);
-        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
         frame.setSize(400, 150);
         frame.setLayout(new FlowLayout());
         frame.add(btnOrder);
