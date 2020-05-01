@@ -76,7 +76,6 @@ public class LoginDialog extends JDialog {
  
 					}
 				} catch (HeadlessException | SQLException e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
             }

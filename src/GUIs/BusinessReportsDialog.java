@@ -16,6 +16,7 @@ import javax.swing.border.EtchedBorder;
 import javax.swing.border.LineBorder;
 import javax.swing.border.TitledBorder;
 
+@SuppressWarnings({ "serial", "unused" })
 public class BusinessReportsDialog extends JDialog {
 	//new vars
 	private static JTextArea area;
@@ -32,7 +33,6 @@ public class BusinessReportsDialog extends JDialog {
         try {
 			area=new JTextArea(UIController.displayBusinessReport());
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}  
 
@@ -57,7 +57,6 @@ public class BusinessReportsDialog extends JDialog {
             	try {
 					UIController.logout();
 				} catch (SQLException e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
             	dispose();

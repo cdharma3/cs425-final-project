@@ -19,7 +19,6 @@ public class EditModel {
 		try {
 			UIController.login("bWatts","abc123");
 		} catch (SQLException e2) {
-			// TODO Auto-generated catch block
 			e2.printStackTrace();
 		}
         JFrame frame = new JFrame("Edit Model");
@@ -50,7 +49,6 @@ public class EditModel {
 							OrderDlg = new EditModelDialog(frame,enter.getText().trim());
 							OrderDlg.setVisible(true);
 						} catch (SQLException e1) {
-							// TODO Auto-generated catch block
 							e1.printStackTrace();
 						}
                         

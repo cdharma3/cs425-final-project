@@ -20,7 +20,6 @@ public class BusinessReports {
                         try {
 							BusinessReportsDialog.main(null);
 						} catch (SQLException e1) {
-							// TODO Auto-generated catch block
 							e1.printStackTrace();
 						}
                         
@@ -32,7 +31,6 @@ public class BusinessReports {
         				try {
         					UIController.logout();
         				} catch (SQLException e1) {
-    						// TODO Auto-generated catch block
     						e1.printStackTrace();
     					}
     	            	frame.dispose();

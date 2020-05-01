@@ -103,7 +103,6 @@ public class OrderFormDialog extends JDialog {
 								dispose();
 								SalesPage.main(null);
 							} catch (SQLException e1) {
-								// TODO Auto-generated catch block
 								e1.printStackTrace();
 							}
 						}else {
@@ -111,7 +110,6 @@ public class OrderFormDialog extends JDialog {
 									+ "please note that the quantity available is: " + UIController.getInventoryQuantity(getMname()));
 						}
 					} catch (SQLException e1) {
-						// TODO Auto-generated catch block
 						e1.printStackTrace();
 					}
 	            	
@@ -136,7 +134,6 @@ public class OrderFormDialog extends JDialog {
 	            	try {
 						UIController.logout();
 					} catch (SQLException e1) {
-						// TODO Auto-generated catch block
 						e1.printStackTrace();
 					}
 	            	dispose();

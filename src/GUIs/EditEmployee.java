@@ -45,7 +45,6 @@ public class EditEmployee {
 							OrderDlg = new EditEmployeeDialog(frame,enter.getText().trim());
 							OrderDlg.setVisible(true);
 						} catch (SQLException e1) {
-							// TODO Auto-generated catch block
 							e1.printStackTrace();
 						}
                         

@@ -19,7 +19,6 @@ public class EditCustomer {
 		try {
 			UIController.login("bWatts","abc123");
 		} catch (SQLException e2) {
-			// TODO Auto-generated catch block
 			e2.printStackTrace();
 		}
         JFrame frame = new JFrame("Edit Customer");
@@ -50,7 +49,6 @@ public class EditCustomer {
 							OrderDlg = new EditCustomerDialog(frame,enter.getText().trim());
 							OrderDlg.setVisible(true);
 						} catch (SQLException e1) {
-							// TODO Auto-generated catch block
 							e1.printStackTrace();
 						}
                         

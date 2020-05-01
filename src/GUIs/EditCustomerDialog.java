@@ -113,7 +113,6 @@ public class EditCustomerDialog extends JDialog {
             	try {
 					UIController.updateEmployeeInformation(cid, update);
 				} catch (SQLException e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
             }
@@ -137,7 +136,6 @@ public class EditCustomerDialog extends JDialog {
             	try {
 					UIController.logout();
 				} catch (SQLException e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
             	dispose();
