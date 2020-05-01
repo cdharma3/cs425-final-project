@@ -109,7 +109,12 @@ public class GrantAccessDialog extends JDialog {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				try {
-					Hashtable access = new Hashtable<String, Boolean>();
+					Hashtable<String, Boolean> access = new Hashtable<String, Boolean>();
+					access.put("select", GrantAccessDialog.this.getSelect());
+					access.put("insert", GrantAccessDialog.this.getInsert());
+					access.put("update", GrantAccessDialog.this.getUpdate());
+					access.put("delete", GrantAccessDialog.this.getDelete());
+
 					UIController.grantAccess(GrantAccessDialog.this.getTable(), access, GrantAccessDialog.this.getEid());
 
 				} catch (Exception e1) {
