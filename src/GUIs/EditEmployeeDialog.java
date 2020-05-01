@@ -27,8 +27,17 @@ public class EditEmployeeDialog extends JDialog {
 		String [] employee;
 		String [] update = new String[6];
 		employee = UIController.displayEmployeeInformation(eid);
-		if(employee[0] == null) {
-			
+		try {
+			if(employee[0] == null) {
+				
+			}
+		}catch(Exception e2){
+			JOptionPane.showMessageDialog(EditEmployeeDialog.this,
+		            "Invalid input for Employee ID, try again",
+		            "Edit Employee",
+		            JOptionPane.ERROR_MESSAGE);
+			dispose();
+			EditEmployee.main(null);
 		}
 		
 		JPanel panel = new JPanel(new GridBagLayout());
