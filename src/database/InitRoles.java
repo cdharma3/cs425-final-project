@@ -66,7 +66,7 @@ public class InitRoles {
 			st.executeUpdate("CREATE ROLE engineering NOINHERIT;");
 			st.execute("GRANT SELECT, INSERT, DELETE, UPDATE ON Model TO engineering;");
 			st.execute("GRANT SELECT, INSERT, DELETE, UPDATE ON Inventory TO engineering;");
-			st.execute("GRANT SELECT (FirstName), SELECT (LastName), SELECT (JobType) ON Employee TO engineering;");
+			st.execute("GRANT SELECT (FirstName), SELECT (LastName), SELECT (JobType), SELECT (E_ID) ON Employee TO engineering;");
 			// create views
 			st.execute("GRANT SELECT ON totalRevenue TO engineering;");
 			st.execute("GRANT SELECT ON customerModel TO engineering;");

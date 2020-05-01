@@ -527,7 +527,7 @@ public class UIController {
 		ps.executeUpdate();
 		System.out.println("Updated!");
 	}
-	
+
 	/**
 	 * displays certain customer information
 	 * @throws SQLException
@@ -553,7 +553,7 @@ public class UIController {
 		}
 
 	}
-	
+
 	/**
 	 * displays certain customer information
 	 * @throws SQLException
@@ -628,14 +628,14 @@ public class UIController {
 			modelInfo[0] = rs.getString("modelName");
 			modelInfo[1] = rs.getString("productioncost");
 			modelInfo[2] = rs.getString("saleprice");
-			
+
 			return modelInfo;
 		} else {
 			return null;
 		}
 
 	}
-	
+
 	/**
 	 * displays certain model information
 	 * @throws SQLException
@@ -680,14 +680,14 @@ public class UIController {
 			invenInfo[2] = rs.getString("lead_time");
 			invenInfo[3] = rs.getString("category_type");
 			invenInfo[4] = rs.getString("quantity");
-			
+
 			return invenInfo;
 		} else {
 			return null;
 		}
 
 	}
-	
+
 	/**
 	 * displays certain model information
 	 * @throws SQLException
@@ -716,7 +716,7 @@ public class UIController {
 	 * displays specific engineer accessed information
 	 * @throws SQLException
 	 */
-	public static String [] engineerAccess(String eid) throws SQLException {
+	public static String[] engineerAccess(String eid) throws SQLException {
 		Connection erpDB = DriverManager.getConnection("jdbc:postgresql://localhost:5432/final-project-db", databaseUsername, databasePassword);
 		String selectEmployeeInformation =
 				"SELECT firstName, lastName, jobType "
@@ -759,7 +759,7 @@ public class UIController {
 		} else {
 			return null;
 		}
-		
+
 		/*need code that adds total sales revenue added up from the sales
 		that are in all orders associated with specified eid*/
 		return employeeInfo;

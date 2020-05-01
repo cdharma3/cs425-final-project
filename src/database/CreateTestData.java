@@ -50,8 +50,6 @@ public class CreateTestData {
 
 			System.out.println(UIController.displayBusinessReport());
 
-			UIController.deleteEmployeeInformation("jMcmurphy");
-
 			System.out.println(Arrays.deepToString(UIController.displayEmployeeInformation("jWillis")));
 			UIController.login("bWatts", "abc123");
 			UIController.logout();
