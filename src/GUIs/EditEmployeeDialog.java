@@ -235,11 +235,36 @@ public class EditEmployeeDialog extends JDialog {
 	}
 	
 	public String getS() {
-		return tfssn.getText().trim();
+		boolean error = true;
+    	if(tfssn.getText().trim().length() != 9 || !(tfssn.getText().trim().matches("[0-9]+"))) {
+    		if(error) {
+    			error = false;
+	    		JOptionPane.showMessageDialog(EditEmployeeDialog.this,
+			            "Invalid input for Social security number, try again",
+			            "Create new employee",
+			            JOptionPane.ERROR_MESSAGE);
+	    		return null;
+    		}
+    	}
+    	return tfssn.getText().trim();
 	}
 	
 	public String getSal() {
-		return tfsalary.getText().trim();
+		boolean error = true;
+		try {
+			return tfsalary.getText().trim();
+		}
+		catch (Exception e){
+			if (error) {
+				JOptionPane.showMessageDialog(EditEmployeeDialog.this,
+						"Invalid input for pay, try again",
+						"Create new employee",
+		            	JOptionPane.ERROR_MESSAGE);
+				error = false;
+			}
+			
+		}
+		return null;
 	}
 	
 	public String getH() {
@@ -247,6 +272,26 @@ public class EditEmployeeDialog extends JDialog {
 	}
 	
 	public String getJType() {
-		return tfjob.getText().trim();
+		boolean error = true;
+    	String job = tfjob.getText().trim();
+    	if(job.equals("hr")||job.equals("human resources")) {
+    		job = "hr";
+    	}else if (job.equals("engineering")||job.equals("engineer") ) {
+    		job = "engineering";
+    	}else if (job.equals("sales")||job.equals("sale")) {
+    		job = "sales";
+    	}else if(job.equals("admin")||job.equals("administrator")) {
+    		job = "admin";
+    	}else {
+    		if(error) {
+    			JOptionPane.showMessageDialog(EditEmployeeDialog.this,
+    					"Invalid input for Job type, try again",
+    					"Create new employee",
+    					JOptionPane.ERROR_MESSAGE);
+    			error = false;
+    			return null;
+    		}
+    	}
+    	return job;
 	}
 }
