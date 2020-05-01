@@ -38,11 +38,11 @@ public class ViewEmployeeDialogEng extends JDialog{
 		}catch(Exception e2){
 			JOptionPane.showMessageDialog(ViewEmployeeDialogEng.this,
 		            "Invalid input for Employee ID, try again",
-		            "Edit Employee",
+		            "View Employee",
 		            JOptionPane.ERROR_MESSAGE);
 			dispose();
 			
-			EditEmployee.main(null);
+			ViewEmployeeEng.main(null);
 		}
 		
 		JPanel panel = new JPanel(new GridBagLayout());
