@@ -34,7 +34,18 @@ public class EditModelDialog extends JDialog {
 		String [] customer;
 		String [] update = new String[3];
 		customer = UIController.displayModelInformation(modelName);
-		
+		try {
+			if(customer[0] == null) {
+				
+			}
+		}catch(Exception e2){
+			JOptionPane.showMessageDialog(EditModelDialog.this,
+		            "Invalid input for Employee ID, try again",
+		            "Edit Employee",
+		            JOptionPane.ERROR_MESSAGE);
+			dispose();
+			EditEmployee.main(null);
+		}
 		
 		JPanel panel = new JPanel(new GridBagLayout());
         GridBagConstraints cs = new GridBagConstraints();
