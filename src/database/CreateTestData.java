@@ -23,6 +23,11 @@ public class CreateTestData {
 			// create jon
 			UIController.addEmployee("jWillis", "bigboi", "Jon", "Willis", "222222222", (float)15.00, true, "hr");
 
+			UIController.addEmployee("a", "a", "a", "a", "222222222", (float)15.00, true, "admin");
+			UIController.addEmployee("h", "h", "h", "h", "222222222", (float)15.00, true, "hr");
+			UIController.addEmployee("s", "s", "s", "s", "222222222", (float)15.00, true, "sales");
+			UIController.addEmployee("e", "e", "e", "e", "222222222", (float)15.00, true, "engineering");
+			
 			// login as bob
 			System.out.println("Logging in returns: " + UIController.login("bWatts", "abc123"));
 			UIController.logout();
@@ -30,6 +35,7 @@ public class CreateTestData {
 			System.out.println("Logging in returns: " + UIController.login("bWatts", "abc123"));
 
 			UIController.addCustomer("Jon", "Johnson", "jJohnson");
+			UIController.addCustomer("c", "c", "c");
 			String[] customerInfo = new String[2];
 			customerInfo [0] = "Jon";
 			customerInfo [1] = "Jonson";
