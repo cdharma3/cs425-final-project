@@ -30,6 +30,11 @@ public class CreateTestData {
 			System.out.println("Logging in returns: " + UIController.login("bWatts", "abc123"));
 
 			UIController.addCustomer("Jon", "Johnson", "jJohnson");
+			String[] customerInfo = new String[2];
+			customerInfo [0] = "Jon";
+			customerInfo [1] = "Jonson";
+
+			UIController.updateCustomerInformation("jJohnson", customerInfo);
 
 			UIController.addModel("Swiffer Duster", (float)120.00);
 			UIController.addModel("Dyson Cyclone", (float)240.00);

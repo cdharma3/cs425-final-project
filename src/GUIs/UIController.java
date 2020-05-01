@@ -591,7 +591,7 @@ public class UIController {
 	public static String[] displayCustomerInformation(String C_ID) throws SQLException {
 		Connection erpDB = DriverManager.getConnection("jdbc:postgresql://localhost:5432/final-project-db", databaseUsername, databasePassword);
 		String selectCustomerInformation =
-				"SELECT firstname, lastname"
+				"SELECT firstname, lastname "
 						+ "FROM Customer "
 						+ "WHERE C_ID = ?;";
 
