@@ -34,7 +34,6 @@ public class EditInventoryDialog extends JDialog {
 		String [] customer;
 		String [] update = new String[5];
 		customer = UIController.displayInventoryInformation(iid);
-		//modelname, cost, lead_time, category_type, quantity
 		
 		JPanel panel = new JPanel(new GridBagLayout());
         GridBagConstraints cs = new GridBagConstraints();

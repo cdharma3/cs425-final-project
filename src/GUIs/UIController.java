@@ -614,12 +614,12 @@ public class UIController {
 	 */
 	public static String[] displayModelInformation(String mName) throws SQLException {
 		Connection erpDB = DriverManager.getConnection("jdbc:postgresql://localhost:5432/final-project-db", databaseUsername, databasePassword);
-		String selectCustomerInformation =
+		String selectModelInformation =
 				"SELECT modelname, productioncost, saleprice"
 						+ "FROM Model "
 						+ "WHERE modelname = ?;";
 
-		PreparedStatement ps = erpDB.prepareStatement(selectCustomerInformation);
+		PreparedStatement ps = erpDB.prepareStatement(selectModelInformation);
 		ps.setString(1, mName);
 		ResultSet rs = ps.executeQuery();
 
@@ -654,6 +654,60 @@ public class UIController {
 		ps.setString(i++, modelInfo[1]);
 		ps.setString(i++, modelInfo[2]);
 		ps.setString(i++, mName);
+
+		ps.executeUpdate();
+		System.out.println("Updated!");
+	}
+	/**
+	 * displays certain model information
+	 * @throws SQLException
+	 */
+	public static String[] displayInventoryInformation(String iid) throws SQLException {
+		Connection erpDB = DriverManager.getConnection("jdbc:postgresql://localhost:5432/final-project-db", databaseUsername, databasePassword);
+		String selectInventoryInformation =
+				"SELECT modelname, cost, lead_time, category_type, quantity"
+						+ "FROM Inventory "
+						+ "WHERE i_id = ?;";
+
+		PreparedStatement ps = erpDB.prepareStatement(selectInventoryInformation);
+		ps.setString(1, iid);
+		ResultSet rs = ps.executeQuery();
+
+		String[] invenInfo = new String[5];
+		if(rs.next()) {
+			invenInfo[0] = rs.getString("modelname");
+			invenInfo[1] = rs.getString("cost");
+			invenInfo[2] = rs.getString("lead_time");
+			invenInfo[3] = rs.getString("category_type");
+			invenInfo[4] = rs.getString("quantity");
+			
+			return invenInfo;
+		} else {
+			return null;
+		}
+
+	}
+	
+	/**
+	 * displays certain model information
+	 * @throws SQLException
+	 */
+	public static void updateInventoryInformation(String iid, String[] invenInfo) throws SQLException {
+		Connection erpDB = DriverManager.getConnection("jdbc:postgresql://localhost:5432/final-project-db", databaseUsername, databasePassword);
+		String selectInventoryInformation =
+				"UPDATE Inventory "
+						+ "SET modelname = ?, cost = ?, lead_time = ?, category_type = ?, quantity = ?"
+						+ "WHERE iid = ?;";
+
+		PreparedStatement ps = erpDB.prepareStatement(selectInventoryInformation);
+		System.out.println(Arrays.toString(invenInfo));
+		int i = 1;
+		ps.setString(i++, invenInfo[0]);
+		ps.setString(i++, invenInfo[1]);
+		ps.setString(i++, invenInfo[2]);
+		ps.setString(i++, invenInfo[3]);
+		ps.setString(i++, invenInfo[4]);
+		ps.setString(i++, iid);
 
 		ps.executeUpdate();
 		System.out.println("Updated!");
