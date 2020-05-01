@@ -248,6 +248,31 @@ public class UIController {
 	}
 
 	/**
+	 * updates selected employee's password
+	 * @throws InvalidKeySpecException
+	 * @throws NoSuchAlgorithmException
+	 */
+	public static void updatePassword(String password, String E_ID) throws SQLException, NoSuchAlgorithmException, InvalidKeySpecException {
+		Connection erpDB = DriverManager.getConnection("jdbc:postgresql://localhost:5432/final-project-db", databaseUsername, databasePassword);
+		String changePassword =
+				"UPDATE Employee "
+						+ "SET password = ? "
+						+ "WHERE E_ID = ?;";
+
+		PreparedStatement ps = erpDB.prepareStatement(changePassword);
+		ps.setString(1, UIController.getSaltedHash(password));
+		ps.setString(2, E_ID);
+		ps.executeUpdate();
+		System.out.println("Password updated!");
+
+		erpDB = DriverManager.getConnection("jdbc:postgresql://localhost:5432/final-project-db", "mr_admin", "mr_password");
+		String changeRolePassword = "ALTER ROLE \"" + E_ID + "\" WITH PASSWORD '" + password + "';";
+		ps = erpDB.prepareStatement(changeRolePassword);
+		ps.execute();
+		System.out.println("Role password updated!");
+	}
+
+	/**
 	 * deletes all employees and roles from database
 	 * warning: will not work if employee table is not populated with role!
 	 * make sure employee table is synced with the roles present
