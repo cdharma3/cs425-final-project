@@ -51,8 +51,14 @@ public class CreateTestData {
 			UIController.addModel("Shark APEX UpLight Lift-Away DuoClean LZ601", (float)60.00, (float)299.99);
 			UIController.addModel("Eufy 11S", (float)60.00, (float)329.90);
 
-			UIController.addInventory("Swiffer Duster", (float)120.00, 5, "Vacuum", 10);
-			UIController.addInventory("Dyson Cyclone", (float)240.00, 20, "Vacuum", 20);
+			UIController.addInventory("Swiffer Duster", (float)120.00, 5, "Vacuum", 100);
+			UIController.addInventory("Dyson Cyclone", (float)240.00, 20, "Vacuum", 200);
+			UIController.addInventory("Kenmore Elite Pet Friendly 31150", (float)329.90, 12,"Vacuum",150);
+			UIController.addInventory("Shark Navigator Powered Lift-Away NV586", (float)249.99, 8, "Vacuum", 50);
+			UIController.addInventory("Miele Complete C3 Marin", (float)1099.00, 10, "Vacuum", 100);
+			UIController.addInventory("Miele Blizzard CX1 Cat & Dog", (float)899.00, 12, "Vacuum", 150);
+			UIController.addInventory("Shark APEX UpLight Lift-Away DuoClean LZ601", (float)299.99, 15, "Vacuum", 200);
+			UIController.addInventory("Eufy 11S", (float)329.90, 5, "Vacuum", 100);
 
 			UIController.addOrder("jJohnson", "bWatts", "Swiffer Duster", 5);
 			UIController.addOrder("jJohnson", "bWatts", "Swiffer Duster", 5);
