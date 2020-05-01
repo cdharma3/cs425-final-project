@@ -19,7 +19,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.LineBorder;
 
-public class EditModelDialog extends JDialog {
+public class EditInventoryDialog extends JDialog {
 	/**
 	 * 
 	 */
@@ -29,8 +29,8 @@ public class EditModelDialog extends JDialog {
 	JTextField tfnum, tfpc, tfsp;
 	JButton btnEnter, btnCancel;
 	
-	public EditModelDialog(Frame parent,String modelName) throws SQLException {
-		super(parent,"Edit Model",true);
+	public EditInventoryDialog(Frame parent,String iid) throws SQLException {
+		super(parent,"Edit Inventory",true);
 		String [] customer;
 		String [] update = new String[3];
 		customer = UIController.displayModelInformation(modelName);
