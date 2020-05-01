@@ -13,6 +13,7 @@ import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.LineBorder;
 
@@ -30,7 +31,18 @@ public class ViewEmployeeDialogEng extends JDialog{
 		super(parent,"View Employee",true);
 		String [] employee;
 		employee = UIController.engineerAccess(eid);
-		
+		try {
+			if(employee[0] == null) {
+				
+			}
+		}catch(Exception e2){
+			JOptionPane.showMessageDialog(ViewEmployeeDialogEng.this,
+		            "Invalid input for Employee ID, try again",
+		            "Edit Employee",
+		            JOptionPane.ERROR_MESSAGE);
+			dispose();
+			EditEmployee.main(null);
+		}
 		
 		JPanel panel = new JPanel(new GridBagLayout());
         GridBagConstraints cs = new GridBagConstraints();

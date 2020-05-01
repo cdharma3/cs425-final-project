@@ -34,6 +34,18 @@ public class EditInventoryDialog extends JDialog {
 		String [] customer;
 		String [] update = new String[5];
 		customer = UIController.displayInventoryInformation(iid);
+		try {
+			if(customer[0] == null) {
+				
+			}
+		}catch(Exception e2){
+			JOptionPane.showMessageDialog(EditInventoryDialog.this,
+		            "Invalid input for Employee ID, try again",
+		            "Edit Employee",
+		            JOptionPane.ERROR_MESSAGE);
+			dispose();
+			EditEmployee.main(null);
+		}
 		
 		JPanel panel = new JPanel(new GridBagLayout());
         GridBagConstraints cs = new GridBagConstraints();
