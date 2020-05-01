@@ -14,6 +14,7 @@ import java.sql.Timestamp;
 import java.util.Arrays;
 import java.util.Base64;
 import java.util.Date;
+import java.util.Hashtable;
 import java.util.UUID;
 
 import javax.crypto.SecretKey;
@@ -272,6 +273,39 @@ public class UIController {
 		System.out.println("Role password updated!");
 	}
 
+	/**
+	 * Grants access to specific tables
+	 */
+	public static void grantAccess(Hashtable<String, Boolean> tables, Hashtable<String, Boolean> access, String E_ID) {
+		String grantAccesses = "GRANT ";
+		if (access.get("select")) {
+			grantAccesses += "SELECT";
+		}
+
+		if (access.get("insert")) {
+			grantAccesses += ", INSERT";
+		}
+
+		if (access.get("update")) {
+			grantAccesses += ", UPDATE";
+		}
+
+		if (access.get("delete")) {
+			grantAccesses += ", DELETE";
+		}
+
+		grantAccesses += " ON ";
+
+
+
+	}
+
+	/**
+	 * deletes all employees and roles from database
+	 * warning: will not work if employee table is not populated with role!
+	 * make sure employee table is synced with the roles present
+	 * @throws SQLException
+	 */
 	public static void deleteAllEmployees() throws SQLException {
 		Connection erpDB = DriverManager.getConnection("jdbc:postgresql://localhost:5432/final-project-db", "mr_admin", "mr_password");
 		String retrieveEmployees = "SELECT E_ID FROM employee;";
@@ -764,7 +798,7 @@ public class UIController {
 		Connection erpDB = DriverManager.getConnection("jdbc:postgresql://localhost:5432/final-project-db", databaseUsername, databasePassword);
 		String selectEmployeeInformation =
 				"SELECT firstName, lastName, salesPerEmployee "
-						+ "FROM Employee NATURAL JOIN EmployeeRevenue"
+						+ "FROM Employee NATURAL JOIN EmployeeRevenue "
 						+ "WHERE E_ID = ?;";
 
 		PreparedStatement ps = erpDB.prepareStatement(selectEmployeeInformation);
