@@ -15,7 +15,7 @@ import javax.swing.JTextField;
 import javax.swing.WindowConstants;
 
 public class ViewEmployeeEng {
-public static void main(String[] args) {
+	public static void main(String[] args) {
 		
         JFrame frame = new JFrame("View Employee");
         JPanel panel = new JPanel();

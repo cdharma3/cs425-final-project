@@ -16,8 +16,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.LineBorder;
 
-//first name last name position
-public class ViewEmployeeDialogEng extends JDialog{
+public class HRViewEmployeeDialog extends JDialog{
 	/**
 	 * 
 	 */
@@ -26,7 +25,7 @@ public class ViewEmployeeDialogEng extends JDialog{
 	JLabel lbeid2, lbfname2, lblname2, lbssn2, lbsalary2, lbhourly2, lbjob2;
 	JButton btnCancel;
 	
-	public ViewEmployeeDialogEng(Frame parent,String eid) throws SQLException {
+	public HRViewEmployeeDialog(Frame parent,String eid) throws SQLException {
 		super(parent,"View Employee",true);
 		String [] employee;
 		employee = UIController.engineerAccess(eid);
