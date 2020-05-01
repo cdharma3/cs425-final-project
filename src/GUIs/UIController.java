@@ -707,7 +707,7 @@ public class UIController {
 		PreparedStatement ps = erpDB.prepareStatement(selectModelInformation);
 		System.out.println(Arrays.toString(modelInfo));
 		int i = 1;
-		ps.setString(i++, modelInfo[0]);
+		ps.setInt(i++, Integer.parseInt(modelInfo[0]));
 		ps.setFloat(i++, Float.parseFloat(modelInfo[1]));
 		ps.setFloat(i++, Float.parseFloat(modelInfo[2]));
 		ps.setString(i++, mName);

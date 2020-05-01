@@ -22,6 +22,8 @@ public class CreateModelDialog extends JDialog {
 	private static final long serialVersionUID = 1L;
 	private JTextField tfModel;				// Model Name
 	private JLabel lbModel;
+	private JTextField tfprodcost;				// First Name
+	private JLabel lbprodcost;
 	private JTextField tfsaleprice;				// First Name
 	private JLabel lbsaleprice;
 	private JButton btnEnter;				// Enter Button
@@ -50,16 +52,28 @@ public class CreateModelDialog extends JDialog {
 		cs.gridwidth = 2;
 		panel.add(this.tfModel, cs);
 
+		this.lbprodcost = new JLabel("Production Cost: ");
+		cs.gridx = 0;
+		cs.gridy = 1;
+		cs.gridwidth = 1;
+		panel.add(this.lbprodcost, cs);
+
+		this.tfprodcost = new JTextField(50);
+		cs.gridx = 1;
+		cs.gridy = 1;
+		cs.gridwidth = 2;
+		panel.add(this.tfprodcost, cs);
+		
 		//First Name
 		this.lbsaleprice = new JLabel("Price: ");
 		cs.gridx = 0;
-		cs.gridy = 1;
+		cs.gridy = 2;
 		cs.gridwidth = 1;
 		panel.add(this.lbsaleprice, cs);
 
 		this.tfsaleprice = new JTextField(50);
 		cs.gridx = 1;
-		cs.gridy = 1;
+		cs.gridy = 2;
 		cs.gridwidth = 2;
 		panel.add(this.tfsaleprice, cs);
 
@@ -73,7 +87,7 @@ public class CreateModelDialog extends JDialog {
 			public void actionPerformed(ActionEvent e) {
 				try {
 					if(CreateModelDialog.this.getPrice() != null) {
-						UIController.addModel(CreateModelDialog.this.getModel(), CreateModelDialog.this.getPrice());
+						UIController.addModel(getModel(), getProdCost() ,getPrice());
 						JOptionPane.showMessageDialog(CreateModelDialog.this,
 								"Model created successfully!",
 								"Create new Model",
@@ -137,7 +151,20 @@ public class CreateModelDialog extends JDialog {
 	public String getModel() {
 		return this.tfModel.getText().trim();
 	}
+	public Float getProdCost() {
+		//checking to see if its a float
+		try {
+			return Float.parseFloat(this.tfprodcost.getText().trim());
+		}
+		catch (Exception e){
+			JOptionPane.showMessageDialog(CreateModelDialog.this,
+					"Invalid input for production cost, try again",
+					"Create new Model",
+					JOptionPane.ERROR_MESSAGE);
 
+		}
+		return null;
+	}
 	public Float getPrice() {
 		//checking to see if its a float
 		try {
