@@ -671,7 +671,7 @@ public class UIController {
 	public static String[] displayModelInformation(String mName) throws SQLException {
 		Connection erpDB = DriverManager.getConnection("jdbc:postgresql://localhost:5432/final-project-db", databaseUsername, databasePassword);
 		String selectModelInformation =
-				"SELECT modelnumber, productioncost, saleprice "
+				"SELECT modelnumber, saleprice "
 						+ "FROM Model "
 						+ "WHERE modelname = ?;";
 
