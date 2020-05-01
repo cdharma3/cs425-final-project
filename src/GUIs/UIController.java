@@ -810,12 +810,9 @@ public class UIController {
 			employeeInfo[0] = rs.getString("firstName");
 			employeeInfo[1] = rs.getString("lastName");
 			employeeInfo[2] = Float.toString(rs.getFloat("salesPerEmployee"));
+			return employeeInfo;
 		} else {
 			return null;
 		}
-
-		/*need code that adds total sales revenue added up from the sales
-		that are in all orders associated with specified eid*/
-		return employeeInfo;
 	}
 }
