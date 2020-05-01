@@ -275,8 +275,11 @@ public class UIController {
 
 	/**
 	 * Grants access to specific tables
+	 * @throws SQLException
 	 */
-	public static void grantAccess(Hashtable<String, Boolean> tables, Hashtable<String, Boolean> access, String E_ID) {
+	public static void grantAccess(String table, Hashtable<String, Boolean> access, String E_ID) throws SQLException {
+		Connection erpDB = DriverManager.getConnection("jdbc:postgresql://localhost:5432/final-project-db", databaseUsername, databasePassword);
+		Statement st = erpDB.createStatement();
 		String grantAccesses = "GRANT ";
 		if (access.get("select")) {
 			grantAccesses += "SELECT";
@@ -294,10 +297,10 @@ public class UIController {
 			grantAccesses += ", DELETE";
 		}
 
-		grantAccesses += " ON ";
+		grantAccesses += " ON " + table + " TO \"" + E_ID + "\";";
 
-
-
+		st.execute(grantAccesses);
+		System.out.println("Executed: " + grantAccesses);
 	}
 
 	/**
