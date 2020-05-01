@@ -242,7 +242,7 @@ public class EditInventoryDialog extends JDialog {
 	}
 	
 	public String getLT() {
-		return tfsp.getText().trim();
+		return tflt.getText().trim();
 	}
 	
 	public String getCT() {

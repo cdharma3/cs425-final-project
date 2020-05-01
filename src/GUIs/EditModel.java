@@ -34,7 +34,7 @@ public class EditModel {
         
         
         JButton btnOrder = new JButton("Click to Edit");
-        
+        JButton btnCancel = new JButton("Cancel");
         btnOrder.addActionListener(
                 new ActionListener(){
                     public void actionPerformed(ActionEvent e) {
@@ -50,11 +50,20 @@ public class EditModel {
                         
                     }
                 });
+        btnCancel.addActionListener(new ActionListener() {
+          	 
+            public void actionPerformed(ActionEvent e) {
+                frame.dispose();
+                EngPage.main(null);
+            }
+        });
+        
         frame.setLocation(200, 200);
-        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
         frame.setSize(400, 150);
         frame.setLayout(new FlowLayout());
         frame.add(btnOrder);
+        frame.add(btnCancel);
         frame.setVisible(true);
 	}
 }
