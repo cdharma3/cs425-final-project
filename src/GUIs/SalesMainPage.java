@@ -16,6 +16,7 @@ public class SalesMainPage extends JDialog {
 	    private JButton btnEdit;				// Edit data Button
 	    private JButton btnOrder;				// Create Order
 	    private JButton btnreports;         	// access and reports
+	    private JButton btnAdmin;
 	    private JButton btnLogout;				//Logout
 	    private boolean succeeded;				// If successful
 	 
@@ -72,6 +73,18 @@ public class SalesMainPage extends JDialog {
 	        });
 	        panel.add(btnreports);
 	 
+	        if(MainLogin.getisAdmin()) {
+		        btnAdmin = new JButton("Return to Admin page");
+		        btnAdmin.addActionListener(new ActionListener() {
+		        
+		            public void actionPerformed(ActionEvent e) {
+		                dispose();
+		                AdminPage.main(null);
+		            }
+		        });
+		        panel.add(btnAdmin);
+	        }
+	        
 	        btnLogout = new JButton("Logout");
 	        btnLogout.addActionListener(new ActionListener() {
 	        

@@ -16,6 +16,7 @@ public class EngMainPage extends JDialog {
 	    private JButton btnModel;				// Access and update Model
 	    private JButton btnInventory;			// Access and update Inventory
 	    private JButton btnEmpl;				// Access (limited) to employee info
+	    private JButton btnAdmin;
 	    private JButton btnLogout;				//Logout
 	    private boolean succeeded;				// If successful
 	 
@@ -70,6 +71,18 @@ public class EngMainPage extends JDialog {
 	            }
 	        });
 	        panel.add(btnEmpl);
+	        
+	        if(MainLogin.getisAdmin()) {
+		        btnAdmin = new JButton("Return to Admin page");
+		        btnAdmin.addActionListener(new ActionListener() {
+		        
+		            public void actionPerformed(ActionEvent e) {
+		                dispose();
+		                AdminPage.main(null);
+		            }
+		        });
+		        panel.add(btnAdmin);
+	        }
 	        
 	        btnLogout = new JButton("Logout");
 	        btnLogout.addActionListener(new ActionListener() {

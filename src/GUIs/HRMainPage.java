@@ -15,6 +15,7 @@ public class HRMainPage extends JDialog {
 	    private JButton btnEmplyeeInfo;			// Access and update employee info
 	    private JButton btnSales;				// View employees and their sales numbers
 	    private JButton btnCreateEmp;			// Create Employee Button
+	    private JButton btnAdmin;
 	    private JButton btnLogout;				//Logout
 	    private boolean succeeded;				// If successful
 	 
@@ -59,6 +60,18 @@ public class HRMainPage extends JDialog {
 	            }
 	        });
 	        panel.add(btnSales);
+	        
+	        if(MainLogin.getisAdmin()) {
+		        btnAdmin = new JButton("Return to Admin page");
+		        btnAdmin.addActionListener(new ActionListener() {
+		        
+		            public void actionPerformed(ActionEvent e) {
+		                dispose();
+		                AdminPage.main(null);
+		            }
+		        });
+		        panel.add(btnAdmin);
+	        }
 	        
 	        btnLogout = new JButton("Logout");
 	        btnLogout.addActionListener(new ActionListener() {

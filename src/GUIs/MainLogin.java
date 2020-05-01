@@ -9,8 +9,9 @@ import javax.swing.*;
 @SuppressWarnings("unused")
 public class MainLogin {
     public static boolean quit = false;
-
+	static boolean isAdmin = false;
 	public static void main(String[] args) {
+
         final JFrame frame = new JFrame("Database Login");
         final JButton btnLogin = new JButton("Click to login");
  
@@ -58,5 +59,12 @@ public class MainLogin {
 			System.out.println("Invalid Job type: "+username+". Please confirm correct Role is assigned.");
 		}
 	}
+	public static boolean getisAdmin() {
+		return isAdmin;
+	}
+	public static void setisAdmin(boolean x) {
+		isAdmin = x;
+	}
+	
 }
     

@@ -25,7 +25,7 @@ public class AdminMainPage extends JDialog {
 	 
 	    public AdminMainPage(Frame parent) {
 	        super(parent, "Admin Main Page", true);
-	        //
+	        MainLogin.setisAdmin(true);
 	        JPanel panel = new JPanel(new GridBagLayout());
 	        GridBagConstraints cs = new GridBagConstraints();
 	 
