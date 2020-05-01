@@ -24,23 +24,23 @@ public class EditInventoryDialog extends JDialog {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	JLabel lbiid, lbnum, lbpc, lbsp;
-	JLabel lbiid2, lbnum2, lbpc2, lbsp2;
-	JTextField tfnum, tfpc, tfsp;
+	JLabel lbiid, lbnam, lbpc, lbsp, lblt, lbct, lbq;
+	JLabel lbiid2, lbnam2, lbpc2, lbsp2, lblt2, lbct2, lbq2;
+	JTextField tfnam, tfpc, tfsp, tflt, tfct, tfq;
 	JButton btnEnter, btnCancel;
 	
 	public EditInventoryDialog(Frame parent,String iid) throws SQLException {
 		super(parent,"Edit Inventory",true);
 		String [] customer;
-		String [] update = new String[3];
+		String [] update = new String[5];
 		customer = UIController.displayInventoryInformation(iid);
-		
+		//modelname, cost, lead_time, category_type, quantity
 		
 		JPanel panel = new JPanel(new GridBagLayout());
         GridBagConstraints cs = new GridBagConstraints();
  
         cs.fill = GridBagConstraints.HORIZONTAL;
-        //model name
+        //iid
         lbiid = new JLabel("I_ID: ");
         cs.gridx = 0;
         cs.gridy = 0;
@@ -54,26 +54,26 @@ public class EditInventoryDialog extends JDialog {
         panel.add(lbiid2, cs);
         
         
-        //model number
-        lbnum = new JLabel("Model Number: ");
+        //model name
+        lbnam = new JLabel("Model Name: ");
         cs.gridx = 0;
         cs.gridy = 1;
         cs.gridwidth = 1;
-        panel.add(lbnum, cs);
+        panel.add(lbnam, cs);
         
-        lbnum2 = new JLabel(customer[0]);
+        lbnam2 = new JLabel(customer[0]);
         cs.gridx = 1;
         cs.gridy = 1;
         cs.gridwidth = 1;
-        panel.add(lbnum2, cs);
+        panel.add(lbnam2, cs);
         
-        tfnum = new JTextField(20);
+        tfnam = new JTextField(20);
         cs.gridx = 2;
         cs.gridy = 1;
         cs.gridwidth = 2;
-        panel.add(tfnum, cs);
-        //production cost
-        lbpc = new JLabel("Production Cost: ");
+        panel.add(tfnam, cs);
+        //cost
+        lbpc = new JLabel("Cost: ");
         cs.gridx = 0;
         cs.gridy = 2;
         cs.gridwidth = 1;
@@ -90,12 +90,12 @@ public class EditInventoryDialog extends JDialog {
         cs.gridy = 2;
         cs.gridwidth = 2;
         panel.add(tfpc, cs);
-        //sale price
-        lbsp = new JLabel("Sale Price: ");
+        //lead_time
+        lblt = new JLabel("Lead Time: ");
         cs.gridx = 0;
         cs.gridy = 3;
         cs.gridwidth = 1;
-        panel.add(lbsp, cs);
+        panel.add(lblt, cs);
         
         lbsp2 = new JLabel(customer[2]);
         cs.gridx = 1;
@@ -103,11 +103,47 @@ public class EditInventoryDialog extends JDialog {
         cs.gridwidth = 1;
         panel.add(lbsp2, cs);
         
-        tfsp = new JTextField(20);
+        tflt = new JTextField(20);
         cs.gridx = 2;
         cs.gridy = 3;
         cs.gridwidth = 2;
-        panel.add(tfsp, cs);
+        panel.add(tflt, cs);
+      //category_type
+        lbct = new JLabel("Category Type: ");
+        cs.gridx = 0;
+        cs.gridy = 4;
+        cs.gridwidth = 1;
+        panel.add(lbct, cs);
+        
+        lbct2 = new JLabel(customer[3]);
+        cs.gridx = 1;
+        cs.gridy = 4;
+        cs.gridwidth = 1;
+        panel.add(lbct2, cs);
+        
+        tfct = new JTextField(20);
+        cs.gridx = 2;
+        cs.gridy = 4;
+        cs.gridwidth = 2;
+        panel.add(tfct, cs);
+      //quantity
+        lbq = new JLabel("Quantity: ");
+        cs.gridx = 0;
+        cs.gridy = 5;
+        cs.gridwidth = 1;
+        panel.add(lbq, cs);
+        
+        lbq2 = new JLabel(customer[4]);
+        cs.gridx = 1;
+        cs.gridy = 5;
+        cs.gridwidth = 1;
+        panel.add(lbq2, cs);
+        
+        tfq = new JTextField(20);
+        cs.gridx = 2;
+        cs.gridy = 5;
+        cs.gridwidth = 2;
+        panel.add(tfq, cs);
         
  
         
@@ -119,23 +155,35 @@ public class EditInventoryDialog extends JDialog {
  
             public void actionPerformed(ActionEvent e) {
             	try {
-					JOptionPane.showMessageDialog(EditModelDialog.this, "You have successfully entered the information. "
-							+ " Model Number: " + getNUM() + " Production Cost: " + getPC() + " Sale Price: " + getSP());
+					JOptionPane.showMessageDialog(EditInventoryDialog.this, "You have successfully entered the information. "
+							+ " Model Name: " + getNAM() + " Cost: " + getPC() + " Lead Time: " + getLT() + " Category Type: " + getCT() + " Quantity: " + getQ());
 				} catch (HeadlessException e1) {
 					e1.printStackTrace();
 				} 
             	
-            	update[0] = getNUM();
+            	update[0] = getNAM();
             	update[1] = getPC();
-            	update[3] = getSP();
+            	update[2] = getLT();
+            	update[3] = getCT();
+            	update[4] = getQ();
             	
             	try {
-					UIController.updateModelInformation(modelName, update);
+					UIController.updateInventoryInformation(iid, update);
 				} catch (SQLException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
             }
+
+			private String getNAM() {
+				// TODO Auto-generated method stub
+				return null;
+			}
+
+			private String getCT() {
+				// TODO Auto-generated method stub
+				return null;
+			}
         });
         btnCancel = new JButton("Cancel");
         btnCancel.addActionListener(new ActionListener() {
@@ -175,15 +223,23 @@ public class EditInventoryDialog extends JDialog {
 		
 	}
 	
-	public String getNUM() {
-		return tfnum.getText().trim();
+	public String getNAM() {
+		return tfnam.getText().trim();
 	}
 	
 	public String getPC() {
 		return tfpc.getText().trim();
 	}
 	
-	public String getSP() {
+	public String getLT() {
 		return tfsp.getText().trim();
+	}
+	
+	public String getCT() {
+		return tfct.getText().trim();
+	}
+	
+	public String getQ() {
+		return tfq.getText().trim();
 	}
 }

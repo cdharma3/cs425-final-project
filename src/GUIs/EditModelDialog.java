@@ -127,7 +127,7 @@ public class EditModelDialog extends JDialog {
             	
             	update[0] = getNUM();
             	update[1] = getPC();
-            	update[3] = getSP();
+            	update[2] = getSP();
             	
             	try {
 					UIController.updateModelInformation(modelName, update);
