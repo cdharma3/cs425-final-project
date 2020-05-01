@@ -181,8 +181,11 @@ public class EditEmployeeDialog extends JDialog {
             	
             	try {
 					UIController.updateEmployeeInformation(eid, update);
+					dispose();
+					HRPage.main(null);
 				} catch (SQLException e1) {
 					e1.printStackTrace();
+					EditEmployee.main(null);
 				}
             }
         });
@@ -191,7 +194,7 @@ public class EditEmployeeDialog extends JDialog {
  
             public void actionPerformed(ActionEvent e) {
                 dispose();
-                SalesPage.main(null);
+                HRPage.main(null);
             }
         });
         JPanel bp = new JPanel();

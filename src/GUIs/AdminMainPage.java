@@ -16,6 +16,7 @@ public class AdminMainPage extends JDialog {
 	    private JButton btnEdit;				// Edit data Button
 	    private JButton btnAccess;				// Grant Access button
 	    private JButton btnreports;         	// access and create reports
+	    private JButton btnpassword;			//Change passwords for employees
 	    private JButton btnDelete;				//Delete employee info
 	    private JButton btnLogout;				//Logout
 	    private boolean succeeded;				// If successful
@@ -67,8 +68,8 @@ public class AdminMainPage extends JDialog {
 	        btnAccess.addActionListener(new ActionListener() {
 	        
 	            public void actionPerformed(ActionEvent e) {
-	            	//TODO
 	                dispose();
+	                MainGrantAccess.main(null);
 	            }
 	        });
 	        panel.add(btnAccess);
@@ -82,6 +83,16 @@ public class AdminMainPage extends JDialog {
 	            }
 	        });
 	        panel.add(btnreports);
+	        
+	        btnpassword = new JButton("Change employee password");
+	        btnpassword.addActionListener(new ActionListener() {
+	        
+	            public void actionPerformed(ActionEvent e) {
+	                dispose();
+	                //TODO
+	            }
+	        });
+	        panel.add(btnpassword);
 	        
 	        btnLogout = new JButton("Logout");
 	        btnLogout.addActionListener(new ActionListener() {

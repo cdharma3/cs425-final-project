@@ -131,8 +131,12 @@ public class EditModelDialog extends JDialog {
             	
             	try {
 					UIController.updateModelInformation(modelName, update);
+					dispose();
+					EngPage.main(null);
 				} catch (SQLException e1) {
 					e1.printStackTrace();
+					dispose();
+					EditModel.main(null);
 				}
             }
         });
@@ -141,7 +145,7 @@ public class EditModelDialog extends JDialog {
  
             public void actionPerformed(ActionEvent e) {
                 dispose();
-                SalesPage.main(null);
+                EngPage.main(null);
             }
         });
         JPanel bp = new JPanel();
