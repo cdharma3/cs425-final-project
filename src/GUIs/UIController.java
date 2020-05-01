@@ -737,4 +737,31 @@ public class UIController {
 			return null;
 		}
 	}
+	/**
+	 * displays specific hr accessed information
+	 * @throws SQLException
+	 */
+	public static String [] hrAccess(String eid) throws SQLException {
+		Connection erpDB = DriverManager.getConnection("jdbc:postgresql://localhost:5432/final-project-db", databaseUsername, databasePassword);
+		String selectEmployeeInformation =
+				"SELECT firstName, lastName "
+						+ "FROM Employee "
+						+ "WHERE E_ID = ?;";
+
+		PreparedStatement ps = erpDB.prepareStatement(selectEmployeeInformation);
+		ps.setString(1, eid);
+		ResultSet rs = ps.executeQuery();
+
+		String[] employeeInfo = new String[3];
+		if(rs.next()) {
+			employeeInfo[0] = rs.getString("firstName");
+			employeeInfo[1] = rs.getString("lastName");
+		} else {
+			return null;
+		}
+		
+		/*need code that adds total sales revenue added up from the sales
+		that are in all orders associated with specified eid*/
+		return employeeInfo;
+	}
 }

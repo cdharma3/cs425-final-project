@@ -28,7 +28,7 @@ public class HRViewEmployeeDialog extends JDialog{
 	public HRViewEmployeeDialog(Frame parent,String eid) throws SQLException {
 		super(parent,"View Employee",true);
 		String [] employee;
-		employee = UIController.engineerAccess(eid);
+		employee = UIController.hrAccess(eid);
 		
 		
 		JPanel panel = new JPanel(new GridBagLayout());
@@ -74,7 +74,7 @@ public class HRViewEmployeeDialog extends JDialog{
         cs.gridwidth = 1;
         panel.add(lblname2, cs);
         //job
-        lbjob = new JLabel("Job Type: ");
+        lbjob = new JLabel("Total Sales: $");
         cs.gridx = 0;
         cs.gridy = 3;
         cs.gridwidth = 1;
