@@ -26,6 +26,7 @@ public class EditEmployeeDialog extends JDialog {
 		super(parent,"Edit Employee",true);
 		String [] employee;
 		String [] update = new String[6];
+		
 		employee = UIController.displayEmployeeInformation(eid);
 		try {
 			if(employee[0] == null) {
